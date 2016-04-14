@@ -5,11 +5,6 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnsRip.MVC", "DnsRip.MVC\DnsRip.MVC.csproj", "{A9ACD8B9-3CD5-411D-ABBB-44AAFD6F9CCF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C3659C38-94BB-46AE-8701-D12E1650EFFD}"
-	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
