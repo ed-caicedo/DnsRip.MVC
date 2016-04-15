@@ -32,6 +32,33 @@ body {
 .form-group {
   margin-bottom: 10px;
 }
+.panel-options .nav-tabs {
+  border-color: #8096A4;
+}
+.panel-options .nav > li {
+  width: 50%;
+}
+.panel-options .nav > li > a {
+  font-size: 12px;
+  padding: 6px 15px;
+  color: #C4D1D7;
+  text-align: center;
+}
+.panel-options .nav > li > a:last-child {
+  margin-right: 0;
+}
+.panel-options .nav-tabs > li.active > a,
+.panel-options .nav-tabs > li.active > a:hover,
+.panel-options .nav-tabs > li.active > a:focus,
+.panel-options .nav > li > a:hover,
+.panel-options .nav > li > a:focus {
+  background-color: #8096A4;
+  border-color: #536F7A;
+  color: #283136;
+}
+.panel-options .tab-pane {
+  background-color: #283136;
+}
 .panel {
   margin-top: 15px;
   background-color: #283136;
@@ -87,31 +114,4 @@ body {
   .panel-main .btn-group .btn {
     width: 33.33%;
   }
-}
-.panel-options .nav-tabs {
-  border-color: #8096A4;
-}
-.panel-options .nav > li {
-  width: 50%;
-}
-.panel-options .nav > li > a {
-  font-size: 12px;
-  padding: 6px 15px;
-  color: #C4D1D7;
-  text-align: center;
-}
-.panel-options .nav > li > a:last-child {
-  margin-right: 0;
-}
-.panel-options .nav-tabs > li.active > a,
-.panel-options .nav-tabs > li.active > a:hover,
-.panel-options .nav-tabs > li.active > a:focus,
-.panel-options .nav > li > a:hover,
-.panel-options .nav > li > a:focus {
-  background-color: #8096A4;
-  border-color: #536F7A;
-  color: #283136;
-}
-.panel-options .tab-pane {
-  background-color: #283136;
 }

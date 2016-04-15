@@ -129,6 +129,12 @@
     <Content Include="Assets\css\main.css">
       <DependentUpon>main.less</DependentUpon>
     </Content>
+    <Content Include="Assets\css\panel-main.css">
+      <DependentUpon>panel-main.less</DependentUpon>
+    </Content>
+    <Content Include="Assets\css\panel-options.css">
+      <DependentUpon>panel-options.less</DependentUpon>
+    </Content>
     <Content Include="Assets\img\logo.svg" />
     <Content Include="Assets\js\lib\bootstrap.js" />
     <Content Include="Assets\js\lib\jquery.js" />
@@ -154,6 +160,8 @@
     <Content Include="Assets\css\main.less" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\css\panel-main.less" />
+    <Content Include="Assets\css\panel-options.less" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>

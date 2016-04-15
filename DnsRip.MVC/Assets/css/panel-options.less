@@ -1,0 +1,36 @@
+﻿@import "main";
+
+.panel-options {
+    .nav-tabs {
+        border-color: @button-active;
+    }
+
+    .nav > li {
+        width: 50%;
+    }
+
+    .nav > li > a {
+        font-size: 12px;
+        padding: 6px 15px;
+        color: @button-text;
+        text-align: center;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    .nav-tabs > li.active > a,
+    .nav-tabs > li.active > a:hover,
+    .nav-tabs > li.active > a:focus,
+    .nav > li > a:hover,
+    .nav > li > a:focus {
+        background-color: @button-active;
+        border-color: @back;
+        color: @back-dark;
+    }
+
+    .tab-pane {
+        background-color: @back-dark;
+    }
+}
