@@ -63,30 +63,8 @@ body {
   margin-top: 15px;
   background-color: #283136;
 }
-.panel-main img {
-  float: left;
-  width: 42px;
-}
-@media (min-width: 480px) {
-  .panel-main img {
-    margin-left: -4px;
-    width: 77px;
-    height: 68px;
-  }
-}
-.panel-main h1 {
-  font-family: 'VT323';
-  font-size: 72px;
-  line-height: 0;
-  color: #ffffff;
-  float: left;
-  margin: 18px 0 0 5px;
-}
-@media (min-width: 480px) {
-  .panel-main h1 {
-    margin: 29px 0 0 5px;
-    font-size: 116px;
-  }
+.panel-main {
+  text-align: center;
 }
 .panel-main .logo {
   display: inline-block;
@@ -95,6 +73,31 @@ body {
 @media (min-width: 480px) {
   .panel-main .logo {
     margin-bottom: 25px;
+  }
+}
+.panel-main .logo img {
+  float: left;
+  width: 42px;
+}
+@media (min-width: 480px) {
+  .panel-main .logo img {
+    margin-left: -4px;
+    width: 77px;
+    height: 68px;
+  }
+}
+.panel-main .logo h1 {
+  font-family: 'VT323';
+  font-size: 72px;
+  line-height: 0;
+  color: #ffffff;
+  float: left;
+  margin: 18px 0 0 5px;
+}
+@media (min-width: 480px) {
+  .panel-main .logo h1 {
+    margin: 29px 0 0 5px;
+    font-size: 116px;
   }
 }
 .panel-main .btn-group {
