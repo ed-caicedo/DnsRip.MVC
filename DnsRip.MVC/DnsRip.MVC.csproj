@@ -125,7 +125,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\css\lib\bootstrap-theme.css" />
     <Content Include="Assets\css\lib\bootstrap.css" />
     <Content Include="Assets\css\main.css">
       <DependentUpon>main.less</DependentUpon>

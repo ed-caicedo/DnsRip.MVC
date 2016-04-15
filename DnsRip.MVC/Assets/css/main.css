@@ -1,9 +1,91 @@
-﻿body {
+﻿@import url(https://fonts.googleapis.com/css?family=Oxygen|VT323);
+body {
   background-color: #536F7A;
+  font-family: 'Oxygen', sans-serif;
+}
+@media (max-width: 319px) {
+  body {
+    width: 320px;
+  }
+}
+.btn-default {
+  background-color: #536F7A;
+  border-color: #283136;
+  color: #C4D1D7;
+}
+.btn-default:hover,
+.btn-default:focus,
+.btn-default.focus,
+.btn-default:active,
+.btn-default.active,
+.btn-default:active:hover,
+.btn-default.active:hover,
+.btn-default:active:focus,
+.btn-default.active:focus {
+  background-color: #8096A4;
+  border-color: #283136;
+  color: #283136;
+}
+.form-control {
+  border-color: #283136;
+}
+.form-group {
+  margin-bottom: 10px;
 }
 .panel {
+  margin-top: 15px;
   background-color: #283136;
 }
-.logo {
-  width: 37px;
+.panel-main img {
+  float: left;
+  width: 42px;
+}
+@media (min-width: 480px) {
+  .panel-main img {
+    margin-left: -4px;
+    width: 77px;
+    height: 68px;
+  }
+}
+.panel-main h1 {
+  font-family: 'VT323';
+  font-size: 72px;
+  line-height: 0;
+  color: #ffffff;
+  float: left;
+  margin: 18px 0 0 5px;
+}
+@media (min-width: 480px) {
+  .panel-main h1 {
+    margin: 29px 0 0 5px;
+    font-size: 116px;
+  }
+}
+.panel-main .logo {
+  display: inline-block;
+  margin-bottom: 15px;
+}
+@media (min-width: 480px) {
+  .panel-main .logo {
+    margin-bottom: 25px;
+  }
+}
+.panel-main .btn-group {
+  margin-bottom: 10px;
+  width: 100%;
+}
+.panel-main .btn-group .btn-google-dns {
+  width: 38.13%;
+}
+.panel-main .btn-group .btn-open-dns {
+  width: 33.46%;
+}
+.panel-main .btn-group .btn-custom {
+  width: 28.79%;
+}
+@media (min-width: 599px) {
+  .panel-main .btn-group .btn {
+    width: 33.33%;
+  }
+}
 }

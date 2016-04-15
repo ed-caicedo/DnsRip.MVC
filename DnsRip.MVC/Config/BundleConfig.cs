@@ -10,7 +10,6 @@ namespace DnsRip.MVC
 
             bundles.Add(new StyleBundle("~/assets/css/default.bundle/")
                 .Include("~/assets/css/lib/bootstrap.css")
-                //.Include("~/assets/css/lib/bootstrap-theme.css")
                 .Include("~/assets/css/main.css"));
 
             bundles.Add(new ScriptBundle("~/assets/js/default.bundle/")

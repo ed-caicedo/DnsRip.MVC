@@ -1,14 +1,118 @@
-﻿@grey: #536F7A;
-@grey-dark: #283136;
+﻿@debug: solid 1px red;
+@back: #536F7A;
+@back-dark: #283136;
+@text: #ffffff;
+@button-active: #8096A4;
+@button-text: #C4D1D7;
+
+@font: 'Oxygen', sans-serif;
+@logo-font: 'VT323',;
+
+@break1: 319px;
+@break2: 480px;
+@break3: 599px;
+
+@import url(https://fonts.googleapis.com/css?family=Oxygen|VT323);
 
 body {
-    background-color: @grey;
+    background-color: @back;
+    font-family: @font;
+
+    @media (max-width:319px) {
+        width: 320px;
+    }
+}
+
+.btn-default {
+    background-color: @back;
+    border-color: @back-dark;
+    color: @button-text;
+
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active,
+    &:active:hover,
+    &.active:hover,
+    &:active:focus,
+    &.active:focus {
+        background-color: @button-active;
+        border-color: @back-dark;
+        color: @back-dark;
+    }
+}
+
+.form-control {
+    border-color: @back-dark;
+}
+
+.form-group {
+    margin-bottom: 10px;
 }
 
 .panel {
-    background-color: @grey-dark;
+    margin-top: 15px;
+    background-color: @back-dark;
+
+    &-main {
+        img {
+            float: left;
+            width: 42px;
+
+            @media (min-width: @break2) {
+                margin-left: -4px;
+                width: 77px;
+                height: 68px;
+            }
+        }
+
+        h1 {
+            font-family: @logo-font;
+            font-size: 72px;
+            line-height: 0;
+            color: @text;
+            float: left;
+            margin: 18px 0 0 5px;
+
+            @media (min-width: @break2) {
+                margin: 29px 0 0 5px;
+                font-size: 116px;
+            }
+        }
+
+        .logo {
+            display: inline-block;
+            margin-bottom: 15px;
+
+            @media (min-width: @break2) {
+                margin-bottom: 25px;
+            }
+        }
+
+        .btn-group {
+            margin-bottom: 10px;
+            width: 100%;
+
+            & .btn-google-dns {
+                width: 38.13%;
+            }
+
+            & .btn-open-dns {
+                width: 33.46%;
+            }
+
+            & .btn-custom {
+                width: 28.79%;
+            }
+
+            & .btn {
+                @media (min-width: @break3) {
+                    width: 33.33%;
+                }
+            }
+        }
+    }
 }
 
-.logo {
-    width: 37px;
 }
