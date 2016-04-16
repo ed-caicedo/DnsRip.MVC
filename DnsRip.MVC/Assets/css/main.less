@@ -7,14 +7,20 @@
 @button-option: #ffffff;
 @button-selected: #FEE580;
 @button-primary: #FE6D02;
+@result-body: #ffffff;
 
 @font: 'Oxygen', sans-serif;
 @logo-font: 'VT323',;
 
 @break1: 319px;
+@break1-1: 375px;
 @break2: 480px;
+@break2-1: 547px;
 @break3: 599px;
+@break3-1: 769px;
+@break3-2: 991px;
 @break4: 992px;
+@break5: 1200px;
 
 @import url(https://fonts.googleapis.com/css?family=Oxygen|VT323);
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
@@ -54,6 +60,10 @@ body {
 
     &-clear:before {
         content: "clear";
+    }
+
+    &-arrow-upward:before {
+        content: "arrow_upward";
     }
 }
 
@@ -122,3 +132,5 @@ body {
 @import "panel-options";
 @import "panel-queue";
 @import "panel-actions";
+@import "panel-results";
+@import "panel-up";

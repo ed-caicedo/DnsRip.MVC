@@ -138,6 +138,9 @@
     <Content Include="Assets\css\panel-options.css">
       <DependentUpon>panel-options.less</DependentUpon>
     </Content>
+    <Content Include="Assets\css\panel-queue.css">
+      <DependentUpon>panel-queue.less</DependentUpon>
+    </Content>
     <Content Include="Assets\img\logo.svg" />
     <Content Include="Assets\js\lib\bootstrap.js" />
     <Content Include="Assets\js\lib\jquery.js" />
@@ -151,7 +154,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\default\index.cshtml" />
@@ -167,6 +169,7 @@
     <Content Include="Assets\css\panel-options.less" />
     <Content Include="Assets\css\panel-queue.less" />
     <Content Include="Assets\css\panel-actions.less" />
+    <Content Include="Assets\css\panel-results.less" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>

@@ -59,6 +59,9 @@ body {
 .m-icon-clear:before {
   content: "clear";
 }
+.m-icon-arrow-upward:before {
+  content: "arrow_upward";
+}
 .btn-default {
   background-color: #536F7A;
   border-color: #283136;
