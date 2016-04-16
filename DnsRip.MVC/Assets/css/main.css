@@ -227,6 +227,7 @@ fieldset[disabled] .btn {
   border-radius: 0 0 4px 4px;
 }
 .panel-options .btn-default {
+  font-size: 11px;
   background-color: #ffffff;
   border-color: #283136;
   color: #283136;
@@ -257,20 +258,44 @@ fieldset[disabled] .btn {
 }
 @media (min-width: 480px) {
   .panel-options .btn-default.type {
+    font-size: 12px;
     width: 32.83%;
   }
 }
-.panel-options .btn-default.type span {
-  margin-top: 3px;
-}
 .panel-options .btn-default.type i {
   font-size: 22px;
+}
+@media (min-width: 599px) {
+  .panel-options .btn-default.type span {
+    top: 3px;
+  }
 }
 .panel-options .btn-default.active {
   font-weight: bold;
 }
 .panel-options .btn-default span {
-  margin-top: 2px;
+  position: relative;
+  top: 3px;
+  max-width: 85%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (min-width: 599px) {
+  .panel-options .btn-default span {
+    top: 1px;
+    max-width: 90%;
+  }
+}
+@media (min-width: 480px) {
+  .panel-options .btn-default {
+    font-size: 12px;
+  }
+}
+@media (min-width: 599px) {
+  .panel-options .btn-default {
+    font-size: 14px;
+  }
 }
 @media (min-width: 992px) {
   .panel-options {
@@ -281,8 +306,25 @@ fieldset[disabled] .btn {
   font-size: 10px;
   margin-bottom: 5px;
 }
+.panel-queue .item span {
+  max-width: 80%;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (min-width: 480px) {
+  .panel-queue .item span {
+    max-width: 85%;
+    font-size: 12px;
+  }
+}
+@media (min-width: 599px) {
+  .panel-queue .item span {
+    font-size: 14px;
+  }
+}
 .panel-actions {
-  margin-top: -1px;
   display: inline-block;
   width: 100%;
 }
@@ -305,6 +347,128 @@ fieldset[disabled] .btn {
   color: #283136;
 }
 .panel-actions button i {
+  position: relative;
+  top: 3px;
+}
+.panel-results .panel {
+  border-bottom: 0;
+  border-color: #536F7A;
+}
+.panel-results .panel-heading {
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (min-width: 480px) {
+  .panel-results .panel-heading {
+    font-size: 12px;
+  }
+}
+@media (min-width: 599px) {
+  .panel-results .panel-heading {
+    font-size: 14px;
+  }
+}
+.panel-results .panel-body {
+  background-color: #ffffff;
+  color: #283136;
+}
+.panel-results .panel-body span {
+  font-size: 11px;
+  max-width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (min-width: 480px) {
+  .panel-results .panel-body span {
+    max-width: 85%;
+    font-size: 12px;
+  }
+}
+@media (min-width: 599px) {
+  .panel-results .panel-body span {
+    font-size: 14px;
+  }
+}
+.panel-results .btn-group {
+  width: 100%;
+  margin-top: -15px;
+}
+.panel-results .btn-group .btn-primary {
+  width: 50.15%;
+  background-color: #FE6D02;
+  border-color: #536F7A;
+  color: #283136;
+}
+.panel-results .btn-group .btn-primary:hover,
+.panel-results .btn-group .btn-primary:focus,
+.panel-results .btn-group .btn-primary:active,
+.panel-results .btn-group .btn-primary.active,
+.panel-results .btn-group .btn-primary:active:hover,
+.panel-results .btn-group .btn-primary.active:hover,
+.panel-results .btn-group .btn-primary:active:focus,
+.panel-results .btn-group .btn-primary.active:focus {
+  background-color: #FEE580;
+  border-color: #536F7A;
+  color: #283136;
+}
+.panel-results .btn-group .btn-primary:first-child:not(:last-child) {
+  border-top-left-radius: 0;
+}
+.panel-results .btn-group .btn-primary:last-child:not(:first-child) {
+  border-top-right-radius: 0;
+}
+@media (min-width: 375px) {
+  .panel-results .btn-group .btn-primary {
+    width: 50.10%;
+  }
+}
+@media (min-width: 547px) {
+  .panel-results .btn-group .btn-primary {
+    width: 50.05%;
+  }
+}
+@media (min-width: 769px) and (max-width: 991px) {
+  .panel-results .btn-group .btn-primary {
+    width: 360px;
+  }
+  .panel-results .btn-group .btn-primary:last-child {
+    width: 361px;
+  }
+}
+@media (min-width: 992px) {
+  .panel-results .btn-group .btn-primary {
+    width: 228px;
+  }
+}
+@media (min-width: 1200px) {
+  .panel-results .btn-group .btn-primary {
+    width: 278px;
+  }
+}
+.panel-up {
+  margin: 15px 0;
+}
+.panel-up button {
+  background-color: #8096A4;
+  border-color: #536F7A;
+  color: #283136;
+}
+.panel-up button:hover,
+.panel-up button:focus,
+.panel-up button:active,
+.panel-up button.active,
+.panel-up button:active:hover,
+.panel-up button.active:hover,
+.panel-up button:active:focus,
+.panel-up button.active:focus {
+  background-color: #C4D1D7;
+  border-color: #536F7A;
+  color: #283136;
+}
+.panel-up button i {
   position: relative;
   top: 3px;
 }

@@ -129,18 +129,6 @@
     <Content Include="Assets\css\main.css">
       <DependentUpon>main.less</DependentUpon>
     </Content>
-    <Content Include="Assets\css\panel-actions.css">
-      <DependentUpon>panel-actions.less</DependentUpon>
-    </Content>
-    <Content Include="Assets\css\panel-main.css">
-      <DependentUpon>panel-main.less</DependentUpon>
-    </Content>
-    <Content Include="Assets\css\panel-options.css">
-      <DependentUpon>panel-options.less</DependentUpon>
-    </Content>
-    <Content Include="Assets\css\panel-queue.css">
-      <DependentUpon>panel-queue.less</DependentUpon>
-    </Content>
     <Content Include="Assets\img\logo.svg" />
     <Content Include="Assets\js\lib\bootstrap.js" />
     <Content Include="Assets\js\lib\jquery.js" />
@@ -170,6 +158,7 @@
     <Content Include="Assets\css\panel-queue.less" />
     <Content Include="Assets\css\panel-actions.less" />
     <Content Include="Assets\css\panel-results.less" />
+    <Content Include="Assets\css\panel-up.less" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>

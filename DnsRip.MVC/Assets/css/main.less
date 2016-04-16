@@ -74,6 +74,12 @@ body {
     }
 }
 
+.ellipsis() {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .button-state(@default-back, @default-text, @active-back, @active-text, @border) {
     background-color: @default-back;
     border-color: @border;

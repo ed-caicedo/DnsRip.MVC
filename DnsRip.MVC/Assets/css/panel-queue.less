@@ -5,4 +5,21 @@
         font-size: 10px;
         margin-bottom: 5px;
     }
+
+    .item {
+        span {
+            max-width: 80%;
+            font-size: 11px;
+            .ellipsis();
+
+            @media (min-width: @break2) {
+                max-width: 85%;
+                font-size: 12px;
+            }
+
+            @media (min-width: @break3) {
+                font-size: 14px;
+            }
+        }
+    }
 }

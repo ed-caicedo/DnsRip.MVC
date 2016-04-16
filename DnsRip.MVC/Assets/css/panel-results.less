@@ -6,9 +6,37 @@
         border-color: @back;
     }
 
+    .panel-heading {
+        font-size: 11px;
+        .ellipsis();
+
+        @media (min-width: @break2) {
+            font-size: 12px;
+        }
+
+        @media (min-width: @break3) {
+            font-size: 14px;
+        }
+    }
+
     .panel-body {
         background-color: @result-body;
         color: @back-dark;
+
+        span {
+            font-size: 11px;
+            max-width: 80%;
+            .ellipsis();
+
+            @media (min-width: @break2) {
+                max-width: 85%;
+                font-size: 12px;
+            }
+
+            @media (min-width: @break3) {
+                font-size: 14px;
+            }
+        }
     }
 
     .btn-group {
