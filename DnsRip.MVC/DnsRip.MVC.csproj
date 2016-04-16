@@ -129,6 +129,9 @@
     <Content Include="Assets\css\main.css">
       <DependentUpon>main.less</DependentUpon>
     </Content>
+    <Content Include="Assets\css\panel-actions.css">
+      <DependentUpon>panel-actions.less</DependentUpon>
+    </Content>
     <Content Include="Assets\css\panel-main.css">
       <DependentUpon>panel-main.less</DependentUpon>
     </Content>
@@ -162,6 +165,8 @@
   <ItemGroup>
     <Content Include="Assets\css\panel-main.less" />
     <Content Include="Assets\css\panel-options.less" />
+    <Content Include="Assets\css\panel-queue.less" />
+    <Content Include="Assets\css\panel-actions.less" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
