@@ -1,66 +1,61 @@
 ﻿@import "main";
 
-.panel {
-    margin-top: 15px;
-    background-color: @back-dark;
+.panel-main {
+    text-align: center;
 
-    &-main {
-        text-align: center;
+    .logo {
+        display: inline-block;
+        margin-bottom: 15px;
 
-        .logo {
-            display: inline-block;
-            margin-bottom: 15px;
+        @media (min-width: @break2) {
+            margin-bottom: 25px;
+        }
+
+        img {
+            float: left;
+            width: 42px;
 
             @media (min-width: @break2) {
-                margin-bottom: 25px;
-            }
-
-            img {
-                float: left;
-                width: 42px;
-
-                @media (min-width: @break2) {
-                    margin-left: -4px;
-                    width: 77px;
-                    height: 68px;
-                }
-            }
-
-            h1 {
-                font-family: @logo-font;
-                font-size: 72px;
-                line-height: 0;
-                color: @text;
-                float: left;
-                margin: 18px 0 0 5px;
-
-                @media (min-width: @break2) {
-                    margin: 29px 0 0 5px;
-                    font-size: 116px;
-                }
+                margin-left: -4px;
+                width: 77px;
+                height: 68px;
             }
         }
 
-        .btn-group {
-            margin-bottom: 10px;
-            width: 100%;
+        h1 {
+            font-family: @logo-font;
+            font-size: 72px;
+            line-height: 0;
+            color: @header-text;
+            float: left;
+            margin: 18px 0 0 5px;
 
-            & .btn-google-dns {
-                width: 38.13%;
+            @media (min-width: @break2) {
+                margin: 29px 0 0 5px;
+                font-size: 116px;
             }
+        }
+    }
 
-            & .btn-open-dns {
-                width: 33.46%;
-            }
+    .btn-group {
+        margin-bottom: 10px;
+        width: 100%;
 
-            & .btn-custom {
-                width: 28.79%;
-            }
+        & .btn-google-dns {
+            width: 38.13%;
+        }
 
-            & .btn {
-                @media (min-width: @break3) {
-                    width: 33.43%;
-                }
+        & .btn-open-dns {
+            width: 33.46%;
+        }
+
+        & .btn-custom {
+            width: 28.79%;
+        }
+
+        & .btn {
+            @media (min-width: @break3) {
+                width: 33.43%;
             }
         }
     }

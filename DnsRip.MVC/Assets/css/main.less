@@ -1,9 +1,9 @@
 ﻿@debug: solid 1px red;
 @back: #536F7A;
 @back-dark: #283136;
-@text: #ffffff;
+@text: #C4D1D7;
+@header-text: #ffffff;
 @button-active: #8096A4;
-@button-text: #C4D1D7;
 @button-option: #ffffff;
 @button-selected: #FEE580;
 @button-primary: #FE6D02;
@@ -22,6 +22,7 @@
 body {
     background-color: @back;
     font-family: @font;
+    color: @text;
 
     @media (max-width:319px) {
         width: 320px;
@@ -41,6 +42,25 @@ body {
 
     &-done:before {
         content: "done";
+    }
+
+    &-done-all:before {
+        content: "done_all";
+    }
+
+    &-vertical-align-bottom:before {
+        content: "vertical_align_bottom";
+    }
+
+    &-clear:before {
+        content: "clear";
+    }
+}
+
+.m-icon-nudge() {
+    i {
+        position: relative;
+        top: 3px;
     }
 }
 
@@ -64,16 +84,12 @@ body {
 }
 
 .btn-default {
-    .button-state(@back, @button-text, @button-active, @back-dark, @back-dark);
+    .button-state(@back, @text, @button-active, @back-dark, @back-dark);
 }
 
 .btn-primary {
     .button-state(@button-primary, @back-dark, @button-selected, @back-dark, @back-dark);
-
-    i {
-        position: relative;
-        top: 1px;
-    }
+    .m-icon-nudge();
 }
 
 .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
@@ -92,5 +108,17 @@ body {
     }
 }
 
+.panel {
+    margin: 15px 0;
+    background-color: @back-dark;
+}
+
+.panel-footer {
+    background-color: @back-dark;
+    border-top: 1px solid @button-active;
+}
+
 @import "panel-main";
 @import "panel-options";
+@import "panel-queue";
+@import "panel-actions";

@@ -10,5 +10,9 @@
   {
     "outputFile": "Assets/css/panel-options.css",
     "inputFile": "Assets/css/panel-options.less"
+  },
+  {
+    "outputFile": "Assets/css/panel-actions.css",
+    "inputFile": "Assets/css/panel-actions.less"
   }
 ]

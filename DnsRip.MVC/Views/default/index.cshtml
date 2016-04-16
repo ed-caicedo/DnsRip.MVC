@@ -10,6 +10,7 @@
     <div class="container">
         <form id="form">
             <div class="row">
+
                 <div class="col-md-6">
                     <div class="panel panel-main">
                         <div class="panel-body">
@@ -35,13 +36,14 @@
                 </div>
 
                 <div class="col-md-6">
+
                     <div class="panel-options">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#hosts">Hosts/IPs</a></li>
                             <li><a href="#types">Types</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane hide" id="hosts">
+                            <div class="tab-pane" id="hosts">
                                 <div class="col-md-12">
                                     <button type="button" class="btn btn-default btn-block active">
                                         <span class="pull-left">google.com</span>
@@ -53,7 +55,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="tab-pane active" id="types">
+                            <div class="tab-pane hide" id="types">
                                 <div class="col-md-12">
                                     <div class="row">
                                         <button type="button" class="btn btn-default type active">
@@ -72,7 +74,7 @@
                                     <div class="row">
                                         <button type="button" class="btn btn-default type">
                                             <span class="pull-left">MX</span>
-                                            <i class="m-icon m-icon-add-circle pull-right"></i>
+                                            <i class="m-icon m-icon-add-circle-outline pull-right"></i>
                                         </button>
                                         <button type="button" class="btn btn-default type">
                                             <span class="pull-left">NS</span>
@@ -86,7 +88,7 @@
                                     <div class="row">
                                         <button type="button" class="btn btn-default type">
                                             <span class="pull-left">TXT</span>
-                                            <i class="m-icon m-icon-add-circle pull-right"></i>
+                                            <i class="m-icon m-icon-add-circle-outline pull-right"></i>
                                         </button>
                                         <button type="button" class="btn btn-default type disabled">
                                             <span class="pull-left">PTR</span>
@@ -108,6 +110,40 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="panel panel-queue">
+                        <div class="panel-body">
+                            <div class="col-md-12">
+                                <div class="row header">
+                                    <span class="pull-left">Lookups</span>
+                                    <span class="pull-right">Server [8.8.4.4]</span>
+                                </div>
+                                <div class="row">
+                                    <span class="pull-left">google.com</span>
+                                    <span class="pull-right">A</span>
+                                </div>
+                                <div class="row">
+                                    <span class="pull-left">www.google.com</span>
+                                    <span class="pull-right">A</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <button type="button" class="btn btn-primary btn-block">
+                                <i class="m-icon m-icon-done-all"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="btn-group btn-group-sm panel-actions">
+                        <button type="button" class="btn">
+                            <i class="m-icon m-icon-vertical-align-bottom"></i>
+                        </button>
+                        <button type="button" class="btn">
+                            <i class="m-icon m-icon-clear"></i>
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </form>

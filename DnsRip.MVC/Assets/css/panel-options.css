@@ -21,6 +21,7 @@
 body {
   background-color: #536F7A;
   font-family: 'Oxygen', sans-serif;
+  color: #C4D1D7;
 }
 @media (max-width: 319px) {
   body {
@@ -48,6 +49,15 @@ body {
 }
 .m-icon-done:before {
   content: "done";
+}
+.m-icon-done-all:before {
+  content: "done_all";
+}
+.m-icon-vertical-align-bottom:before {
+  content: "vertical_align_bottom";
+}
+.m-icon-clear:before {
+  content: "clear";
 }
 .btn-default {
   background-color: #536F7A;
@@ -85,7 +95,7 @@ body {
 }
 .btn-primary i {
   position: relative;
-  top: 1px;
+  top: 3px;
 }
 .btn.disabled,
 .btn[disabled],
@@ -102,8 +112,12 @@ fieldset[disabled] .btn {
   margin-bottom: 0;
 }
 .panel {
-  margin-top: 15px;
+  margin: 15px 0;
   background-color: #283136;
+}
+.panel-footer {
+  background-color: #283136;
+  border-top: 1px solid #8096A4;
 }
 .panel-main {
   text-align: center;
@@ -159,6 +173,40 @@ fieldset[disabled] .btn {
   .panel-main .btn-group .btn {
     width: 33.43%;
   }
+}
+.panel-queue .header {
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+.panel-actions {
+  margin-top: -1px;
+  display: inline-block;
+  width: 100%;
+}
+.panel-actions button {
+  width: 50%;
+  background-color: #8096A4;
+  border-color: #536F7A;
+  color: #283136;
+}
+.panel-actions button:hover,
+.panel-actions button:focus,
+.panel-actions button:active,
+.panel-actions button.active,
+.panel-actions button:active:hover,
+.panel-actions button.active:hover,
+.panel-actions button:active:focus,
+.panel-actions button.active:focus {
+  background-color: #C4D1D7;
+  border-color: #536F7A;
+  color: #283136;
+}
+.panel-actions button i {
+  position: relative;
+  top: 3px;
+}
+.panel-options {
+  margin-bottom: -5px;
 }
 .panel-options .nav-tabs {
   border-color: #8096A4;
