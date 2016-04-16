@@ -4,6 +4,9 @@
 @text: #ffffff;
 @button-active: #8096A4;
 @button-text: #C4D1D7;
+@button-option: #ffffff;
+@button-selected: #FEE580;
+@button-primary: #FE6D02;
 
 @font: 'Oxygen', sans-serif;
 @logo-font: 'VT323',;
@@ -11,8 +14,10 @@
 @break1: 319px;
 @break2: 480px;
 @break3: 599px;
+@break4: 992px;
 
 @import url(https://fonts.googleapis.com/css?family=Oxygen|VT323);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
 body {
     background-color: @back;
@@ -23,24 +28,56 @@ body {
     }
 }
 
-.btn-default {
-    background-color: @back;
-    border-color: @back-dark;
-    color: @button-text;
+.m-icon {
+    .material-icons();
+
+    &-add-circle-outline:before {
+        content: "add_circle_outline";
+    }
+
+    &-add-circle:before {
+        content: "add_circle";
+    }
+
+    &-done:before {
+        content: "done";
+    }
+}
+
+.button-state(@default-back, @default-text, @active-back, @active-text, @border) {
+    background-color: @default-back;
+    border-color: @border;
+    color: @default-text;
 
     &:hover,
     &:focus,
-    &.focus,
     &:active,
     &.active,
     &:active:hover,
     &.active:hover,
     &:active:focus,
     &.active:focus {
-        background-color: @button-active;
-        border-color: @back-dark;
-        color: @back-dark;
+        background-color: @active-back;
+        border-color: @border;
+        color: @active-text;
     }
+}
+
+.btn-default {
+    .button-state(@back, @button-text, @button-active, @back-dark, @back-dark);
+}
+
+.btn-primary {
+    .button-state(@button-primary, @back-dark, @button-selected, @back-dark, @back-dark);
+
+    i {
+        position: relative;
+        top: 1px;
+    }
+}
+
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+    cursor: auto;
 }
 
 .form-control {
@@ -49,6 +86,10 @@ body {
 
 .form-group {
     margin-bottom: 10px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
 
 @import "panel-main";

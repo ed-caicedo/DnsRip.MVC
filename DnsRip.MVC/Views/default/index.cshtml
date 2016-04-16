@@ -18,17 +18,17 @@
                                 <h1>DNS.rip</h1>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="query" id="query"
-                                       maxlength="100" placeholder="Enter a hostname, IP, or URL" />
+                                <input type="text" class="form-control" name="query" maxlength="100"
+                                       placeholder="Enter a hostname, IP, or URL" />
                             </div>
-                            <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                            <div class="btn-group btn-group-sm">
                                 <button type="button" class="btn btn-default btn-google-dns active">Goolge DNS</button>
                                 <button type="button" class="btn btn-default btn-open-dns">OpenDNS</button>
                                 <button type="button" class="btn btn-default btn-custom">Custom</button>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="server" id="server"
-                                       maxlength="100" placeholder="Enter a nameserver" />
+                                <input type="text" class="form-control" name="server" maxlength="100"
+                                       placeholder="Enter a nameserver" />
                             </div>
                         </div>
                     </div>
@@ -36,17 +36,76 @@
 
                 <div class="col-md-6">
                     <div class="panel-options">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#hosts" aria-controls="hosts" role="tab" data-toggle="tab">Hosts/IPs</a></li>
-                            <li role="presentation"><a href="#types" aria-controls="types" role="tab" data-toggle="tab">Types</a></li>
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#hosts">Hosts/IPs</a></li>
+                            <li><a href="#types">Types</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="hosts">
+                            <div class="tab-pane hide" id="hosts">
                                 <div class="col-md-12">
-                                    <button type="button" class="btn btn-sm btn-block">google.com</button>
+                                    <button type="button" class="btn btn-default btn-block active">
+                                        <span class="pull-left">google.com</span>
+                                        <i class="m-icon m-icon-add-circle pull-right"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-default btn-block">
+                                        <span class="pull-left">www.google.com</span>
+                                        <i class="m-icon m-icon-add-circle-outline pull-right"></i>
+                                    </button>
                                 </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="types">Types</div>
+                            <div class="tab-pane active" id="types">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <button type="button" class="btn btn-default type active">
+                                            <span class="pull-left">A</span>
+                                            <i class="m-icon m-icon-add-circle pull-right"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-default type">
+                                            <span class="pull-left">AAAA</span>
+                                            <i class="m-icon m-icon-add-circle-outline pull-right"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-default type">
+                                            <span class="pull-left">CNAME</span>
+                                            <i class="m-icon m-icon-add-circle-outline pull-right"></i>
+                                        </button>
+                                    </div>
+                                    <div class="row">
+                                        <button type="button" class="btn btn-default type">
+                                            <span class="pull-left">MX</span>
+                                            <i class="m-icon m-icon-add-circle pull-right"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-default type">
+                                            <span class="pull-left">NS</span>
+                                            <i class="m-icon m-icon-add-circle-outline pull-right"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-default type">
+                                            <span class="pull-left">SOA</span>
+                                            <i class="m-icon m-icon-add-circle-outline pull-right"></i>
+                                        </button>
+                                    </div>
+                                    <div class="row">
+                                        <button type="button" class="btn btn-default type">
+                                            <span class="pull-left">TXT</span>
+                                            <i class="m-icon m-icon-add-circle pull-right"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-default type disabled">
+                                            <span class="pull-left">PTR</span>
+                                            <i class="m-icon m-icon-add-circle-outline pull-right"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-default type">
+                                            <span class="pull-left">ANY</span>
+                                            <i class="m-icon m-icon-add-circle-outline pull-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-footer">
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-primary btn-block">
+                                        <i class="m-icon m-icon-done"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

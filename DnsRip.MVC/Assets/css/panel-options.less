@@ -30,7 +30,68 @@
         color: @back-dark;
     }
 
-    .tab-pane {
+    .tab-pane, .tab-footer {
         background-color: @back-dark;
+        padding: 15px 0 15px 0;
+        display: inline-block;
+        width: 100%;
+
+        .row {
+            margin: 0 0 3px 0;
+            clear: both;
+
+            &::after {
+                clear: both;
+            }
+        }
+    }
+
+    .tab-footer {
+        border-top: 1px solid @button-active;
+        margin-top: -5px;
+        border-bottom: 1px solid transparent;
+        border-radius: 0 0 4px 4px;
+    }
+
+    .btn-default {
+        .button-state(@button-option, @back-dark, @button-selected, @back-dark, @back-dark);
+
+        &:focus,
+        &.disabled:focus,
+        &.disabled:hover {
+            background-color: @button-option;
+            border-color: @back-dark;
+            color: @back-dark;
+        }
+
+        &.type {
+            width: 32.53%;
+            font-size: 11px;
+            padding: 6px 5px 6px 10px;
+
+            @media (min-width: @break2) {
+                width: 32.83%;
+            }
+
+            span {
+                margin-top: 3px;
+            }
+
+            i {
+                font-size: 22px;
+            }
+        }
+
+        &.active {
+            font-weight: bold;
+        }
+
+        span {
+            margin-top: 2px;
+        }
+    }
+
+    @media(min-width: @break4) {
+        margin-top: 15px;
     }
 }

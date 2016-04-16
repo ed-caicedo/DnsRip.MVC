@@ -1,4 +1,23 @@
 ﻿@import url(https://fonts.googleapis.com/css?family=Oxygen|VT323);
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url(https://fonts.gstatic.com/s/materialicons/v14/2fcrYFNaTjcS6g4U3t-Y5StnKWgpfO2iSkLzTz-AABg.ttf) format('truetype');
+}
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+}
 body {
   background-color: #536F7A;
   font-family: 'Oxygen', sans-serif;
@@ -8,6 +27,28 @@ body {
     width: 320px;
   }
 }
+.m-icon {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+}
+.m-icon-add-circle-outline:before {
+  content: "add_circle_outline";
+}
+.m-icon-add-circle:before {
+  content: "add_circle";
+}
+.m-icon-done:before {
+  content: "done";
+}
 .btn-default {
   background-color: #536F7A;
   border-color: #283136;
@@ -15,7 +56,6 @@ body {
 }
 .btn-default:hover,
 .btn-default:focus,
-.btn-default.focus,
 .btn-default:active,
 .btn-default.active,
 .btn-default:active:hover,
@@ -26,11 +66,40 @@ body {
   border-color: #283136;
   color: #283136;
 }
+.btn-primary {
+  background-color: #FE6D02;
+  border-color: #283136;
+  color: #283136;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary:active:hover,
+.btn-primary.active:hover,
+.btn-primary:active:focus,
+.btn-primary.active:focus {
+  background-color: #FEE580;
+  border-color: #283136;
+  color: #283136;
+}
+.btn-primary i {
+  position: relative;
+  top: 1px;
+}
+.btn.disabled,
+.btn[disabled],
+fieldset[disabled] .btn {
+  cursor: auto;
+}
 .form-control {
   border-color: #283136;
 }
 .form-group {
   margin-bottom: 10px;
+}
+.form-group:last-child {
+  margin-bottom: 0;
 }
 .panel-options .nav-tabs {
   border-color: #8096A4;
@@ -56,8 +125,78 @@ body {
   border-color: #536F7A;
   color: #283136;
 }
-.panel-options .tab-pane {
+.panel-options .tab-pane,
+.panel-options .tab-footer {
   background-color: #283136;
+  padding: 15px 0 15px 0;
+  display: inline-block;
+  width: 100%;
+}
+.panel-options .tab-pane .row,
+.panel-options .tab-footer .row {
+  margin: 0 0 3px 0;
+  clear: both;
+}
+.panel-options .tab-pane .row::after,
+.panel-options .tab-footer .row::after {
+  clear: both;
+}
+.panel-options .tab-footer {
+  border-top: 1px solid #8096A4;
+  margin-top: -5px;
+  border-bottom: 1px solid transparent;
+  border-radius: 0 0 4px 4px;
+}
+.panel-options .btn-default {
+  background-color: #ffffff;
+  border-color: #283136;
+  color: #283136;
+}
+.panel-options .btn-default:hover,
+.panel-options .btn-default:focus,
+.panel-options .btn-default:active,
+.panel-options .btn-default.active,
+.panel-options .btn-default:active:hover,
+.panel-options .btn-default.active:hover,
+.panel-options .btn-default:active:focus,
+.panel-options .btn-default.active:focus {
+  background-color: #FEE580;
+  border-color: #283136;
+  color: #283136;
+}
+.panel-options .btn-default:focus,
+.panel-options .btn-default.disabled:focus,
+.panel-options .btn-default.disabled:hover {
+  background-color: #ffffff;
+  border-color: #283136;
+  color: #283136;
+}
+.panel-options .btn-default.type {
+  width: 32.53%;
+  font-size: 11px;
+  padding: 6px 5px 6px 10px;
+}
+@media (min-width: 480px) {
+  .panel-options .btn-default.type {
+    width: 32.83%;
+  }
+}
+.panel-options .btn-default.type span {
+  margin-top: 3px;
+}
+.panel-options .btn-default.type i {
+  font-size: 22px;
+}
+.panel-options .btn-default.active {
+  font-weight: bold;
+}
+.panel-options .btn-default span {
+  margin-top: 2px;
+}
+@media (min-width: 992px) {
+  .panel-options {
+    margin-top: 15px;
+  }
 }
 .panel {
   margin-top: 15px;
@@ -115,6 +254,6 @@ body {
 }
 @media (min-width: 599px) {
   .panel-main .btn-group .btn {
-    width: 33.33%;
+    width: 33.43%;
   }
 }
