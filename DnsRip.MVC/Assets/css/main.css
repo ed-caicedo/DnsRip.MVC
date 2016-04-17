@@ -41,27 +41,6 @@ body {
   word-wrap: normal;
   direction: ltr;
 }
-.m-icon-add-circle-outline:before {
-  content: "add_circle_outline";
-}
-.m-icon-add-circle:before {
-  content: "add_circle";
-}
-.m-icon-done:before {
-  content: "done";
-}
-.m-icon-done-all:before {
-  content: "done_all";
-}
-.m-icon-vertical-align-bottom:before {
-  content: "vertical_align_bottom";
-}
-.m-icon-clear:before {
-  content: "clear";
-}
-.m-icon-arrow-upward:before {
-  content: "arrow_upward";
-}
 .btn-default {
   background-color: #536F7A;
   border-color: #283136;
