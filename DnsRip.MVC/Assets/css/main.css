@@ -18,14 +18,25 @@
   word-wrap: normal;
   direction: ltr;
 }
+html {
+  position: relative;
+  min-height: 100%;
+}
 body {
   background-color: #536F7A;
   font-family: 'Oxygen', sans-serif;
   color: #C4D1D7;
+  margin-bottom: 40px;
 }
 @media (max-width: 319px) {
   body {
     width: 320px;
+  }
+}
+@media (min-width: 992px) {
+  body {
+    padding-top: 60px;
+    margin-bottom: 100px;
   }
 }
 .m-icon {
@@ -120,7 +131,6 @@ fieldset[disabled] .btn {
   }
 }
 .panel-main .btn-group {
-  margin-bottom: 10px;
   width: 100%;
 }
 .panel-main .btn-group .btn-google-dns {
@@ -136,6 +146,9 @@ fieldset[disabled] .btn {
   .panel-main .btn-group .btn {
     width: 33.43%;
   }
+}
+.panel-main .nameserver {
+  margin-top: 10px;
 }
 .panel-options {
   margin-bottom: -5px;
@@ -266,6 +279,11 @@ fieldset[disabled] .btn {
   font-size: 10px;
   margin-bottom: 5px;
 }
+@media (min-width: 992px) {
+  .panel-queue .panel-body {
+    min-height: 142px;
+  }
+}
 .panel-queue .item span {
   max-width: 80%;
   font-size: 11px;
@@ -283,6 +301,10 @@ fieldset[disabled] .btn {
   .panel-queue .item span {
     font-size: 14px;
   }
+}
+.panel-queue .btn-primary.disabled:focus,
+.panel-queue .btn-primary.disabled:hover {
+  background-color: #FE6D02;
 }
 .panel-actions {
   display: inline-block;
@@ -431,4 +453,30 @@ fieldset[disabled] .btn {
 .panel-up button i {
   position: relative;
   top: 3px;
+}
+.footer {
+  font-size: 12px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #283136;
+  padding: 10px;
+}
+.footer .copy {
+  display: inline-block;
+  width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.footer img {
+  width: 16px;
+}
+.footer a {
+  color: #C4D1D7;
+}
+.footer a:hover {
+  color: #536F7A;
+  text-decoration: none;
 }

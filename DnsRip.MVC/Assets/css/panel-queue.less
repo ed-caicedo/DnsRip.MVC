@@ -6,6 +6,12 @@
         margin-bottom: 5px;
     }
 
+    .panel-body {
+        @media (min-width: @break4) {
+            min-height: 142px;
+        }
+    }
+
     .item {
         span {
             max-width: 80%;
@@ -20,6 +26,13 @@
             @media (min-width: @break3) {
                 font-size: 14px;
             }
+        }
+    }
+
+    .btn-primary {
+        &.disabled:focus,
+        &.disabled:hover {
+            background-color: @button-primary;
         }
     }
 }

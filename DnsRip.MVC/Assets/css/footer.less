@@ -1,0 +1,30 @@
+﻿@import "main";
+
+.footer {
+    font-size: 12px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: @back-dark;
+    padding: 10px;
+
+    .copy {
+        display: inline-block;
+        width: 80%;
+        .ellipsis();
+    }
+
+    img {
+        width: 16px;
+    }
+
+    a {
+        color: @text;
+
+        &:hover {
+            color: @back;
+            text-decoration: none;
+        }
+    }
+}

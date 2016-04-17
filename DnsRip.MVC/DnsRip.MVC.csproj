@@ -129,6 +129,7 @@
     <Content Include="Assets\css\main.css">
       <DependentUpon>main.less</DependentUpon>
     </Content>
+    <Content Include="Assets\img\github.png" />
     <Content Include="Assets\img\logo.png" />
     <Content Include="Assets\js\lib\bootstrap.js" />
     <Content Include="Assets\js\lib\jquery.js" />
@@ -159,6 +160,7 @@
     <Content Include="Assets\css\panel-actions.less" />
     <Content Include="Assets\css\panel-results.less" />
     <Content Include="Assets\css\panel-up.less" />
+    <Content Include="Assets\css\footer.less" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>

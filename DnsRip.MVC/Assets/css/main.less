@@ -24,13 +24,24 @@
 @import url(https://fonts.googleapis.com/css?family=Oxygen);
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
     background-color: @back;
     font-family: @font;
     color: @text;
+    margin-bottom: 40px;
 
-    @media (max-width:319px) {
+    @media (max-width: @break1) {
         width: 320px;
+    }
+
+    @media (min-width: @break4) {
+        padding-top: 60px;
+        margin-bottom: 100px;
     }
 }
 
@@ -111,3 +122,4 @@ body {
 @import "panel-actions";
 @import "panel-results";
 @import "panel-up";
+@import "footer";

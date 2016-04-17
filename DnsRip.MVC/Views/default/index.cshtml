@@ -26,7 +26,7 @@
                                 <button type="button" class="btn btn-default btn-open-dns">OpenDNS</button>
                                 <button type="button" class="btn btn-default btn-custom">Custom</button>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group nameserver hidden">
                                 <input type="text" class="form-control" name="server" maxlength="100"
                                        placeholder="Enter a nameserver" />
                             </div>
@@ -58,7 +58,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="tab-pane hide" id="types">
+                            <div class="tab-pane hidden" id="types">
                                 <div class="col-md-12">
                                     <div class="row">
                                         <button type="button" class="btn btn-default type">
@@ -122,21 +122,16 @@
                                     <span class="pull-right">Server [8.8.4.4]</span>
                                 </div>
                                 <div class="row item">
-                                    <span class="pull-left">google.com</span>
-                                    <span class="pull-right">A</span>
+                                    <span class="pull-left">[Empty]</span>
                                 </div>
-                                <div class="row item">
-                                    <span class="pull-left">googasdfasdfasdfasdfasasdbasdbsdabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbsdbasdbafdbasdfbarbarbarbbrbrrgfasdfsadfasdfle.com</span>
-                                    <span class="pull-right">CNAME</span>
-                                </div>
-                                <div class="row item">
-                                    <span class="pull-left">www.google.com</span>
-                                    <span class="pull-right">A</span>
-                                </div>
+                                @*<div class="row item">
+                                        <span class="pull-left">google.com</span>
+                                        <span class="pull-right">A</span>
+                                    </div>*@
                             </div>
                         </div>
                         <div class="panel-footer">
-                            <button type="button" class="btn btn-primary btn-block">
+                            <button type="button" class="btn btn-primary btn-block disabled">
                                 <i class="m-icon">&#xE877;</i>
                             </button>
                         </div>
@@ -178,17 +173,42 @@
                             </button>
                         </div>
                     </div>
-
                     <div class="panel-results">
                         <div class="panel">
                             <div class="panel-heading">
-                                google.com
+                                googasdfasdfasdfasdfasasdbasdbsdabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbsdbasdbafdbasdfbarbarbarbbrbrrgfasdfsadfasdfle.com
                             </div>
                             <div class="panel-body">
                                 <div class="col-md-12">
                                     <div class="row">
+                                        <span class="pull-left">CNAME</span>
+                                        <span class="pull-right">googasdfasdfasdfasdfasasdbasdbsdabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbsdbasdbafdbasdfbarbarbarbbrbrrgfasdfsadfasdfle.com</span>
+                                    </div>
+                                    <div class="row">
                                         <span class="pull-left">A</span>
                                         <span class="pull-right">216.58.192.238</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-primary">
+                                <i class="m-icon">&#xE258;</i>
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                                <i class="m-icon">&#xE14C;</i>
+                            </button>
+                        </div>
+                    </div><div class="panel-results">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                googasdfasdfasdfasdfasasdbasdbsdabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbsdbasdbafdbasdfbarbarbarbbrbrrgfasdfsadfasdfle.com
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <span class="pull-left">CNAME</span>
+                                        <span class="pull-right">googasdfasdfasdfasdfasasdbasdbsdabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbsdbasdbafdbasdfbarbarbarbbrbrrgfasdfsadfasdfle.com</span>
                                     </div>
                                     <div class="row">
                                         <span class="pull-left">A</span>
@@ -213,6 +233,17 @@
                         </button>
                     </div>
                 </div>
+            </div>
+            <div class="footer">
+                <span class="copy">
+                    Copyright &copy; Ed Caicedo 2016 | A demo site for
+                    <a href="https://github.com/ed-caicedo/DnsRip" target="_blank">DnsRip</a>
+                </span>
+                <span class="pull-right">
+                    <a href="https://github.com/ed-caicedo/DnsRip" target="_blank">
+                        <img src="/assets/img/github.png" alt="GitHub" />
+                    </a>
+                </span>
             </div>
         </form>
     </div>
