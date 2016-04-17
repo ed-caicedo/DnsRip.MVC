@@ -1,4 +1,4 @@
-﻿@import url(https://fonts.googleapis.com/css?family=Oxygen|VT323);
+﻿@import url(https://fonts.googleapis.com/css?family=Oxygen);
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
@@ -106,36 +106,17 @@ fieldset[disabled] .btn {
 }
 .panel-main .logo {
   display: inline-block;
-  margin-bottom: 15px;
-}
-@media (min-width: 480px) {
-  .panel-main .logo {
-    margin-bottom: 25px;
-  }
+  margin-bottom: 10px;
+  text-align: center;
 }
 .panel-main .logo img {
   float: left;
-  width: 42px;
+  width: 256px;
+  margin: auto;
 }
 @media (min-width: 480px) {
   .panel-main .logo img {
-    margin-left: -4px;
-    width: 77px;
-    height: 68px;
-  }
-}
-.panel-main .logo h1 {
-  font-family: 'VT323';
-  font-size: 72px;
-  line-height: 0;
-  color: #ffffff;
-  float: left;
-  margin: 18px 0 0 5px;
-}
-@media (min-width: 480px) {
-  .panel-main .logo h1 {
-    margin: 29px 0 0 5px;
-    font-size: 116px;
+    width: 404px;
   }
 }
 .panel-main .btn-group {
