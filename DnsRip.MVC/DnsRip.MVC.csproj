@@ -129,6 +129,34 @@
     <Content Include="Assets\css\main.css">
       <DependentUpon>main.less</DependentUpon>
     </Content>
+    <Content Include="Assets\icons\android-chrome-144x144.png" />
+    <Content Include="Assets\icons\android-chrome-192x192.png" />
+    <Content Include="Assets\icons\android-chrome-36x36.png" />
+    <Content Include="Assets\icons\android-chrome-48x48.png" />
+    <Content Include="Assets\icons\android-chrome-72x72.png" />
+    <Content Include="Assets\icons\android-chrome-96x96.png" />
+    <Content Include="Assets\icons\apple-touch-icon-114x114.png" />
+    <Content Include="Assets\icons\apple-touch-icon-120x120.png" />
+    <Content Include="Assets\icons\apple-touch-icon-144x144.png" />
+    <Content Include="Assets\icons\apple-touch-icon-152x152.png" />
+    <Content Include="Assets\icons\apple-touch-icon-180x180.png" />
+    <Content Include="Assets\icons\apple-touch-icon-57x57.png" />
+    <Content Include="Assets\icons\apple-touch-icon-60x60.png" />
+    <Content Include="Assets\icons\apple-touch-icon-72x72.png" />
+    <Content Include="Assets\icons\apple-touch-icon-76x76.png" />
+    <Content Include="Assets\icons\apple-touch-icon-precomposed.png" />
+    <Content Include="Assets\icons\apple-touch-icon.png" />
+    <Content Include="Assets\icons\browserconfig.xml" />
+    <Content Include="Assets\icons\favicon-16x16.png" />
+    <Content Include="Assets\icons\favicon-32x32.png" />
+    <Content Include="Assets\icons\favicon-96x96.png" />
+    <Content Include="Assets\icons\favicon.ico" />
+    <Content Include="Assets\icons\mstile-144x144.png" />
+    <Content Include="Assets\icons\mstile-150x150.png" />
+    <Content Include="Assets\icons\mstile-310x150.png" />
+    <Content Include="Assets\icons\mstile-310x310.png" />
+    <Content Include="Assets\icons\mstile-70x70.png" />
+    <Content Include="Assets\icons\safari-pinned-tab.svg" />
     <Content Include="Assets\img\github.png" />
     <Content Include="Assets\img\logo.png" />
     <Content Include="Assets\js\lib\bootstrap.js" />
@@ -161,6 +189,7 @@
     <Content Include="Assets\css\panel-results.less" />
     <Content Include="Assets\css\panel-up.less" />
     <Content Include="Assets\css\footer.less" />
+    <Content Include="Assets\icons\manifest.json" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
