@@ -115,6 +115,17 @@ fieldset[disabled] .btn {
 .panel-main {
   text-align: center;
 }
+@media (min-width: 992px) {
+  .panel-main {
+    position: fixed;
+    width: 456px;
+  }
+}
+@media (min-width: 1200px) {
+  .panel-main {
+    width: 554px;
+  }
+}
 .panel-main .logo {
   display: inline-block;
   margin-bottom: 10px;
@@ -455,13 +466,18 @@ fieldset[disabled] .btn {
   top: 3px;
 }
 .footer {
-  font-size: 12px;
+  font-size: 11px;
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   background-color: #283136;
-  padding: 10px;
+  padding: 9px 15px 5px 15px;
+}
+@media (max-width: 319px) {
+  .footer {
+    width: 320px;
+  }
 }
 .footer .copy {
   display: inline-block;
