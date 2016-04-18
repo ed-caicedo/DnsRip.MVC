@@ -1,4 +1,5 @@
-﻿using System.Web.Optimization;
+﻿using System.Web.Http;
+using System.Web.Optimization;
 using System.Web.Routing;
 
 namespace DnsRip.MVC
@@ -7,6 +8,7 @@ namespace DnsRip.MVC
     {
         protected void Application_Start()
         {
+            GlobalConfiguration.Configure(RouteConfig.RegisterConfig);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }

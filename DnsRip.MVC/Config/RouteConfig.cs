@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web.Http;
+using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace DnsRip.MVC
@@ -8,6 +9,11 @@ namespace DnsRip.MVC
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.MapMvcAttributeRoutes();
+        }
+
+        public static void RegisterConfig(HttpConfiguration config)
+        {
+            config.MapHttpAttributeRoutes();
         }
     }
 }
