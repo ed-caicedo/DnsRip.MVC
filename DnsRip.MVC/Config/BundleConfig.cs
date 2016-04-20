@@ -15,6 +15,7 @@ namespace DnsRip.MVC
             bundles.Add(new ScriptBundle("~/assets/js/default.bundle/")
                 .Include("~/assets/js/lib/jquery.js")
                 .Include("~/assets/js/lib/bootstrap.js")
+                .Include("~/assets/js/lib/knockout.js")
                 .Include("~/assets/js/lib/typewatch.js")
                 .Include("~/assets/js/main.js"));
         }

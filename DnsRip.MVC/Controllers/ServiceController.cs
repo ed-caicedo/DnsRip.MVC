@@ -1,5 +1,4 @@
-﻿using DnsRip.MVC.Models;
-using System.Web.Http;
+﻿using System.Web.Http;
 
 namespace DnsRip.MVC.Controllers
 {

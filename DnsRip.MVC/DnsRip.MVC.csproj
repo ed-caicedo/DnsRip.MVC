@@ -139,6 +139,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ParseRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +180,7 @@
     <Content Include="Assets\js\lib\bootstrap.js" />
     <None Include="Assets\js\lib\jquery-vsdoc.js" />
     <Content Include="Assets\js\lib\jquery.js" />
+    <Content Include="Assets\js\lib\knockout.js" />
     <Content Include="Assets\js\lib\typewatch.js" />
     <Content Include="Assets\js\main.js" />
     <Content Include="favicon.ico" />

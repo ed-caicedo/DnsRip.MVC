@@ -3,7 +3,7 @@
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: local('Material Icons'), local('MaterialIcons-Regular'), url(https://fonts.gstatic.com/s/materialicons/v14/2fcrYFNaTjcS6g4U3t-Y5StnKWgpfO2iSkLzTz-AABg.ttf) format('truetype');
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url(https://fonts.gstatic.com/s/materialicons/v15/2fcrYFNaTjcS6g4U3t-Y5StnKWgpfO2iSkLzTz-AABg.ttf) format('truetype');
 }
 .material-icons {
   font-family: 'Material Icons';
@@ -162,6 +162,7 @@ fieldset[disabled] .btn {
   margin-top: 10px;
 }
 .panel-options {
+  display: none;
   margin-bottom: -5px;
 }
 .panel-options .nav-tabs {
