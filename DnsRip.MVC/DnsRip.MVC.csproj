@@ -49,8 +49,8 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DnsRip, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DnsRip.1.0.0.0\lib\net452\DnsRip.dll</HintPath>
+    <Reference Include="DnsRip, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DnsRip.1.1.0.0\lib\net452\DnsRip.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -141,6 +141,7 @@
     </Compile>
     <Compile Include="Models\ParseRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\AdditionalHosts.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\css\lib\bootstrap.css" />
@@ -180,6 +181,7 @@
     <Content Include="Assets\js\lib\bootstrap.js" />
     <None Include="Assets\js\lib\jquery-vsdoc.js" />
     <Content Include="Assets\js\lib\jquery.js" />
+    <Content Include="Assets\js\lib\knockout.debug.js" />
     <Content Include="Assets\js\lib\knockout.js" />
     <Content Include="Assets\js\lib\typewatch.js" />
     <Content Include="Assets\js\main.js" />
