@@ -16,7 +16,7 @@
             hosts: ko.observableArray()
         }
 
-        ko.bindingHandlers.fadeVisible = {
+        ko.bindingHandlers.fade = {
             update: function (element, valueAccessor, allBindings, viewModel) {
                 if (ko.unwrap(valueAccessor()))
                     $(element).fadeIn(viewModel.duration);
@@ -44,20 +44,26 @@
 
                     if (parsed)
                         parsed.done(function (data) {
-                            console.log(data);
+                            //console.log(data);
                             var vm = t.viewModel;
                             vm.hosts.removeAll();
 
                             if (data.Type !== "Invalid") {
                                 vm.optionsVisible(true);
-                                vm.hosts.push(data.Parsed);
+                                vm.hosts.push({
+                                    name: data.Parsed,
+                                    selected: true
+                                });
 
                                 if (data.Additional)
                                     for (var a = 0; a < data.Additional.length; a++)
-                                        vm.hosts.push(data.Additional[a]);
+                                        vm.hosts.push({
+                                            name: data.Additional[a],
+                                            selected: false
+                                        });
                             }
 
-                            console.log(ko.toJS(vm.hosts));
+                            //console.log(ko.toJS(vm.hosts));
 
                             if (!vm.hosts().length)
                                 vm.optionsVisible(false);

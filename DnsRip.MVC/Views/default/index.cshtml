@@ -56,7 +56,7 @@
 
                 <div class="col-md-6">
 
-                    <div class="panel-options" data-bind="fadeVisible: optionsVisible">
+                    <div class="panel-options" data-bind="fade: optionsVisible">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#hosts">Hosts/IPs</a></li>
                             <li><a href="#types">Types</a></li>
@@ -64,13 +64,9 @@
                         <div class="tab-content">
                             <div class="tab-pane" id="hosts">
                                 <div class="col-md-12">
-                                    @*<button type="button" class="btn btn-default btn-block active">
-                                            <span class="pull-left">google.com</span>
-                                            <i class="m-icon pull-right">&#xE147;</i>
-                                        </button>*@
                                     <span data-bind="foreach: hosts">
-                                        <button type="button" class="btn btn-default btn-block">
-                                            <span class="pull-left" data-bind="text: $data"></span>
+                                        <button type="button" class="btn btn-default btn-block" data-bind="css: { active: selected }">
+                                            <span class="pull-left" data-bind="text: name"></span>
                                             <i class="m-icon pull-right">&#xE148;</i>
                                         </button>
                                     </span>
