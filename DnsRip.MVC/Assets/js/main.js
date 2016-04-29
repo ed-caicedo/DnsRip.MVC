@@ -13,7 +13,10 @@
         this.viewModel = {
             duration: this.duration,
             optionsVisible: ko.observable(false),
-            hosts: ko.observableArray()
+            lookupEnabled: ko.observable(false),
+            lookupEmpty: ko.observable(true),
+            hosts: ko.observableArray(),
+            selected: ko.observableArray()
         }
 
         ko.bindingHandlers.fade = {
@@ -30,6 +33,8 @@
         init: function () {
             this.initQuery();
             ko.applyBindings(this.viewModel);
+
+            console.log(ko.toJS(this.viewModel));
         },
 
         initQuery: function () {
@@ -47,9 +52,11 @@
                             //console.log(data);
                             var vm = t.viewModel;
                             vm.hosts.removeAll();
+                            vm.selected.removeAll();
+                            vm.lookupEnabled(false);
+                            vm.lookupEmpty(true);
 
                             if (data.Type !== "Invalid") {
-                                vm.optionsVisible(true);
                                 vm.hosts.push({
                                     name: data.Parsed,
                                     selected: true
@@ -63,10 +70,28 @@
                                         });
                             }
 
-                            //console.log(ko.toJS(vm.hosts));
+                            var hosts = vm.hosts();
 
-                            if (!vm.hosts().length)
+                            if (hosts.length) {
+                                vm.optionsVisible(true);
+
+                                for (var i = 0; i < hosts.length; i++) {
+                                    if (hosts[i].selected === true)
+                                        vm.selected.push({
+                                            name: hosts[i].name,
+                                            type: "A"
+                                        });
+                                }
+                            } else {
                                 vm.optionsVisible(false);
+                            }
+
+                            if (vm.selected().length) {
+                                vm.lookupEnabled(true);
+                                vm.lookupEmpty(false);
+                            }
+
+                            console.log(ko.toJS(vm.selected));
                         });
                 },
                 wait: t.duration,

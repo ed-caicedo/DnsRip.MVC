@@ -64,12 +64,12 @@
                         <div class="tab-content">
                             <div class="tab-pane" id="hosts">
                                 <div class="col-md-12">
-                                    <span data-bind="foreach: hosts">
+                                    <div data-bind="foreach: hosts">
                                         <button type="button" class="btn btn-default btn-block" data-bind="css: { active: selected }">
                                             <span class="pull-left" data-bind="text: name"></span>
                                             <i class="m-icon pull-right">&#xE148;</i>
                                         </button>
-                                    </span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane hidden" id="types">
@@ -122,6 +122,7 @@
                                 <div class="col-md-12">
                                     <button type="button" class="btn btn-primary btn-block">
                                         <i class="m-icon">&#xE876;</i>
+                                        <span>Save Lookups</span>
                                     </button>
                                 </div>
                             </div>
@@ -135,18 +136,24 @@
                                     <span class="pull-left">Lookups</span>
                                     <span class="pull-right">Server [8.8.4.4]</span>
                                 </div>
-                                <div class="row item">
+                                <div class="row item" data-bind="visible: lookupEmpty">
                                     <span class="pull-left">[Empty]</span>
                                 </div>
-                                @*<div class="row item">
-                                        <span class="pull-left">google.com</span>
-                                        <span class="pull-right">A</span>
-                                    </div>*@
+                                <div data-bind="foreach: selected">
+                                    <div class="row item">
+                                        <div class="pull-left">
+                                            <span data-bind="text: name"></span>
+                                            <i class="m-icon">&#xE876;</i>
+                                        </div>
+                                        <span class="pull-right" data-bind="text: type"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="panel-footer">
-                            <button type="button" class="btn btn-primary btn-block disabled">
+                            <button type="button" class="btn btn-primary btn-block disabled" data-bind="css: { disabled: !lookupEnabled()  }">
                                 <i class="m-icon">&#xE877;</i>
+                                <span>Run Lookups</span>
                             </button>
                         </div>
                     </div>
