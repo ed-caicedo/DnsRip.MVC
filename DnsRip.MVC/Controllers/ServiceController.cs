@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using DnsRip.MVC.Models;
 
 namespace DnsRip.MVC.Controllers
 {
@@ -23,10 +24,9 @@ namespace DnsRip.MVC.Controllers
         [HttpPost]
         [Route("parse")]
         public IHttpActionResult Parse(ParseRequest request)
-
         {
             var dnsRip = new DnsRip.Parser();
-            var parsed = dnsRip.Parse(request.Text);
+            var parsed = dnsRip.Parse(request.Value);
 
             var result = new
             {

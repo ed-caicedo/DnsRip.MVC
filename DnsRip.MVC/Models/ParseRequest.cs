@@ -1,7 +1,7 @@
-namespace DnsRip.MVC.Controllers
+namespace DnsRip.MVC.Models
 {
     public class ParseRequest
     {
-        public string Text { get; set; }
+        public string Value { get; set; }
     }
 }

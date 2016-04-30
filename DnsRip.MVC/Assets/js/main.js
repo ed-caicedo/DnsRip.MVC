@@ -2,16 +2,10 @@
 /// <reference path="lib/knockout.debug.js" />
 /// <reference path="lib/typewatch.js" />
 
-// ReSharper disable once InconsistentNaming
-
-(function () {
-    var DnsRip = function () {
-        this.$query = $("#query");
-
-        this.duration = 333;
-
+(function ($, ko) {
+    var DnsRip = function (opts) {
         this.viewModel = {
-            duration: this.duration,
+            duration: opts.duration,
             optionsVisible: ko.observable(false),
             hosts: ko.observableArray(),
             queued: ko.observableArray()
@@ -28,52 +22,48 @@
                     $(element).fadeOut(viewModel.duration);
             }
         };
-    }
 
-    DnsRip.prototype = {
-        init: function () {
-            this.initQuery();
-            ko.applyBindings(this.viewModel);
-
-            console.log(ko.toJS(this.viewModel));
-        },
-
-        initQuery: function () {
+        this.initQuery = function () {
             var t = this;
 
-            t.$query.typeWatch({
+            opts.$query.typeWatch({
                 callback: function (value) {
-                    var parsed;
-
                     if (value)
-                        parsed = t.parse(value);
-
-                    if (parsed)
-                        parsed.done(function (data) {
-                            t.reset();
-                            t.addOptions(data);
-                        });
+                         t.parse(value);
                 },
                 wait: t.duration,
                 highlight: false,
                 allowSubmit: false,
                 captureLength: 3
             });
-        },
 
-        parse: function (text) {
-            return $.post("/parse/", {
-                text: text
+            var loaded = opts.$query.val();
+
+            if (loaded)
+                t.parse(loaded);
+        }
+
+        this.parse = function (value) {
+            var t = this;
+
+            var parsed = $.post("/parse/", {
+                value: value
             });
-        },
 
-        reset: function() {
+            if (parsed)
+                parsed.done(function (data) {
+                    t.reset();
+                    t.addOptions(data);
+                });
+        }
+
+        this.reset = function () {
             var vm = this.viewModel;
             vm.hosts.removeAll();
             vm.queued.removeAll();
-        },
+        }
 
-        addOptions: function (parseResult) {
+        this.addOptions = function (parseResult) {
             var vm = this.viewModel;
 
             if (parseResult.Type !== "Invalid") {
@@ -108,7 +98,22 @@
         }
     }
 
+    DnsRip.prototype = {
+        init: function () {
+            this.initQuery();
+
+            ko.applyBindings(this.viewModel);
+
+            console.log(ko.toJS(this.viewModel));
+        }       
+    }
+
     $(function () {
-        new DnsRip().init();
+        var dnsRip = new DnsRip({
+            $query: $("#query"),
+            duration: 333
+        });
+
+        dnsRip.init();
     });
-})();
+})(jQuery, ko);
