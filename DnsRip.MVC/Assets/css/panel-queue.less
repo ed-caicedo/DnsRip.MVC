@@ -4,6 +4,10 @@
     .header {
         font-size: 10px;
         margin-bottom: 5px;
+
+        span {
+            padding-right: 2px;
+        }
     }
 
     .panel-body {
@@ -13,7 +17,13 @@
     }
 
     .item {
+        &.uncommitted {
+            font-style: italic;
+            opacity: .7;
+        }
+
         span {
+            padding-right: 2px;
             max-width: 80%;
             font-size: 11px;
             .ellipsis();

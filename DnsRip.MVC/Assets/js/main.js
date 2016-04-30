@@ -13,17 +13,18 @@
         this.viewModel = {
             duration: this.duration,
             optionsVisible: ko.observable(false),
-            lookupEnabled: ko.observable(false),
-            lookupEmpty: ko.observable(true),
             hosts: ko.observableArray(),
-            selected: ko.observableArray()
+            queued: ko.observableArray()
         }
 
         ko.bindingHandlers.fade = {
             update: function (element, valueAccessor, allBindings, viewModel) {
-                if (ko.unwrap(valueAccessor()))
+                var elem = $(element);
+                var val = ko.unwrap(valueAccessor());
+
+                if (val && elem.not(":visible"))
                     $(element).fadeIn(viewModel.duration);
-                else
+                else if (!val && elem.is(":visible"))
                     $(element).fadeOut(viewModel.duration);
             }
         };
@@ -49,49 +50,8 @@
 
                     if (parsed)
                         parsed.done(function (data) {
-                            //console.log(data);
-                            var vm = t.viewModel;
-                            vm.hosts.removeAll();
-                            vm.selected.removeAll();
-                            vm.lookupEnabled(false);
-                            vm.lookupEmpty(true);
-
-                            if (data.Type !== "Invalid") {
-                                vm.hosts.push({
-                                    name: data.Parsed,
-                                    selected: true
-                                });
-
-                                if (data.Additional)
-                                    for (var a = 0; a < data.Additional.length; a++)
-                                        vm.hosts.push({
-                                            name: data.Additional[a],
-                                            selected: false
-                                        });
-                            }
-
-                            var hosts = vm.hosts();
-
-                            if (hosts.length) {
-                                vm.optionsVisible(true);
-
-                                for (var i = 0; i < hosts.length; i++) {
-                                    if (hosts[i].selected === true)
-                                        vm.selected.push({
-                                            name: hosts[i].name,
-                                            type: "A"
-                                        });
-                                }
-                            } else {
-                                vm.optionsVisible(false);
-                            }
-
-                            if (vm.selected().length) {
-                                vm.lookupEnabled(true);
-                                vm.lookupEmpty(false);
-                            }
-
-                            console.log(ko.toJS(vm.selected));
+                            t.reset();
+                            t.addOptions(data);
                         });
                 },
                 wait: t.duration,
@@ -105,6 +65,46 @@
             return $.post("/parse/", {
                 text: text
             });
+        },
+
+        reset: function() {
+            var vm = this.viewModel;
+            vm.hosts.removeAll();
+            vm.queued.removeAll();
+        },
+
+        addOptions: function (parseResult) {
+            var vm = this.viewModel;
+
+            if (parseResult.Type !== "Invalid") {
+                vm.hosts.push({
+                    name: parseResult.Parsed,
+                    selected: true
+                });
+
+                if (parseResult.Additional)
+                    for (var a = 0; a < parseResult.Additional.length; a++)
+                        vm.hosts.push({
+                            name: parseResult.Additional[a],
+                            selected: false
+                        });
+            }
+
+            var hosts = vm.hosts();
+
+            if (hosts.length) {
+                vm.optionsVisible(true);
+
+                for (var i = 0; i < hosts.length; i++) {
+                    if (hosts[i].selected === true)
+                        vm.queued.push({
+                            name: hosts[i].name,
+                            type: "A"
+                        });
+                }
+            } else {
+                vm.optionsVisible(false);
+            }
         }
     }
 

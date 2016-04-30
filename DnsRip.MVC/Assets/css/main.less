@@ -56,15 +56,6 @@ body {
     }
 }
 
-.m-icon-text() {
-    span {
-        font-size: 12px;
-        position: relative;
-        top: -3px;
-        left: 2px;
-    }
-}
-
 .ellipsis() {
     white-space: nowrap;
     overflow: hidden;
@@ -97,7 +88,12 @@ body {
 .btn-primary {
     .button-state(@button-primary, @back-dark, @button-selected, @back-dark, @back-dark);
     .m-icon-nudge();
-    .m-icon-text();
+    span {
+        font-size: 14px;
+        position: relative;
+        top: -3px;
+        left: 2px;
+    }
 }
 
 .btn.disabled, .btn[disabled], fieldset[disabled] .btn {

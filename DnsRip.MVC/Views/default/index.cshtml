@@ -24,6 +24,7 @@
     <meta name="msapplication-TileImage" content="/assets/icons/mstile-144x144.png">
     <meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
+    <meta name="description" content="A demo site for DnsRip: https://github.com/ed-caicedo/DnsRip" />
     @Styles.Render("~/assets/css/default.bundle/")
 </head>
 <body>
@@ -31,6 +32,7 @@
         <form id="form">
             <div class="row">
 
+                <!--main-->
                 <div class="col-md-6">
                     <div class="panel panel-main">
                         <div class="panel-body">
@@ -56,6 +58,7 @@
 
                 <div class="col-md-6">
 
+                    <!--options-->
                     <div class="panel-options" data-bind="fade: optionsVisible">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#hosts">Hosts/IPs</a></li>
@@ -67,7 +70,7 @@
                                     <div data-bind="foreach: hosts">
                                         <button type="button" class="btn btn-default btn-block" data-bind="css: { active: selected }">
                                             <span class="pull-left" data-bind="text: name"></span>
-                                            <i class="m-icon pull-right">&#xE148;</i>
+                                            <i class="m-icon pull-right" data-bind="text: selected ? '&#xE147;' : '&#xE148;'"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -129,6 +132,7 @@
                         </div>
                     </div>
 
+                    <!--queue-->
                     <div class="panel panel-queue">
                         <div class="panel-body">
                             <div class="col-md-12">
@@ -136,28 +140,26 @@
                                     <span class="pull-left">Lookups</span>
                                     <span class="pull-right">Server [8.8.4.4]</span>
                                 </div>
-                                <div class="row item" data-bind="visible: lookupEmpty">
+                                <div class="row item" data-bind="visible: !queued().length">
                                     <span class="pull-left">[Empty]</span>
                                 </div>
-                                <div data-bind="foreach: selected">
-                                    <div class="row item">
-                                        <div class="pull-left">
-                                            <span data-bind="text: name"></span>
-                                            <i class="m-icon">&#xE876;</i>
-                                        </div>
-                                        <span class="pull-right" data-bind="text: type"></span>
+                                <div data-bind="foreach: queued">
+                                    <div class="row item uncommitted">
+                                        <span class="pull-left host" data-bind="text: name"></span>
+                                        <span class="pull-right type" data-bind="text: type"></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="panel-footer">
-                            <button type="button" class="btn btn-primary btn-block disabled" data-bind="css: { disabled: !lookupEnabled()  }">
+                            <button type="button" class="btn btn-primary btn-block disabled" data-bind="css: { disabled: !queued().length  }">
                                 <i class="m-icon">&#xE877;</i>
                                 <span>Run Lookups</span>
                             </button>
                         </div>
                     </div>
 
+                    <!--actions-->
                     <div class="btn-group btn-group-sm panel-actions hidden">
                         <button type="button" class="btn">
                             <i class="m-icon">&#xE258;</i>
@@ -167,6 +169,7 @@
                         </button>
                     </div>
 
+                    <!--results-->
                     <div class="panel-results hidden">
                         <div class="panel">
                             <div class="panel-heading">
@@ -201,7 +204,10 @@
                         </button>
                     </div>
                 </div>
+
             </div>
+
+            <!--footer-->
             <div class="footer">
                 <span class="copy">
                     Copyright &copy; Ed Caicedo 2016 | A demo site for
@@ -213,6 +219,7 @@
                     </a>
                 </span>
             </div>
+
         </form>
     </div>
     @Scripts.Render("~/assets/js/default.bundle/")

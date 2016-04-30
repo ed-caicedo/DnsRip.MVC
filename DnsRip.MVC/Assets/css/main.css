@@ -91,7 +91,7 @@ body {
   top: 3px;
 }
 .btn-primary span {
-  font-size: 12px;
+  font-size: 14px;
   position: relative;
   top: -3px;
   left: 2px;
@@ -297,12 +297,20 @@ fieldset[disabled] .btn {
   font-size: 10px;
   margin-bottom: 5px;
 }
+.panel-queue .header span {
+  padding-right: 2px;
+}
 @media (min-width: 992px) {
   .panel-queue .panel-body {
     min-height: 142px;
   }
 }
+.panel-queue .item.uncommitted {
+  font-style: italic;
+  opacity: .7;
+}
 .panel-queue .item span {
+  padding-right: 2px;
   max-width: 80%;
   font-size: 11px;
   white-space: nowrap;
