@@ -6,9 +6,10 @@ namespace DnsRip.MVC
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
-            //BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = true;
 
             bundles.Add(new StyleBundle("~/assets/css/default.bundle/")
+                .Include("~/assets/css/lib/fonts.css")
                 .Include("~/assets/css/lib/bootstrap.css")
                 .Include("~/assets/css/main.css"));
 

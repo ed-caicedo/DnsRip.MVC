@@ -1,8 +1,6 @@
-﻿using DnsRip.MVC.Utilities;
-using System.Collections.Generic;
-using System.Linq;
+﻿using DnsRip.MVC.Models;
+using DnsRip.MVC.Utilities;
 using System.Web.Http;
-using DnsRip.MVC.Models;
 
 namespace DnsRip.MVC.Controllers
 {

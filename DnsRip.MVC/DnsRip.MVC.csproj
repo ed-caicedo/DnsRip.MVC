@@ -144,6 +144,7 @@
     <Compile Include="Utilities\AdditionalHosts.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\css\lib\fonts.css" />
     <Content Include="Assets\css\lib\bootstrap.css" />
     <Content Include="Assets\css\main.css">
       <DependentUpon>main.less</DependentUpon>
