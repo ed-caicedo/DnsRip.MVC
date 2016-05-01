@@ -1,6 +1,7 @@
 ﻿/// <reference path="lib/jquery-vsdoc.js" />
 /// <reference path="lib/knockout.debug.js" />
 /// <reference path="lib/typewatch.js" />
+/// <reference path="utl/utilities.js" />
 
 (function ($, ko) {
     var DnsRip = function (opts) {
@@ -78,6 +79,7 @@
 
         this.parse = function (value) {
             var t = this;
+            var vm = t.viewModel;
 
             var parsed = $.post("/parse/", {
                 value: value
@@ -87,6 +89,11 @@
                 parsed.done(function (data) {
                     t.reset();
                     t.addOptions(data);
+
+                    var hosts = vm.hosts();
+
+                    if (hosts.length)
+                        t.addToQueue(hosts[0].name, "A", hosts[0].timestamp);
                 });
         }
 
@@ -98,37 +105,37 @@
 
         this.addOptions = function (parseResult) {
             var vm = this.viewModel;
+            var ts = $.getTimestamp();
 
             if (parseResult.Type !== "Invalid") {
                 vm.hosts.push({
+                    timestamp: ts,
                     name: parseResult.Parsed,
-                    selected: true
-                });
+                    active: true
+            });
 
                 if (parseResult.Additional)
                     for (var a = 0; a < parseResult.Additional.length; a++)
                         vm.hosts.push({
+                            timestamp: ts,
                             name: parseResult.Additional[a],
-                            selected: false
+                            active: false
                         });
             }
 
-            var hosts = vm.hosts();
-
-            if (hosts.length) {
+            if (vm.hosts().length)
                 vm.optionsVisible(true);
-
-                for (var i = 0; i < hosts.length; i++) {
-                    if (hosts[i].selected === true)
-                        vm.queued.push({
-                            name: hosts[i].name,
-                            type: "A"
-                        });
-                }
-            } else {
+            else
                 vm.optionsVisible(false);
-            }
         }
+
+        this.addToQueue = function(name, type, timestamp) {
+            this.viewModel.queued.push({
+                timestamp: timestamp,
+                name: name,
+                type: type 
+            });
+        }  
     }
 
     DnsRip.prototype = {

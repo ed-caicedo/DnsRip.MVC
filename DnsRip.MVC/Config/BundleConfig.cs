@@ -18,6 +18,7 @@ namespace DnsRip.MVC
                 .Include("~/assets/js/lib/bootstrap.js")
                 .Include("~/assets/js/lib/knockout.js")
                 .Include("~/assets/js/lib/typewatch.js")
+                .Include("~/assets/js/utl/utilities.js")
                 .Include("~/assets/js/main.js"));
         }
     }
