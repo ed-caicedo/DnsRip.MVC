@@ -9,10 +9,54 @@
             duration: opts.duration,
             optionsVisible: ko.observable(false),
             optionsTimestamp: null,
-            definedServer: ko.observable("8.8.8.8"),
+            definedServer: ko.observable(opts.defaultServer),
             customServer: ko.observable(),
             hosts: ko.observableArray(),
-            queued: ko.observableArray()
+            queued: ko.observableArray(),
+            types: [
+                ko.observableArray([
+                {
+                    type: "A",
+                    state: null,
+                    use: "Hostname"
+                }, {
+                    type: "AAAA",
+                    state: null,
+                    use: "Hostname"
+                }, {
+                    type: "CNAME",
+                    state: null,
+                    use: "Hostname"
+                }]),
+                ko.observableArray([
+                {
+                    type: "MX",
+                    state: null,
+                    use: "Hostname"
+                }, {
+                    type: "NS",
+                    state: null,
+                    use: "Hostname"
+                }, {
+                    type: "SOA",
+                    state: null,
+                    use: "Hostname"
+                }]),
+                ko.observableArray([
+                {
+                    type: "TXT",
+                    state: null,
+                    use: "Hostname"
+                }, {
+                    type: "PTR",
+                    state: null,
+                    use: "Ip"
+                }, {
+                    type: "ANY",
+                    state: null,
+                    use: null
+                }])
+            ]
         }
 
         this.viewModel.server = ko.pureComputed(function () {
@@ -113,8 +157,15 @@
 
                     var hosts = vm.hosts();
 
-                    if (hosts.length)
-                        t.addToQueue(hosts[0].name, "A", hosts[0].timestamp);
+                    if (hosts.length) {
+                        var types = t.getSelectedTypes();
+
+                        for (var i = 0; i < types.length; i++)
+                            t.addToQueue(hosts[0].name, types[i], hosts[0].timestamp);
+
+                    }
+
+                    console.log(ko.toJS(vm));
                 });
         }
 
@@ -144,12 +195,101 @@
                             name: parseResult.Additional[a],
                             active: false
                         });
+
+                if (!this.validTypesSelected(parseResult.Type))
+                    this.selectDefaultType(parseResult.Type);
             }
 
             if (vm.hosts().length)
                 vm.optionsVisible(true);
             else
                 vm.optionsVisible(false);
+        }
+
+        this.validTypesSelected = function (parseResultType) {
+            var typeGroups = this.viewModel.types;
+            var selectCount = 0;
+
+            for (var i = 0; i < typeGroups.length; i++) {
+                var types = typeGroups[i]();
+
+                for (var j = 0; j < types.length; j++) {
+                    if (types[j].state === "active") {
+                        selectCount++;
+
+                        if (types[j].use && parseResultType !== types[j].use)
+                            return false;
+                    }
+                }
+            }
+
+            if (!selectCount)
+                return false;
+
+            return true;
+        }
+
+        this.selectDefaultType = function (parseResultType) {
+            var typeGroups = this.viewModel.types;
+
+            for (var i = 0; i < typeGroups.length; i++) {
+                var types = typeGroups[i].removeAll();
+
+                for (var j = 0; j < types.length; j++) {
+                    var state = null;
+
+                    switch (parseResultType) {
+                        case "Hostname":
+                            switch (types[j].type) {
+                                case "A":
+                                    state = "active";
+                                    break;
+                                case "PTR":
+                                    state = "disabled";
+                                    break;
+                                default:
+                                    state = null;
+                                    break;
+                            }
+                            break;
+                        case "Ip":
+                            switch (types[j].type) {
+                                case "PTR":
+                                    state = "active";
+                                    break;
+                                case "ANY":
+                                    state = null;
+                                    break;
+                                default:
+                                    state = "disabled";
+                                    break;
+                            }
+                            break;
+                    }
+
+                    typeGroups[i].push({
+                        type: types[j].type,
+                        state: state,
+                        use: types[j].use
+                    });
+                }
+            }
+        }
+
+        this.getSelectedTypes = function () {
+            var typeGroups = this.viewModel.types;
+            var selected = [];
+
+            for (var i = 0; i < typeGroups.length; i++) {
+                var types = typeGroups[i]();
+
+                for (var j = 0; j < types.length; j++) {
+                    if (types[j].state === "active")
+                        selected.push(types[j].type);
+                }
+            }
+
+            return selected;
         }
 
         this.addToQueue = function (name, type, timestamp) {
@@ -168,8 +308,6 @@
             this.initOptionTabs();
 
             ko.applyBindings(this.viewModel);
-
-            console.log(ko.toJS(this.viewModel));
         }
     }
 
@@ -181,7 +319,8 @@
             $serverFld: $("#server"),
             $optionTabs: $(".option-tab"),
             $optionPanes: $(".option-pane"),
-            duration: 200
+            duration: 200,
+            defaultServer: "8.8.8.8"
         });
 
         dnsRip.init();

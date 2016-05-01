@@ -75,48 +75,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane hidden" id="types">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <button type="button" class="btn btn-default type">
-                                            <span class="pull-left">A</span>
-                                            <i class="m-icon pull-right">&#xE147;</i>
-                                        </button>
-                                        <button type="button" class="btn btn-default type">
-                                            <span class="pull-left">AAAA</span>
-                                            <i class="m-icon pull-right">&#xE148;</i>
-                                        </button>
-                                        <button type="button" class="btn btn-default type active">
-                                            <span class="pull-left">CNAME</span>
-                                            <i class="m-icon pull-right">&#xE148;</i>
-                                        </button>
-                                    </div>
-                                    <div class="row">
-                                        <button type="button" class="btn btn-default type">
-                                            <span class="pull-left">MX</span>
-                                            <i class="m-icon pull-right">&#xE148;</i>
-                                        </button>
-                                        <button type="button" class="btn btn-default type">
-                                            <span class="pull-left">NS</span>
-                                            <i class="m-icon pull-right">&#xE148;</i>
-                                        </button>
-                                        <button type="button" class="btn btn-default type">
-                                            <span class="pull-left">SOA</span>
-                                            <i class="m-icon pull-right">&#xE148;</i>
-                                        </button>
-                                    </div>
-                                    <div class="row">
-                                        <button type="button" class="btn btn-default type">
-                                            <span class="pull-left">TXT</span>
-                                            <i class="m-icon pull-right">&#xE148;</i>
-                                        </button>
-                                        <button type="button" class="btn btn-default type disabled">
-                                            <span class="pull-left">PTR</span>
-                                            <i class="m-icon pull-right">&#xE148;</i>
-                                        </button>
-                                        <button type="button" class="btn btn-default type">
-                                            <span class="pull-left">ANY</span>
-                                            <i class="m-icon pull-right">&#xE148;</i>
+                            <div class="tab-pane option-pane" id="types">
+                                <div class="col-md-12" data-bind="foreach: types">
+                                    <div class="row" data-bind="foreach: $data">
+                                        <button type="button" class="btn btn-default type" data-bind="css: { active: state == 'active', disabled: state == 'disabled' }">
+                                            <span class="pull-left" data-bind="text: type"></span>
+                                            <i class="m-icon pull-right" data-bind="text: state == 'active' ? '&#xE147;' : '&#xE148;'"></i>
                                         </button>
                                     </div>
                                 </div>
