@@ -8,6 +8,7 @@
         this.viewModel = {
             duration: opts.duration,
             optionsVisible: ko.observable(false),
+            optionsTimestamp: null,
             definedServer: ko.observable("8.8.8.8"),
             customServer: ko.observable(),
             hosts: ko.observableArray(),
@@ -22,7 +23,7 @@
 
             return defined;
         }, this.viewModel);
-        
+
         ko.bindingHandlers.fade = {
             update: function (element, valueAccessor, allBindings, viewModel) {
                 var elem = $(element);
@@ -41,7 +42,7 @@
             opts.$queryFld.typeWatch({
                 callback: function (value) {
                     if (value)
-                         t.parse(value);
+                        t.parse(value);
                 },
                 wait: t.duration,
                 highlight: false,
@@ -72,8 +73,28 @@
                     opts.$serverCnt.slideDown(t.duration);
                 else
                     opts.$serverCnt.slideUp(t.duration);
-                
+
                 vm.definedServer(server);
+            });
+        }
+
+        this.initOptionTabs = function () {
+            var $allTabs = opts.$optionTabs;
+            var $allPanes = opts.$optionPanes;
+
+            $allTabs.find("a").on("click", function (e) {
+                e.preventDefault();
+                var $t = $(this);
+
+                $allPanes.hide();
+                $allPanes.filter($t.attr("href")).css("display", "inline-block");
+            });
+
+            $allTabs.on("click", function () {
+                var $t = $(this);
+
+                $allTabs.removeClass("active");
+                $t.addClass("active");
             });
         }
 
@@ -108,11 +129,13 @@
             var ts = $.getTimestamp();
 
             if (parseResult.Type !== "Invalid") {
+                vm.optionsTimestamp = ts;
+
                 vm.hosts.push({
                     timestamp: ts,
                     name: parseResult.Parsed,
                     active: true
-            });
+                });
 
                 if (parseResult.Additional)
                     for (var a = 0; a < parseResult.Additional.length; a++)
@@ -129,24 +152,25 @@
                 vm.optionsVisible(false);
         }
 
-        this.addToQueue = function(name, type, timestamp) {
+        this.addToQueue = function (name, type, timestamp) {
             this.viewModel.queued.push({
                 timestamp: timestamp,
                 name: name,
-                type: type 
+                type: type
             });
-        }  
+        }
     }
 
     DnsRip.prototype = {
         init: function () {
             this.initQuery();
             this.initServers();
+            this.initOptionTabs();
 
             ko.applyBindings(this.viewModel);
 
             console.log(ko.toJS(this.viewModel));
-        }       
+        }
     }
 
     $(function () {
@@ -155,6 +179,8 @@
             $dnsBtns: $(".dns"),
             $serverCnt: $("#server-container"),
             $serverFld: $("#server"),
+            $optionTabs: $(".option-tab"),
+            $optionPanes: $(".option-pane"),
             duration: 200
         });
 

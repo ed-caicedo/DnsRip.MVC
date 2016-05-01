@@ -41,7 +41,7 @@
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" name="query" id="query" maxlength="100"
-                                       placeholder="Enter a hostname, IP, or URL" />
+                                       placeholder="Enter a hostname, IP, or URL" value="google.com" />
                             </div>
                             <div class="btn-group btn-group-sm">
                                 <button type="button" class="btn btn-default btn-google-dns dns active" data-value="8.8.8.8">Goolge DNS</button>
@@ -61,11 +61,11 @@
                     <!--options-->
                     <div class="panel-options" data-bind="fade: optionsVisible">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#hosts">Hosts/IPs</a></li>
-                            <li><a href="#types">Types</a></li>
+                            <li class="option-tab active"><a href="#hosts">Hosts/IPs</a></li>
+                            <li class="option-tab"><a href="#types">Types</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane" id="hosts">
+                            <div class="tab-pane option-pane" id="hosts">
                                 <div class="col-md-12">
                                     <div data-bind="foreach: hosts">
                                         <button type="button" class="btn btn-default btn-block" data-bind="css: { active: active }">

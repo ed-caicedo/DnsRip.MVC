@@ -193,6 +193,9 @@ fieldset[disabled] .btn {
 .panel-options .tab-footer .row::after {
   clear: both;
 }
+.panel-options .tab-pane:not(:first-child) {
+  display: none;
+}
 .panel-options .tab-footer {
   border-top: 1px solid #8096A4;
   margin-top: -5px;
