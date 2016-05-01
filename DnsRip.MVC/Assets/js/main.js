@@ -7,10 +7,21 @@
         this.viewModel = {
             duration: opts.duration,
             optionsVisible: ko.observable(false),
+            definedServer: ko.observable("8.8.8.8"),
+            customServer: ko.observable(),
             hosts: ko.observableArray(),
             queued: ko.observableArray()
         }
 
+        this.viewModel.server = ko.pureComputed(function () {
+            var defined = this.definedServer();
+
+            if (!defined)
+                return this.customServer();
+
+            return defined;
+        }, this.viewModel);
+        
         ko.bindingHandlers.fade = {
             update: function (element, valueAccessor, allBindings, viewModel) {
                 var elem = $(element);
@@ -26,7 +37,7 @@
         this.initQuery = function () {
             var t = this;
 
-            opts.$query.typeWatch({
+            opts.$queryFld.typeWatch({
                 callback: function (value) {
                     if (value)
                          t.parse(value);
@@ -37,10 +48,32 @@
                 captureLength: 3
             });
 
-            var loaded = opts.$query.val();
+            var loaded = opts.$queryFld.val();
 
             if (loaded)
                 t.parse(loaded);
+        }
+
+        this.initServers = function () {
+            var $all = opts.$dnsBtns;
+            var t = this;
+            var vm = t.viewModel;
+
+            $all.on("click", function () {
+                var $t = $(this);
+
+                $all.removeClass("active");
+                $t.addClass("active");
+
+                var server = $t.data("value");
+
+                if (!server)
+                    opts.$serverCnt.slideDown(t.duration);
+                else
+                    opts.$serverCnt.slideUp(t.duration);
+                
+                vm.definedServer(server);
+            });
         }
 
         this.parse = function (value) {
@@ -101,6 +134,7 @@
     DnsRip.prototype = {
         init: function () {
             this.initQuery();
+            this.initServers();
 
             ko.applyBindings(this.viewModel);
 
@@ -110,8 +144,11 @@
 
     $(function () {
         var dnsRip = new DnsRip({
-            $query: $("#query"),
-            duration: 333
+            $queryFld: $("#query"),
+            $dnsBtns: $(".dns"),
+            $serverCnt: $("#server-container"),
+            $serverFld: $("#server"),
+            duration: 200
         });
 
         dnsRip.init();

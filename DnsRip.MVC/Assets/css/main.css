@@ -164,7 +164,8 @@ fieldset[disabled] .btn {
     width: 33.43%;
   }
 }
-.panel-main .nameserver {
+.panel-main .server {
+  display: none;
   margin-top: 10px;
 }
 .panel-options {
