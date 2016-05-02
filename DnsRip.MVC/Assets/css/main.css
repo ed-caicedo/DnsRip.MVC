@@ -7,6 +7,7 @@ body {
   font-family: 'Oxygen', sans-serif;
   color: #C4D1D7;
   margin-bottom: 40px;
+  overflow: scroll;
 }
 @media (max-width: 319px) {
   body {
@@ -227,22 +228,22 @@ fieldset[disabled] .btn {
   border-color: #283136;
   color: #283136;
 }
-.panel-options .btn-default.type {
+.panel-options .btn-default.type-option {
   width: 32.53%;
   font-size: 11px;
   padding: 6px 5px 6px 10px;
 }
 @media (min-width: 480px) {
-  .panel-options .btn-default.type {
+  .panel-options .btn-default.type-option {
     font-size: 12px;
     width: 32.83%;
   }
 }
-.panel-options .btn-default.type i {
+.panel-options .btn-default.type-option i {
   font-size: 22px;
 }
 @media (min-width: 599px) {
-  .panel-options .btn-default.type span {
+  .panel-options .btn-default.type-option span {
     top: 3px;
   }
 }

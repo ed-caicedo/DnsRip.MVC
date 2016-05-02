@@ -82,8 +82,9 @@
 
         this.initQuery = function () {
             var t = this;
+            var fld = $(opts.queryFld);
 
-            opts.$queryFld.typeWatch({
+            fld.typeWatch({
                 callback: function (value) {
                     if (value)
                         t.parse(value);
@@ -91,17 +92,17 @@
                 wait: t.duration,
                 highlight: false,
                 allowSubmit: false,
-                captureLength: 3
+                captureLength: 0
             });
 
-            var loaded = opts.$queryFld.val();
+            var loaded = fld.val();
 
             if (loaded)
                 t.parse(loaded);
         }
 
         this.initServers = function () {
-            var $all = opts.$dnsBtns;
+            var $all = $(opts.dnsBtns);
             var t = this;
             var vm = t.viewModel;
 
@@ -112,19 +113,20 @@
                 $t.addClass("active");
 
                 var server = $t.data("value");
+                var cnt = $(opts.serverCnt);
 
                 if (!server)
-                    opts.$serverCnt.slideDown(t.duration);
+                    cnt.slideDown(t.duration);
                 else
-                    opts.$serverCnt.slideUp(t.duration);
+                    cnt.slideUp(t.duration);
 
                 vm.definedServer(server);
             });
         }
 
         this.initOptionTabs = function () {
-            var $allTabs = opts.$optionTabs;
-            var $allPanes = opts.$optionPanes;
+            var $allTabs = $(opts.optionTabs);
+            var $allPanes = $(opts.optionPanes);
 
             $allTabs.find("a").on("click", function (e) {
                 e.preventDefault();
@@ -142,10 +144,26 @@
             });
         }
 
-        this.parse = function (value) {
+        this.initHostOptions = function () {
             var t = this;
             var vm = t.viewModel;
 
+            $(opts.optionPanel).on("click", opts.hostOptions, null, function () {
+                var $t = $(this);
+                var value = $t.data("value");
+
+                if ($t.hasClass("active")) {
+                    t.changeHostSelection(value, vm.optionsTimestamp, false);
+                    t.removeFromQueue(value, vm.optionsTimestamp);
+                } else {
+                    t.changeHostSelection(value, vm.optionsTimestamp, true);
+                    t.addToQueue(value, vm.optionsTimestamp);
+                }
+            });
+        }
+
+        this.parse = function (value) {
+            var t = this;
             var parsed = $.post("/parse/", {
                 value: value
             });
@@ -154,19 +172,34 @@
                 parsed.done(function (data) {
                     t.reset();
                     t.addOptions(data);
-
-                    var hosts = vm.hosts();
-
-                    if (hosts.length) {
-                        var types = t.getSelectedTypes();
-
-                        for (var i = 0; i < types.length; i++)
-                            t.addToQueue(hosts[0].name, types[i], hosts[0].timestamp);
-
-                    }
-
-                    console.log(ko.toJS(vm));
+                    t.selectFirstHost();
                 });
+        }
+
+        this.selectFirstHost = function () {
+            var t = this;
+            var hosts = t.viewModel.hosts();
+
+            if (hosts.length)
+                t.addToQueue(hosts[0].name, hosts[0].timestamp);
+        }
+
+        this.changeHostSelection = function (name, timestamp, isActive) {
+            var vm = this.viewModel;
+            var hosts = vm.hosts.removeAll();
+
+            for (var i = 0; i < hosts.length; i++) {
+                var active = hosts[i].active;
+
+                if (hosts[i].name === name && hosts[i].timestamp === timestamp)
+                    active = isActive;
+
+                vm.hosts.push({
+                    timestamp: hosts[i].timestamp,
+                    name: hosts[i].name,
+                    active: active
+                });
+            }
         }
 
         this.reset = function () {
@@ -292,11 +325,20 @@
             return selected;
         }
 
-        this.addToQueue = function (name, type, timestamp) {
-            this.viewModel.queued.push({
-                timestamp: timestamp,
-                name: name,
-                type: type
+        this.addToQueue = function (name, timestamp) {
+            var types = this.getSelectedTypes();
+
+            for (var i = 0; i < types.length; i++)
+                this.viewModel.queued.push({
+                    timestamp: timestamp,
+                    name: name,
+                    type: types[i]
+                });
+        }
+
+        this.removeFromQueue = function (name, timestamp) {
+            this.viewModel.queued.remove(function (item) {
+                return item.name === name && item.timestamp === timestamp;
             });
         }
     }
@@ -306,6 +348,7 @@
             this.initQuery();
             this.initServers();
             this.initOptionTabs();
+            this.initHostOptions();
 
             ko.applyBindings(this.viewModel);
         }
@@ -313,14 +356,16 @@
 
     $(function () {
         var dnsRip = new DnsRip({
-            $queryFld: $("#query"),
-            $dnsBtns: $(".dns"),
-            $serverCnt: $("#server-container"),
-            $serverFld: $("#server"),
-            $optionTabs: $(".option-tab"),
-            $optionPanes: $(".option-pane"),
-            duration: 200,
-            defaultServer: "8.8.8.8"
+            queryFld: "#query",
+            dnsBtns: ".dns",
+            serverCnt: "#server-container",
+            optionTabs: ".option-tab",
+            optionPanel: "#option-panel",
+            optionPanes: ".option-pane",
+            hostOptions: ".host-option",
+            typeOptions: ".type-option",
+            defaultServer: "8.8.8.8",
+            duration: 200
         });
 
         dnsRip.init();
