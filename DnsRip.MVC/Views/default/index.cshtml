@@ -68,8 +68,9 @@
                             <div class="tab-pane option-pane" id="hosts">
                                 <div class="col-md-12">
                                     <div data-bind="foreach: hosts">
-                                        <button type="button" class="btn btn-default btn-block host-option" 
-                                                data-bind="css: { active: active }, attr: { 'data-value': name }">
+                                        <button type="button" class="btn btn-default btn-block host-option"
+                                                data-bind="css: { active: active }, 
+                                                attr: { 'data-value': name }">
                                             <span class="pull-left" data-bind="text: name"></span>
                                             <i class="m-icon pull-right" data-bind="text: active ? '&#xE147;' : '&#xE148;'"></i>
                                         </button>

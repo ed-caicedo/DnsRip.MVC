@@ -153,10 +153,10 @@
                 var value = $t.data("value");
 
                 if ($t.hasClass("active")) {
-                    t.changeHostSelection(value, vm.optionsTimestamp, false);
+                    t.changeHostSelection(value, false);
                     t.removeFromQueue(value, vm.optionsTimestamp);
                 } else {
-                    t.changeHostSelection(value, vm.optionsTimestamp, true);
+                    t.changeHostSelection(value, true);
                     t.addToQueue(value, vm.optionsTimestamp);
                 }
             });
@@ -184,14 +184,14 @@
                 t.addToQueue(hosts[0].name, hosts[0].timestamp);
         }
 
-        this.changeHostSelection = function (name, timestamp, isActive) {
+        this.changeHostSelection = function (name, isActive) {
             var vm = this.viewModel;
             var hosts = vm.hosts.removeAll();
 
             for (var i = 0; i < hosts.length; i++) {
                 var active = hosts[i].active;
 
-                if (hosts[i].name === name && hosts[i].timestamp === timestamp)
+                if (hosts[i].name === name)
                     active = isActive;
 
                 vm.hosts.push({
