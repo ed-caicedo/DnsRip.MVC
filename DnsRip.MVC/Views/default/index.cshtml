@@ -80,8 +80,9 @@
                             <div class="tab-pane option-pane" id="types">
                                 <div class="col-md-12" data-bind="foreach: types">
                                     <div class="row" data-bind="foreach: $data">
-                                        <button type="button" class="btn btn-default type-option" 
-                                                data-bind="css: { active: state == 'active', disabled: state == 'disabled' }">
+                                        <button type="button" class="btn btn-default type-option"
+                                                data-bind="css: { active: state == 'active', disabled: state == 'disabled' }, 
+                                                attr: { 'data-value': type, disabled: state == 'disabled' ? 'disabled' : null }">
                                             <span class="pull-left" data-bind="text: type"></span>
                                             <i class="m-icon pull-right" data-bind="text: state == 'active' ? '&#xE147;' : '&#xE148;'"></i>
                                         </button>

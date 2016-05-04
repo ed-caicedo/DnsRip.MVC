@@ -4,11 +4,12 @@
 /// <reference path="utl/utilities.js" />
 
 (function ($, ko) {
-    var Host = function(timestamp, name, active) {
+    var Host = function (timestamp, name, active, type) {
         return {
             timestamp: timestamp,
             name: name,
-            active: active
+            active: active,
+            type: type
         }
     }
 
@@ -159,6 +160,23 @@
             });
         }
 
+        this.initTypeOptions = function () {
+            var t = this;
+            var vm = t.viewModel;
+
+            $(opts.optionPanel).on("click", opts.typeOptions, null, function () {
+                var $t = $(this);
+                var value = $t.data("value");
+
+                if ($t.hasClass("active")) {
+                    t.changeTypeSelection(value, false);
+                } else {
+                    t.changeTypeSelection(value, true);
+                }
+            });
+
+        }
+
         this.parse = function (value) {
             var t = this;
             var parsed = $.post("/parse/", {
@@ -191,8 +209,32 @@
                 if (hosts[i].name === name)
                     active = isActive;
 
-                vm.hosts.push(new Host(hosts[i].timestamp, hosts[i].name, active));
+                vm.hosts.push(new Host(hosts[i].timestamp, hosts[i].name, active, hosts[i].type));
             }
+        }
+
+        this.changeTypeSelection = function (type, isActive, isRollback) {
+            var vm = this.viewModel;
+            var typeGroups = vm.types;
+            var hostType = vm.hosts()[0].type;
+
+            for (var i = 0; i < typeGroups.length; i++) {
+                var types = typeGroups[i].removeAll();
+
+                for (var j = 0; j < types.length; j++) {
+                    var state = types[j].state;
+
+                    if (types[j].type === type)
+                        state = isActive ? "active" : null;
+
+                    typeGroups[i].push(new Type(types[j].type, types[j].use, state));
+                }
+            }
+
+            if (!isRollback && !this.validTypesSelected(hostType))
+                this.changeTypeSelection(type, !isActive, true);
+
+            return true;
         }
 
         this.reset = function () {
@@ -207,11 +249,11 @@
 
             if (parseResult.Type !== "Invalid") {
                 vm.optionsTimestamp = ts;
-                vm.hosts.push(new Host(ts, parseResult.Parsed, true));
+                vm.hosts.push(new Host(ts, parseResult.Parsed, true, parseResult.Type));
 
                 if (parseResult.Additional)
                     for (var a = 0; a < parseResult.Additional.length; a++)
-                        vm.hosts.push(new Host(ts, parseResult.Additional[a], false));
+                        vm.hosts.push(new Host(ts, parseResult.Additional[a], false, parseResult.Type));
 
                 if (!this.validTypesSelected(parseResult.Type))
                     this.selectDefaultType(parseResult.Type);
@@ -325,6 +367,7 @@
             this.initServers();
             this.initOptionTabs();
             this.initHostOptions();
+            this.initTypeOptions();
 
             ko.applyBindings(this.viewModel);
         }
