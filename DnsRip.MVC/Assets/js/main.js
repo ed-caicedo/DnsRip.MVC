@@ -4,6 +4,30 @@
 /// <reference path="utl/utilities.js" />
 
 (function ($, ko) {
+    var Host = function(timestamp, name, active) {
+        return {
+            timestamp: timestamp,
+            name: name,
+            active: active
+        }
+    }
+
+    var QueueItem = function (timestamp, name, type) {
+        return {
+            timestamp: timestamp,
+            name: name,
+            type: type
+        }
+    }
+
+    var Type = function (type, use, state) {
+        return {
+            type: type,
+            use: use,
+            state: state
+        }
+    }
+
     var DnsRip = function (opts) {
         this.viewModel = {
             duration: opts.duration,
@@ -15,47 +39,20 @@
             queued: ko.observableArray(),
             types: [
                 ko.observableArray([
-                {
-                    type: "A",
-                    state: null,
-                    use: "Hostname"
-                }, {
-                    type: "AAAA",
-                    state: null,
-                    use: "Hostname"
-                }, {
-                    type: "CNAME",
-                    state: null,
-                    use: "Hostname"
-                }]),
+                    new Type("A", "Hostname"),
+                    new Type("AAAA", "Hostname"),
+                    new Type("CNAME", "Hostname")
+                ]),
                 ko.observableArray([
-                {
-                    type: "MX",
-                    state: null,
-                    use: "Hostname"
-                }, {
-                    type: "NS",
-                    state: null,
-                    use: "Hostname"
-                }, {
-                    type: "SOA",
-                    state: null,
-                    use: "Hostname"
-                }]),
+                    new Type("MX", "Hostname"),
+                    new Type("NS", "Hostname"),
+                    new Type("SOA", "Hostname")
+                ]),
                 ko.observableArray([
-                {
-                    type: "TXT",
-                    state: null,
-                    use: "Hostname"
-                }, {
-                    type: "PTR",
-                    state: null,
-                    use: "Ip"
-                }, {
-                    type: "ANY",
-                    state: null,
-                    use: null
-                }])
+                    new Type("TXT", "Hostname"),
+                    new Type("PTR", "Ip"),
+                    new Type("ANY")
+                ])
             ]
         }
 
@@ -194,11 +191,7 @@
                 if (hosts[i].name === name)
                     active = isActive;
 
-                vm.hosts.push({
-                    timestamp: hosts[i].timestamp,
-                    name: hosts[i].name,
-                    active: active
-                });
+                vm.hosts.push(new Host(hosts[i].timestamp, hosts[i].name, active));
             }
         }
 
@@ -214,20 +207,11 @@
 
             if (parseResult.Type !== "Invalid") {
                 vm.optionsTimestamp = ts;
-
-                vm.hosts.push({
-                    timestamp: ts,
-                    name: parseResult.Parsed,
-                    active: true
-                });
+                vm.hosts.push(new Host(ts, parseResult.Parsed, true));
 
                 if (parseResult.Additional)
                     for (var a = 0; a < parseResult.Additional.length; a++)
-                        vm.hosts.push({
-                            timestamp: ts,
-                            name: parseResult.Additional[a],
-                            active: false
-                        });
+                        vm.hosts.push(new Host(ts, parseResult.Additional[a], false));
 
                 if (!this.validTypesSelected(parseResult.Type))
                     this.selectDefaultType(parseResult.Type);
@@ -300,11 +284,7 @@
                             break;
                     }
 
-                    typeGroups[i].push({
-                        type: types[j].type,
-                        state: state,
-                        use: types[j].use
-                    });
+                    typeGroups[i].push(new Type(types[j].type, types[j].use, state));
                 }
             }
         }
@@ -329,11 +309,7 @@
             var types = this.getSelectedTypes();
 
             for (var i = 0; i < types.length; i++)
-                this.viewModel.queued.push({
-                    timestamp: timestamp,
-                    name: name,
-                    type: types[i]
-                });
+                this.viewModel.queued.push(new QueueItem(timestamp, name, types[i]));
         }
 
         this.removeFromQueue = function (name, timestamp) {
