@@ -173,8 +173,45 @@
                 } else {
                     t.changeTypeSelection(value, true);
                 }
+
+                t.updateQueue(vm.optionsTimestamp);
             });
 
+        }
+
+        this.addToQueue = function (name, timestamp) {
+            var types = this.getSelectedTypes();
+
+            for (var i = 0; i < types.length; i++)
+                this.viewModel.queued.push(new QueueItem(timestamp, name, types[i]));
+        }
+
+        this.removeFromQueue = function (name, timestamp) {
+            this.viewModel.queued.remove(function (item) {
+                return item.name === name && item.timestamp === timestamp;
+            });
+        }
+
+        this.updateQueue = function (timestamp) {
+            var queue = this.viewModel.queued;
+            var current = queue.remove(function (item) {
+                return item.timestamp === timestamp;
+            });
+
+            var hosts = [];
+
+            for (var i = 0; i < current.length; i++) {
+                if (hosts.indexOf(current[i].name) === -1)
+                    hosts.push(current[i].name);
+            }
+
+            var types = this.getSelectedTypes();
+
+            for (var j = 0; j < types.length; j++) {
+                for (var k = 0; k < hosts.length; k++) {
+                    queue.push(new QueueItem(timestamp, hosts[k], types[j]));
+                }
+            }
         }
 
         this.parse = function (value) {
@@ -217,6 +254,11 @@
             var vm = this.viewModel;
             var typeGroups = vm.types;
             var hostType = vm.hosts()[0].type;
+            var anyState = this.getAnyState();
+            var disableAny = false;
+
+            if (anyState === "active" && type !== "ANY" && isActive)
+                disableAny = true;
 
             for (var i = 0; i < typeGroups.length; i++) {
                 var types = typeGroups[i].removeAll();
@@ -224,7 +266,12 @@
                 for (var j = 0; j < types.length; j++) {
                     var state = types[j].state;
 
-                    if (types[j].type === type)
+                    if (
+                        (type === "ANY" && types[j].type !== type && state === "active") ||
+                        (disableAny && types[j].type === "ANY")
+                        )
+                        state = null;
+                    else if (types[j].type === type)
                         state = isActive ? "active" : null;
 
                     typeGroups[i].push(new Type(types[j].type, types[j].use, state));
@@ -235,6 +282,21 @@
                 this.changeTypeSelection(type, !isActive, true);
 
             return true;
+        }
+
+        this.getAnyState = function () {
+            var typeGroups = this.viewModel.types;
+
+            for (var i = 0; i < typeGroups.length; i++) {
+                var types = typeGroups[i]();
+
+                for (var j = 0; j < types.length; j++) {
+                    if (types[j].type === "ANY")
+                        return types[j].state;
+                }
+            }
+
+            return null;
         }
 
         this.reset = function () {
@@ -345,19 +407,6 @@
             }
 
             return selected;
-        }
-
-        this.addToQueue = function (name, timestamp) {
-            var types = this.getSelectedTypes();
-
-            for (var i = 0; i < types.length; i++)
-                this.viewModel.queued.push(new QueueItem(timestamp, name, types[i]));
-        }
-
-        this.removeFromQueue = function (name, timestamp) {
-            this.viewModel.queued.remove(function (item) {
-                return item.name === name && item.timestamp === timestamp;
-            });
         }
     }
 
