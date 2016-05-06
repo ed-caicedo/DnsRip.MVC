@@ -23,6 +23,9 @@ namespace DnsRip.MVC.Controllers
         [Route("parse")]
         public IHttpActionResult Parse(ParseRequest request)
         {
+            if (request.Value == null)
+                return Ok();
+
             var dnsRip = new DnsRip.Parser();
             var parsed = dnsRip.Parse(request.Value);
 

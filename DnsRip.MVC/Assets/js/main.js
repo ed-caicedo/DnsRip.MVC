@@ -84,7 +84,7 @@
 
             fld.typeWatch({
                 callback: function (value) {
-                    if (value)
+                    //if (value)
                         t.parse(value);
                 },
                 wait: t.duration,
@@ -216,6 +216,7 @@
 
         this.parse = function (value) {
             var t = this;
+            var vm = t.viewModel;
             var parsed = $.post("/parse/", {
                 value: value
             });
@@ -223,6 +224,12 @@
             if (parsed)
                 parsed.done(function (data) {
                     t.reset();
+
+                    if (!data) {
+                        vm.optionsVisible(false);
+                        return;
+                    }
+
                     t.addOptions(data);
                     t.selectFirstHost();
                 });
