@@ -13,11 +13,12 @@
         }
     }
 
-    var QueueItem = function (timestamp, name, type) {
+    var QueueItem = function (timestamp, name, type, committed) {
         return {
             timestamp: timestamp,
             name: name,
-            type: type
+            type: type,
+            committed: committed
         }
     }
 
@@ -30,6 +31,8 @@
     }
 
     var DnsRip = function (opts) {
+        this.$queryFld = $(opts.queryFld);
+
         this.viewModel = {
             duration: opts.duration,
             optionsVisible: ko.observable(false),
@@ -80,12 +83,11 @@
 
         this.initQuery = function () {
             var t = this;
-            var fld = $(opts.queryFld);
 
-            fld.typeWatch({
+            this.$queryFld.typeWatch({
                 callback: function (value) {
                     //if (value)
-                        t.parse(value);
+                    t.parse(value);
                 },
                 wait: t.duration,
                 highlight: false,
@@ -93,7 +95,7 @@
                 captureLength: 0
             });
 
-            var loaded = fld.val();
+            var loaded = this.$queryFld.val();
 
             if (loaded)
                 t.parse(loaded);
@@ -176,26 +178,25 @@
 
                 t.updateQueue(vm.optionsTimestamp);
             });
-
         }
 
         this.addToQueue = function (name, timestamp) {
             var types = this.getSelectedTypes();
 
             for (var i = 0; i < types.length; i++)
-                this.viewModel.queued.push(new QueueItem(timestamp, name, types[i]));
+                this.viewModel.queued.push(new QueueItem(timestamp, name, types[i], false));
         }
 
         this.removeFromQueue = function (name, timestamp) {
             this.viewModel.queued.remove(function (item) {
-                return item.name === name && item.timestamp === timestamp;
+                return item.name === name && item.timestamp === timestamp && item.committed === false;
             });
         }
 
         this.updateQueue = function (timestamp) {
             var queue = this.viewModel.queued;
             var current = queue.remove(function (item) {
-                return item.timestamp === timestamp;
+                return item.timestamp === timestamp && item.committed === false;
             });
 
             var hosts = [];
@@ -209,7 +210,7 @@
 
             for (var j = 0; j < types.length; j++) {
                 for (var k = 0; k < hosts.length; k++) {
-                    queue.push(new QueueItem(timestamp, hosts[k], types[j]));
+                    queue.push(new QueueItem(timestamp, hosts[k], types[j], false));
                 }
             }
         }
@@ -309,7 +310,9 @@
         this.reset = function () {
             var vm = this.viewModel;
             vm.hosts.removeAll();
-            vm.queued.removeAll();
+            vm.queued.remove(function(item) {
+                return item.committed === false;
+            });
         }
 
         this.addOptions = function (parseResult) {
@@ -415,6 +418,22 @@
 
             return selected;
         }
+
+        this.initSaveLookups = function () {
+            var t = this;
+            var vm = this.viewModel;
+
+            $(opts.saveLookupsBtn).on("click", function () {
+                var queued = vm.queued.removeAll();
+
+                for (var i = 0; i < queued.length; i++)
+                    vm.queued.push(new QueueItem(queued[i].timestamp, queued[i].name, queued[i].type, true));
+
+                vm.optionsVisible(false);
+                t.$queryFld.val("");
+                t.reset();
+            });
+        }
     }
 
     DnsRip.prototype = {
@@ -424,6 +443,7 @@
             this.initOptionTabs();
             this.initHostOptions();
             this.initTypeOptions();
+            this.initSaveLookups();
 
             ko.applyBindings(this.viewModel);
         }
@@ -439,6 +459,7 @@
             optionPanes: ".option-pane",
             hostOptions: ".host-option",
             typeOptions: ".type-option",
+            saveLookupsBtn: "#save-lookups",
             defaultServer: "8.8.8.8",
             duration: 200
         });

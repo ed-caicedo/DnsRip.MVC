@@ -91,7 +91,7 @@
                             </div>
                             <div class="tab-footer">
                                 <div class="col-md-12">
-                                    <button type="button" class="btn btn-primary btn-block">
+                                    <button id="save-lookups" type="button" class="btn btn-primary btn-block">
                                         <i class="m-icon">&#xE876;</i>
                                         <span>Save Lookups</span>
                                     </button>
@@ -112,7 +112,7 @@
                                     <span class="pull-left">[Empty]</span>
                                 </div>
                                 <div data-bind="foreach: queued">
-                                    <div class="row item uncommitted">
+                                    <div class="row item" data-bind="css: { uncommitted: !committed }">
                                         <span class="pull-left host" data-bind="text: name"></span>
                                         <span class="pull-right type" data-bind="text: type"></span>
                                     </div>
