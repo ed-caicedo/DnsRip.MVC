@@ -134,13 +134,8 @@
 
                 $allPanes.hide();
                 $allPanes.filter($t.attr("href")).css("display", "inline-block");
-            });
-
-            $allTabs.on("click", function () {
-                var $t = $(this);
-
                 $allTabs.removeClass("active");
-                $t.addClass("active");
+                $t.parent().addClass("active");
             });
         }
 
@@ -233,6 +228,7 @@
 
                     t.addOptions(data);
                     t.selectFirstHost();
+                    t.selectHostTab();
                 });
         }
 
@@ -242,6 +238,10 @@
 
             if (hosts.length)
                 t.addToQueue(hosts[0].name, hosts[0].timestamp);
+        }
+
+        this.selectHostTab = function() {
+            $(opts.hostTab).trigger("click");
         }
 
         this.changeHostSelection = function (name, isActive) {
@@ -455,6 +455,8 @@
             dnsBtns: ".dns",
             serverCnt: "#server-container",
             optionTabs: ".option-tab",
+            hostTab: "#host-tab",
+            typeTab: "#type-tab",
             optionPanel: "#option-panel",
             optionPanes: ".option-pane",
             hostOptions: ".host-option",
