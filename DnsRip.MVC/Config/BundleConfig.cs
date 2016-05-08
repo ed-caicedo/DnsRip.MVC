@@ -11,6 +11,7 @@ namespace DnsRip.MVC
             bundles.Add(new StyleBundle("~/assets/css/default.bundle/")
                 .Include("~/assets/css/lib/fonts.css")
                 .Include("~/assets/css/lib/bootstrap.css")
+                .Include("~/assets/css/lib/nprogress.css")
                 .Include("~/assets/css/main.css"));
 
             bundles.Add(new ScriptBundle("~/assets/js/default.bundle/")
@@ -18,6 +19,7 @@ namespace DnsRip.MVC
                 .Include("~/assets/js/lib/bootstrap.js")
                 .Include("~/assets/js/lib/knockout.js")
                 .Include("~/assets/js/lib/typewatch.js")
+                .Include("~/assets/js/lib/nprogress.js")
                 .Include("~/assets/js/utl/utilities.js")
                 .Include("~/assets/js/main.js"));
         }

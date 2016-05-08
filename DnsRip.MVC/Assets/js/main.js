@@ -1,6 +1,7 @@
 ﻿/// <reference path="lib/jquery-vsdoc.js" />
 /// <reference path="lib/knockout.debug.js" />
 /// <reference path="lib/typewatch.js" />
+/// <reference path="lib/nprogress.js" />
 /// <reference path="utl/utilities.js" />
 
 (function ($, ko) {
@@ -139,6 +140,26 @@
             });
         }
 
+        this.initSaveLookups = function () {
+            var t = this;
+            var vm = this.viewModel;
+
+            $(opts.saveLookupsBtn).on("click", function () {
+                var queued = vm.queued.removeAll();
+
+                for (var i = 0; i < queued.length; i++)
+                    vm.queued.push(new QueueItem(queued[i].timestamp, queued[i].name, queued[i].type, true));
+
+                vm.optionsVisible(false);
+                t.$queryFld.val("");
+                t.reset();
+            });
+        }
+
+        this.initProgress = function () {
+            NProgress.configure({ showSpinner: false });
+        }
+
         this.initHostOptions = function () {
             var t = this;
             var vm = t.viewModel;
@@ -213,12 +234,16 @@
         this.parse = function (value) {
             var t = this;
             var vm = t.viewModel;
+            
+            NProgress.start();
+
             var parsed = $.post("/parse/", {
                 value: value
             });
 
             if (parsed)
                 parsed.done(function (data) {
+                    NProgress.done();
                     t.reset();
 
                     if (!data) {
@@ -418,22 +443,6 @@
 
             return selected;
         }
-
-        this.initSaveLookups = function () {
-            var t = this;
-            var vm = this.viewModel;
-
-            $(opts.saveLookupsBtn).on("click", function () {
-                var queued = vm.queued.removeAll();
-
-                for (var i = 0; i < queued.length; i++)
-                    vm.queued.push(new QueueItem(queued[i].timestamp, queued[i].name, queued[i].type, true));
-
-                vm.optionsVisible(false);
-                t.$queryFld.val("");
-                t.reset();
-            });
-        }
     }
 
     DnsRip.prototype = {
@@ -444,6 +453,7 @@
             this.initHostOptions();
             this.initTypeOptions();
             this.initSaveLookups();
+            this.initProgress();
 
             ko.applyBindings(this.viewModel);
         }

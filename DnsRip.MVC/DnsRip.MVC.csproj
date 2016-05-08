@@ -146,6 +146,7 @@
   <ItemGroup>
     <Content Include="Assets\css\lib\fonts.css" />
     <Content Include="Assets\css\lib\bootstrap.css" />
+    <Content Include="Assets\css\lib\nprogress.css" />
     <Content Include="Assets\css\main.css">
       <DependentUpon>main.less</DependentUpon>
     </Content>
@@ -180,10 +181,12 @@
     <Content Include="Assets\img\github.png" />
     <Content Include="Assets\img\logo.png" />
     <Content Include="Assets\js\lib\bootstrap.js" />
+    <Content Include="Assets\css\nprogress.less" />
     <None Include="Assets\js\lib\jquery-vsdoc.js" />
     <Content Include="Assets\js\lib\jquery.js" />
     <Content Include="Assets\js\lib\knockout.debug.js" />
     <Content Include="Assets\js\lib\knockout.js" />
+    <Content Include="Assets\js\lib\nprogress.js" />
     <Content Include="Assets\js\lib\typewatch.js" />
     <Content Include="Assets\js\main.js" />
     <Content Include="Assets\js\utl\utilities.js" />
