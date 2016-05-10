@@ -4,6 +4,7 @@ using System.Web.Routing;
 
 namespace DnsRip.MVC
 {
+
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
@@ -11,6 +12,8 @@ namespace DnsRip.MVC
             GlobalConfiguration.Configure(RouteConfig.RegisterConfig);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            log4net.Config.XmlConfigurator.Configure();
         }
     }
 }
