@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Configuration;
+using System.Diagnostics;
 using DnsRip.MVC.Models;
 using DnsRip.MVC.Utilities;
 using System.Web.Http;
@@ -25,9 +26,6 @@ namespace DnsRip.MVC.Controllers
         public IHttpActionResult Parse(ParseRequest request)
         {
             var log = log4net.LogManager.GetLogger(GetType());
-            log.Debug("test");
-
-            Trace.WriteLine("bob");
 
             if (request.Value == null)
                 return Ok();

@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnsRip.MVC", "DnsRip.MVC\DnsRip.MVC.csproj", "{A9ACD8B9-3CD5-411D-ABBB-44AAFD6F9CCF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DnsRip.MVC.Tests", "DnsRip.MVC.Tests\DnsRip.MVC.Tests.csproj", "{1FE113C7-AE63-4F7E-81FB-F5CA9B5A6A4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{30F85FD4-860D-4D3D-8B49-94B9A84A32B0}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

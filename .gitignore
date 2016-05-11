@@ -235,4 +235,5 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 
-Web.Release.config
+# //
+credentials.config

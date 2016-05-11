@@ -140,8 +140,8 @@
     <Compile Include="Config\RouteConfig.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
+    <Compile Include="global.asax.cs">
+      <DependentUpon>global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ParseRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -195,15 +195,16 @@
     <Content Include="Assets\js\main.js" />
     <Content Include="Assets\js\utl\utilities.js" />
     <Content Include="favicon.ico" />
-    <Content Include="Global.asax" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <Content Include="global.asax" />
+    <Content Include="web.config" />
+    <Content Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
+    <Content Include="credentials.config" />
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\default\index.cshtml" />
