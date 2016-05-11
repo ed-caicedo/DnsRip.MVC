@@ -26,6 +26,7 @@ namespace DnsRip.MVC.Controllers
         public IHttpActionResult Parse(ParseRequest request)
         {
             var log = log4net.LogManager.GetLogger(GetType());
+            log.Debug("test");
 
             if (request.Value == null)
                 return Ok();
