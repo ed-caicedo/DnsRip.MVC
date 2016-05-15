@@ -1,11 +1,12 @@
-﻿using System.Web.Http;
+﻿using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
+using System.Web.Http;
+using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using log4net.Config;
 
 namespace DnsRip.MVC
 {
-
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
@@ -13,7 +14,10 @@ namespace DnsRip.MVC
             GlobalConfiguration.Configure(RouteConfig.RegisterConfig);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            XmlConfigurator.Configure();
+
+            var container = ContainerConfig.Register();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
     }
 }

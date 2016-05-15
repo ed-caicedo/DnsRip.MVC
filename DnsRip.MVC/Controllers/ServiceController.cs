@@ -1,32 +1,25 @@
-﻿using System.Configuration;
-using System.Diagnostics;
-using DnsRip.MVC.Models;
+﻿using DnsRip.MVC.Models;
 using DnsRip.MVC.Utilities;
+using log4net;
+using System.Web;
 using System.Web.Http;
 
 namespace DnsRip.MVC.Controllers
 {
     public class ServiceController : ApiController
     {
-        private readonly string[] _subdomains = new[]
+        private readonly ILog _log;
+
+        public ServiceController(ILog log)
         {
-            "www",
-            "m",
-            "blog",
-            "ftp",
-            "imap",
-            "pop",
-            "smtp",
-            "mail",
-            "webmail"
-        };
+            _log = log;
+        }
 
         [HttpPost]
         [Route("parse")]
         public IHttpActionResult Parse(ParseRequest request)
         {
-            var log = log4net.LogManager.GetLogger(GetType());
-            log.Debug("test");
+            _log.Debug($"parse1: {request.Value}; ip: {HttpContext.Current.Request.UserHostAddress}");
 
             if (request.Value == null)
                 return Ok();
