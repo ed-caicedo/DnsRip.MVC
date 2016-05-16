@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DnsRip.MVC.Interfaces;
 
 namespace DnsRip.MVC.Utilities
 {
-    public class AdditionalHosts
+    public class AdditionalHosts : IAdditionalHosts
     {
-        public static IEnumerable<string> Find(string input)
+        public IEnumerable<string> Find(string input)
         {
             var subdomains = new[]
             {

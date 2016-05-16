@@ -1,4 +1,5 @@
 ﻿using System;
+using DnsRip.MVC.Models;
 using DnsRip.MVC.Utilities;
 using Newtonsoft.Json;
 using NUnit.Framework;
@@ -24,7 +25,8 @@ namespace DnsRip.MVC.Tests.Tests
                 "webmail.google.com"
             };
 
-            var hosts = AdditionalHosts.Find("google.com");
+            var addHosts = new AdditionalHosts();
+            var hosts = addHosts.Find("google.com");
 
             Console.WriteLine(JsonConvert.SerializeObject(hosts));
 
@@ -47,7 +49,8 @@ namespace DnsRip.MVC.Tests.Tests
                 "webmail.google.co"
             };
 
-            var hosts = AdditionalHosts.Find("google.co");
+            var addHosts = new AdditionalHosts();
+            var hosts = addHosts.Find("google.co");
 
             Console.WriteLine(JsonConvert.SerializeObject(hosts));
 
@@ -70,7 +73,8 @@ namespace DnsRip.MVC.Tests.Tests
                 "webmail.google.com"
             };
 
-            var hosts = AdditionalHosts.Find("www.google.com");
+            var addHosts = new AdditionalHosts();
+            var hosts = addHosts.Find("www.google.com");
 
             Console.WriteLine(JsonConvert.SerializeObject(hosts));
 

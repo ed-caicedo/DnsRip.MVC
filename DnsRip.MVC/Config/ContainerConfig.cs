@@ -1,8 +1,11 @@
-﻿using System.Reflection;
-using Autofac;
+﻿using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using DnsRip.MVC.Utilities;
+using System.Reflection;
+using DnsRip.Interfaces;
+using DnsRip.MVC.Interfaces;
+using DnsRip.MVC.Models;
 
 namespace DnsRip.MVC
 {
@@ -12,9 +15,13 @@ namespace DnsRip.MVC
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterControllers(Assembly.GetExecutingAssembly());
-            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            builder.RegisterModule<AutofacWebTypesModule>();
             builder.RegisterModule(new LoggingModule());
+            builder.RegisterControllers(Assembly.GetExecutingAssembly()).InstancePerRequest();
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly()).InstancePerRequest();
+            builder.RegisterType<ParseResponseFactory>().As<IParseResposeFactory>().InstancePerRequest();
+            builder.RegisterType<AdditionalHosts>().As<IAdditionalHosts>().InstancePerRequest();
+            builder.RegisterType<Parser>().As<IParser>().InstancePerRequest();
 
             return builder.Build();
         }
