@@ -1,14 +1,13 @@
-using System.Collections.Generic;
-using DnsRip.Models;
+﻿using System.Collections.Generic;
 
 namespace DnsRip.MVC.Responses
 {
     public class RunResponse
     {
         public string Query { get; set; }
-        public string Type { get; set; }
+        public IEnumerable<RunRecord> Records { get; set; }
         public bool IsValid { get; set; }
         public string Error { get; set; }
-        public IEnumerable<ResolveResponse> Response { get; set; }
+        
     }
 }

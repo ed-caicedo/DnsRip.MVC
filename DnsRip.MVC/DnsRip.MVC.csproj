@@ -152,9 +152,9 @@
     <Compile Include="Config\RouteConfig.cs" />
     <Compile Include="Config\ContainerConfig.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
-    <Compile Include="Models\RunRecordModel.cs" />
-    <Compile Include="Models\RunResponseViewModel.cs" />
-    <Compile Include="Models\RunResponseViewModelFactory.cs" />
+    <Compile Include="Responses\RunRecord.cs" />
+    <Compile Include="Responses\RunResponse.cs" />
+    <Compile Include="Responses\RunResponseFactory.cs" />
     <Compile Include="Requests\RunRequest.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="global.asax.cs">
@@ -165,8 +165,8 @@
     <Compile Include="Responses\ParseResponse.cs" />
     <Compile Include="Interfaces\IAdditionalHosts.cs" />
     <Compile Include="Responses\ParseResponseFactory.cs" />
-    <Compile Include="Responses\RunResponse.cs" />
-    <Compile Include="Responses\RunResponseFactory.cs" />
+    <Compile Include="Responses\RawRunResponse.cs" />
+    <Compile Include="Responses\RawRunResponseFactory.cs" />
     <Compile Include="Utilities\LoggingModule.cs" />
     <Compile Include="Requests\ParseRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

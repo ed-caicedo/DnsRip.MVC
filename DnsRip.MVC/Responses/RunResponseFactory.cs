@@ -1,6 +1,5 @@
-﻿using DnsRip.MVC.Requests;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace DnsRip.MVC.Responses
 {
@@ -8,45 +7,74 @@ namespace DnsRip.MVC.Responses
     {
         public RunResponseFactory()
         {
-            _responses = new List<RunResponse>();
+            _results = new List<RunResponse>();
         }
 
-        private readonly List<RunResponse> _responses;
+        private readonly List<RunResponse> _results;
 
-        public IEnumerable<RunResponse> Create(RunRequest request)
+        public IEnumerable<RunResponse> Create(IEnumerable<RawRunResponse> responses)
         {
-            for (var i = 0; i < request.Domains.Length; i++)
+            foreach (var response in responses)
             {
-                var resolver = new Resolver(new[] { request.Server });
-                var response = new RunResponse
-                {
-                    Query = request.Domains[i],
-                    Type = request.Types[i],
-                    IsValid = true
-                };
+                AddQuery(response.Query, response.IsValid, response.Error);
 
-                if (!resolver.Validator.IsDomain(request.Domains[i]) && !resolver.Validator.IsIp(request.Domains[i]))
+                if (!response.IsValid)
+                    continue;
+
+                foreach (var resp in response.Response)
                 {
-                    response.IsValid = false;
-                    response.Error = "Invalid domain or ip";
+                    if (response.Query != resp.Host)
+                    {
+                        AddQuery(resp.Host, true, null);
+                        AddRecord(resp.Host, resp.Type, resp.Record);
+                    }
+                    else
+                    {
+                        AddRecord(response.Query, resp.Type, resp.Record);
+                    }
                 }
 
-                if (!resolver.Validator.IsValidType(request.Types[i]))
-                {
-                    response.IsValid = false;
-                    response.Error = "Invalid type";
-                }
+                if (!response.Response.Any())
+                    AddRecord(response.Query, response.Type, "No Response");
 
-                if (response.IsValid)
-                {
-                    response.Response = resolver.Resolve(request.Domains[i],
-                        (QueryType)Enum.Parse(typeof(QueryType), request.Types[i]));
-                }
-
-                _responses.Add(response);
             }
 
-            return _responses;
+            return _results;
+        }
+
+        private void AddRecord(string query, string type, string record)
+        {
+            var result = _results.Single(r => r.Query == query);
+            var records = result.Records?.ToList() ?? new List<RunRecord>();
+
+            if (records.All(r => r.Type != type || r.Result != record))
+            {
+                records.Add(new RunRecord
+                {
+                    Type = type,
+                    Result = record
+                });
+
+                result.Records = records;
+            }
+        }
+
+        private void AddRecord(string query, QueryType type, string record)
+        {
+            AddRecord(query, type.ToString(), record);
+        }
+
+        private void AddQuery(string query, bool isValid, string error)
+        {
+            if (_results.All(r => r.Query != query))
+            {
+                _results.Add(new RunResponse
+                {
+                    Query = query,
+                    IsValid = isValid,
+                    Error = error
+                });
+            }
         }
     }
 }

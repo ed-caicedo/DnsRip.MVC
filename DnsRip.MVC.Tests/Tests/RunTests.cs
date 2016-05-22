@@ -4,7 +4,6 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DnsRip.MVC.Models;
 using DnsRip.MVC.Responses;
 
 namespace DnsRip.MVC.Tests.Tests
@@ -12,7 +11,7 @@ namespace DnsRip.MVC.Tests.Tests
     [TestFixture]
     public class RunTests
     {
-        private IEnumerable<RunResponse> _responses;
+        private IEnumerable<RawRunResponse> _responses;
 
         [OneTimeSetUp]
         public void GetReponses()
@@ -24,7 +23,7 @@ namespace DnsRip.MVC.Tests.Tests
                 Server = "8.8.8.8"
             };
 
-            var responseFactory = new RunResponseFactory();
+            var responseFactory = new RawRunResponseFactory();
             _responses = responseFactory.Create(request);
         }
 
@@ -41,7 +40,7 @@ namespace DnsRip.MVC.Tests.Tests
         [Test]
         public void Organize()
         {
-            var reponseFactory = new RunResponseViewModelFactory();
+            var reponseFactory = new RunResponseFactory();
             var results = reponseFactory.Create(_responses).ToList();
 
             Console.Write(JsonConvert.SerializeObject(results, Formatting.Indented));

@@ -1,11 +1,9 @@
-﻿using log4net;
-using System.Web;
-using System.Web.Http;
-using DnsRip.Interfaces;
-using DnsRip.MVC.Interfaces;
-using DnsRip.MVC.Models;
+﻿using DnsRip.MVC.Interfaces;
 using DnsRip.MVC.Requests;
 using DnsRip.MVC.Responses;
+using log4net;
+using System.Web;
+using System.Web.Http;
 
 namespace DnsRip.MVC.Controllers
 {
@@ -30,7 +28,7 @@ namespace DnsRip.MVC.Controllers
 
             if (request.Value == null)
                 return Ok();
-            
+
             var result = _parseResponseFactory.Create(request);
 
             _log.Debug($"action: Parse; result: {result.Parsed}; type: {result.Type}");
@@ -42,9 +40,9 @@ namespace DnsRip.MVC.Controllers
         [Route("run")]
         public IHttpActionResult Run(RunRequest request)
         {
-            var reponseFactory = new RunResponseFactory();
+            var reponseFactory = new RawRunResponseFactory();
             var response = reponseFactory.Create(request);
-            var modelFactory = new RunResponseViewModelFactory();
+            var modelFactory = new RunResponseFactory();
             var model = modelFactory.Create(response);
 
             return Ok(model);

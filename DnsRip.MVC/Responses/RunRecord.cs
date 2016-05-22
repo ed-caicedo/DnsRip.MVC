@@ -1,6 +1,6 @@
-namespace DnsRip.MVC.Models
+namespace DnsRip.MVC.Responses
 {
-    public class RunRecordModel
+    public class RunRecord
     {
         public string Type { get; set; }
         public string Result { get; set; }
