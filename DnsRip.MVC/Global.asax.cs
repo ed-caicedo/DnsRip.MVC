@@ -4,6 +4,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using DnsRip.MVC.Attributes;
 
 namespace DnsRip.MVC
 {
@@ -12,6 +13,7 @@ namespace DnsRip.MVC
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(RouteConfig.RegisterConfig);
+            GlobalConfiguration.Configuration.Filters.Add(new ErrorAttribute());
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 

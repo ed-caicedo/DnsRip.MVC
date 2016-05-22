@@ -1,9 +1,11 @@
-﻿using System.Linq;
+﻿using System;
 using DnsRip.MVC.Interfaces;
 using DnsRip.MVC.Requests;
 using log4net;
+using System.Linq;
 using System.Web;
 using System.Web.Http;
+using Mvc = System.Web.Mvc;
 
 namespace DnsRip.MVC.Controllers
 {
@@ -25,6 +27,7 @@ namespace DnsRip.MVC.Controllers
 
         [HttpPost]
         [Route("parse")]
+        [Mvc.ValidateAntiForgeryToken]
         public IHttpActionResult Parse(ParseRequest request)
         {
             _log.Debug($"action: Parse; request: {request.Value}; ip: {_httpRequest.UserHostAddress}");
@@ -41,6 +44,7 @@ namespace DnsRip.MVC.Controllers
 
         [HttpPost]
         [Route("run")]
+        [Mvc.ValidateAntiForgeryToken]
         public IHttpActionResult Run(RunRequest request)
         {
             foreach (var domain in request.Domains)

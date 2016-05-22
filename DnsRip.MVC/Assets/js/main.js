@@ -255,16 +255,10 @@
         this.parse = function (value) {
             var t = this;
             var vm = t.viewModel;
-
-            NProgress.start();
-
-            var parsed = $.post("/parse/", {
-                value: value
-            });
+            var parsed = t.post("/parse/", "value=" + value);
 
             if (parsed)
                 parsed.done(function (data) {
-                    NProgress.done();
                     t.reset();
 
                     if (!data) {
@@ -276,6 +270,22 @@
                     t.selectFirstHost();
                     t.selectHostTab();
                 });
+        }
+
+        this.post = function (url, request) {
+            NProgress.start();
+
+            var promise = $.post(url, request + "&" + $.getAFToken());
+
+            promise.always(function() {
+                NProgress.done();
+            });
+
+            promise.fail(function () {
+                alert("An error has occurred, please try again");
+            });
+
+            return promise;
         }
 
         this.selectFirstHost = function () {

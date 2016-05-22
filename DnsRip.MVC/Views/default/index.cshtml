@@ -24,7 +24,7 @@
     <meta name="msapplication-TileImage" content="/assets/icons/mstile-144x144.png">
     <meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
-    <meta name="description" content="A demo site for DnsRip: https://github.com/ed-caicedo/DnsRip"/>
+    <meta name="description" content="A demo site for DnsRip: https://github.com/ed-caicedo/DnsRip" />
     @Styles.Render("~/assets/css/default.bundle/")
 </head>
 <body>
@@ -50,7 +50,7 @@
                             </div>
                             <div id="server-container" class="form-group server">
                                 <input type="text" class="form-control" name="server" id="server" maxlength="100"
-                                       placeholder="Enter a nameserver"  data-bind="textInput: customServer" />
+                                       placeholder="Enter a nameserver" data-bind="textInput: customServer" />
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                                 <div class="col-md-12">
                                     <div data-bind="foreach: hosts">
                                         <button type="button" class="btn btn-default btn-block host-option"
-                                                data-bind="css: { active: active }, 
+                                                data-bind="css: { active: active },
                                                 attr: { 'data-value': name }">
                                             <span class="pull-left" data-bind="text: name"></span>
                                             <i class="m-icon pull-right" data-bind="text: active ? '&#xE147;' : '&#xE148;'"></i>
@@ -81,7 +81,7 @@
                                 <div class="col-md-12" data-bind="foreach: types">
                                     <div class="row" data-bind="foreach: $data">
                                         <button type="button" class="btn btn-default type-option"
-                                                data-bind="css: { active: state == 'active', disabled: state == 'disabled' }, 
+                                                data-bind="css: { active: state == 'active', disabled: state == 'disabled' },
                                                 attr: { 'data-value': type, disabled: state == 'disabled' ? 'disabled' : null }">
                                             <span class="pull-left" data-bind="text: type"></span>
                                             <i class="m-icon pull-right" data-bind="text: state == 'active' ? '&#xE147;' : '&#xE148;'"></i>
@@ -190,6 +190,7 @@
 
         </form>
     </div>
+    @Html.AntiForgeryToken()
     @Scripts.Render("~/assets/js/default.bundle/")
 </body>
 </html>

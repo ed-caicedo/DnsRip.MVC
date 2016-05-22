@@ -148,6 +148,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\ErrorAttribute.cs" />
     <Compile Include="Config\BundleConfig.cs" />
     <Compile Include="Config\RouteConfig.cs" />
     <Compile Include="Config\ContainerConfig.cs" />
