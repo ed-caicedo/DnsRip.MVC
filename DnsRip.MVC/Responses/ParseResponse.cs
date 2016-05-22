@@ -4,7 +4,7 @@ using DnsRip.MVC.Interfaces;
 
 namespace DnsRip.MVC.Responses
 {
-    public class ParseResponse : IParseResponse
+    public class ParseResponse
     {
         public ParseResponse(ParseResult parsed, IAdditionalHosts addHosts)
         {

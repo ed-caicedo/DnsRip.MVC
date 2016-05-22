@@ -16,7 +16,7 @@ namespace DnsRip.MVC.Responses
         private readonly IParser _parser;
         private readonly IAdditionalHosts _addHosts;
 
-        public IParseResponse Create(ParseRequest request)
+        public ParseResponse Create(ParseRequest request)
         {
             var parsed = _parser.Parse(request.Value);
             return new ParseResponse(parsed, _addHosts);
