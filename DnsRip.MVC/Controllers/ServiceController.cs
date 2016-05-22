@@ -1,4 +1,5 @@
-﻿using DnsRip.MVC.Interfaces;
+﻿using System.Linq;
+using DnsRip.MVC.Interfaces;
 using DnsRip.MVC.Requests;
 using log4net;
 using System.Web;
@@ -42,7 +43,13 @@ namespace DnsRip.MVC.Controllers
         [Route("run")]
         public IHttpActionResult Run(RunRequest request)
         {
-            var response = _runResponseFactory.Create(request);
+            foreach (var domain in request.Domains)
+                _log.Debug($"action: Run; request: {domain}; ip: {_httpRequest.UserHostAddress}");
+
+            var response = _runResponseFactory.Create(request).ToList();
+
+            foreach (var resp in response)
+                _log.Debug($"action: Run; result: {resp.Query}; isValid: {resp.IsValid}; ip: {_httpRequest.UserHostAddress}");
 
             return Ok(response);
         }
