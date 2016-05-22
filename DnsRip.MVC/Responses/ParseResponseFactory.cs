@@ -1,5 +1,4 @@
 ﻿using DnsRip.Interfaces;
-using DnsRip.Models;
 using DnsRip.MVC.Interfaces;
 using DnsRip.MVC.Requests;
 

@@ -1,24 +1,28 @@
-﻿using DnsRip.MVC.Requests;
+﻿using DnsRip.Interfaces;
+using DnsRip.MVC.Interfaces;
+using DnsRip.MVC.Requests;
 using System;
 using System.Collections.Generic;
-using DnsRip.MVC.Interfaces;
 
 namespace DnsRip.MVC.Responses
 {
     public class RawRunResponseFactory : IRawRunResponseFactory
     {
-        public RawRunResponseFactory()
+        public RawRunResponseFactory(IResolverFactory resolverFactory)
         {
+            _resolverFactory = resolverFactory;
             _responses = new List<RawRunResponse>();
         }
 
+        private readonly IResolverFactory _resolverFactory;
         private readonly List<RawRunResponse> _responses;
 
         public IEnumerable<RawRunResponse> Create(RunRequest request)
         {
             for (var i = 0; i < request.Domains.Length; i++)
             {
-                var resolver = new Resolver(new[] { request.Server });
+                var resolver = _resolverFactory.Create(request.Server);
+
                 var response = new RawRunResponse
                 {
                     Query = request.Domains[i],

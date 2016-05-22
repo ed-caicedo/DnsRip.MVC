@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using DnsRip.MVC.Interfaces;
+﻿using DnsRip.MVC.Interfaces;
 using DnsRip.MVC.Requests;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DnsRip.MVC.Responses
 {
@@ -15,7 +15,6 @@ namespace DnsRip.MVC.Responses
 
         private readonly List<RunResponse> _results;
         private readonly IRawRunResponseFactory _rawRunResponseFactory;
-
 
         public IEnumerable<RunResponse> Create(RunRequest request)
         {
@@ -43,10 +42,14 @@ namespace DnsRip.MVC.Responses
 
                 if (!response.Response.Any())
                     AddRecord(response.Query, response.Type, "No Response");
-
             }
 
             return _results;
+        }
+
+        private void AddRecord(string query, QueryType type, string record)
+        {
+            AddRecord(query, type.ToString(), record);
         }
 
         private void AddRecord(string query, string type, string record)
@@ -64,11 +67,6 @@ namespace DnsRip.MVC.Responses
 
                 result.Records = records;
             }
-        }
-
-        private void AddRecord(string query, QueryType type, string record)
-        {
-            AddRecord(query, type.ToString(), record);
         }
 
         private void AddQuery(string query, bool isValid, string error)

@@ -8,6 +8,5 @@ namespace DnsRip.MVC.Responses
         public IEnumerable<RunRecord> Records { get; set; }
         public bool IsValid { get; set; }
         public string Error { get; set; }
-        
     }
 }

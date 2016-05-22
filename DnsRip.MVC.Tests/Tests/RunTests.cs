@@ -28,8 +28,8 @@ namespace DnsRip.MVC.Tests.Tests
         [Test]
         public void CountResponses()
         {
-
-            var responseFactory = new RawRunResponseFactory();
+            var resolverFactory = new ResolverFactory();
+            var responseFactory = new RawRunResponseFactory(resolverFactory);
             var response = responseFactory.Create(_request).ToList();
 
             Console.Write(JsonConvert.SerializeObject(response, Formatting.Indented));
@@ -42,7 +42,8 @@ namespace DnsRip.MVC.Tests.Tests
         [Test]
         public void Organize()
         {
-            var rawRunResponseFactory = new RawRunResponseFactory();
+            var resolverFactory = new ResolverFactory();
+            var rawRunResponseFactory = new RawRunResponseFactory(resolverFactory);
             var runResponseFactory = new RunResponseFactory(rawRunResponseFactory);
             var results = runResponseFactory.Create(_request).ToList();
 
