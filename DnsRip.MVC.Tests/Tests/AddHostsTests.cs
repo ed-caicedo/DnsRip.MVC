@@ -1,5 +1,4 @@
 ﻿using System;
-using DnsRip.MVC.Models;
 using DnsRip.MVC.Utilities;
 using Newtonsoft.Json;
 using NUnit.Framework;

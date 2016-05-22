@@ -1,4 +1,4 @@
-namespace DnsRip.MVC.Models
+namespace DnsRip.MVC.Requests
 {
     public class ParseRequest
     {

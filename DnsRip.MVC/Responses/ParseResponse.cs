@@ -1,8 +1,8 @@
-﻿using DnsRip.Models;
+﻿using System.Collections.Generic;
+using DnsRip.Models;
 using DnsRip.MVC.Interfaces;
-using System.Collections.Generic;
 
-namespace DnsRip.MVC.Models
+namespace DnsRip.MVC.Responses
 {
     public class ParseResponse : IParseResponse
     {

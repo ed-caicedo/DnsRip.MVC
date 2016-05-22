@@ -61,8 +61,8 @@
       <HintPath>..\packages\Autofac.WebApi2.3.4.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DnsRip, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DnsRip.1.2.1.0\lib\net452\DnsRip.dll</HintPath>
+    <Reference Include="DnsRip, Version=1.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DnsRip.1.2.3.0\lib\net452\DnsRip.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -152,17 +152,23 @@
     <Compile Include="Config\RouteConfig.cs" />
     <Compile Include="Config\ContainerConfig.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Models\RunRecordModel.cs" />
+    <Compile Include="Models\RunResponseViewModel.cs" />
+    <Compile Include="Models\RunResponseViewModelFactory.cs" />
+    <Compile Include="Requests\RunRequest.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="global.asax.cs">
       <DependentUpon>global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\IParseResponse.cs" />
     <Compile Include="Interfaces\IParseResposeFactory.cs" />
-    <Compile Include="Models\ParseResponse.cs" />
+    <Compile Include="Interfaces\IParseResponse.cs" />
+    <Compile Include="Responses\ParseResponse.cs" />
     <Compile Include="Interfaces\IAdditionalHosts.cs" />
-    <Compile Include="Models\ParseResponseFactory.cs" />
+    <Compile Include="Responses\ParseResponseFactory.cs" />
+    <Compile Include="Responses\RunResponse.cs" />
+    <Compile Include="Responses\RunResponseFactory.cs" />
     <Compile Include="Utilities\LoggingModule.cs" />
-    <Compile Include="Models\ParseRequest.cs" />
+    <Compile Include="Requests\ParseRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\AdditionalHosts.cs" />
   </ItemGroup>

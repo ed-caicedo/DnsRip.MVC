@@ -142,7 +142,7 @@
 
         this.initSaveLookups = function () {
             var t = this;
-            var vm = this.viewModel;
+            var vm = t.viewModel;
 
             $(opts.saveLookupsBtn).on("click", function () {
                 var queued = vm.queued.removeAll();
@@ -153,6 +153,27 @@
                 vm.optionsVisible(false);
                 t.$queryFld.val("");
                 t.reset();
+            });
+        }
+
+        this.initRunLookups = function () {
+            var vm = this.viewModel;
+
+            $(opts.runLookupsBtn).on("click", function () {
+                var domains = "";
+                var types = "";
+                var queue = vm.queued();
+
+                for (var i = 0; i < queue.length; i++) {
+                    domains += domains ? "&domains=" + queue[i].name : "domains=" + queue[i].name;
+                    types += types ? "&types=" + queue[i].type : "types=" + queue[i].type;
+                }
+
+                var request = domains + "&" + types + "&server=" + vm.server();
+
+                $.post("/run/", request, function (response) {
+                    console.log(response);
+                });
             });
         }
 
@@ -234,7 +255,7 @@
         this.parse = function (value) {
             var t = this;
             var vm = t.viewModel;
-            
+
             NProgress.start();
 
             var parsed = $.post("/parse/", {
@@ -265,7 +286,7 @@
                 t.addToQueue(hosts[0].name, hosts[0].timestamp);
         }
 
-        this.selectHostTab = function() {
+        this.selectHostTab = function () {
             $(opts.hostTab).trigger("click");
         }
 
@@ -335,7 +356,7 @@
         this.reset = function () {
             var vm = this.viewModel;
             vm.hosts.removeAll();
-            vm.queued.remove(function(item) {
+            vm.queued.remove(function (item) {
                 return item.committed === false;
             });
         }
@@ -453,6 +474,7 @@
             this.initHostOptions();
             this.initTypeOptions();
             this.initSaveLookups();
+            this.initRunLookups();
             this.initProgress();
 
             ko.applyBindings(this.viewModel);
@@ -472,6 +494,7 @@
             hostOptions: ".host-option",
             typeOptions: ".type-option",
             saveLookupsBtn: "#save-lookups",
+            runLookupsBtn: "#run-lookups",
             defaultServer: "8.8.8.8",
             duration: 200
         });

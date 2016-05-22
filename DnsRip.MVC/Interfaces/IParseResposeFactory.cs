@@ -1,10 +1,10 @@
 ﻿using DnsRip.Models;
-using DnsRip.MVC.Models;
+using DnsRip.MVC.Requests;
 
 namespace DnsRip.MVC.Interfaces
 {
-    public interface IParseResposeFactory
+    public interface IParseResponseFactory
     {
-        IParseResponse Create(ParseResult parsed);
+        IParseResponse Create(ParseRequest request);
     }
 }

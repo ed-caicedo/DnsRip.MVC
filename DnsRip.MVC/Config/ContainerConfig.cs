@@ -5,7 +5,7 @@ using DnsRip.MVC.Utilities;
 using System.Reflection;
 using DnsRip.Interfaces;
 using DnsRip.MVC.Interfaces;
-using DnsRip.MVC.Models;
+using DnsRip.MVC.Responses;
 
 namespace DnsRip.MVC
 {
@@ -19,7 +19,7 @@ namespace DnsRip.MVC
             builder.RegisterModule(new LoggingModule());
             builder.RegisterControllers(Assembly.GetExecutingAssembly()).InstancePerRequest();
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly()).InstancePerRequest();
-            builder.RegisterType<ParseResponseFactory>().As<IParseResposeFactory>().InstancePerRequest();
+            builder.RegisterType<ParseResponseFactory>().As<IParseResponseFactory>().InstancePerRequest();
             builder.RegisterType<AdditionalHosts>().As<IAdditionalHosts>().InstancePerRequest();
             builder.RegisterType<Parser>().As<IParser>().InstancePerRequest();
 
