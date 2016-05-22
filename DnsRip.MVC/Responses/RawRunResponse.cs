@@ -3,7 +3,7 @@ using DnsRip.Models;
 
 namespace DnsRip.MVC.Responses
 {
-    public class RawRunResponse
+    public class RawRunResponse : IRawRunResponse
     {
         public string Query { get; set; }
         public string Type { get; set; }

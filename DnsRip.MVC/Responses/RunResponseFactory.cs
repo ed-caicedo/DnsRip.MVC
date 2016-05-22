@@ -1,19 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DnsRip.MVC.Interfaces;
+using DnsRip.MVC.Requests;
 
 namespace DnsRip.MVC.Responses
 {
-    public class RunResponseFactory
+    public class RunResponseFactory : IRunResponseFactory
     {
-        public RunResponseFactory()
+        public RunResponseFactory(IRawRunResponseFactory rawRunResponseFactory)
         {
+            _rawRunResponseFactory = rawRunResponseFactory;
             _results = new List<RunResponse>();
         }
 
         private readonly List<RunResponse> _results;
+        private readonly IRawRunResponseFactory _rawRunResponseFactory;
 
-        public IEnumerable<RunResponse> Create(IEnumerable<RawRunResponse> responses)
+
+        public IEnumerable<RunResponse> Create(RunRequest request)
         {
+            var responses = _rawRunResponseFactory.Create(request);
+
             foreach (var response in responses)
             {
                 AddQuery(response.Query, response.IsValid, response.Error);

@@ -1,6 +1,5 @@
 ﻿using DnsRip.MVC.Interfaces;
 using DnsRip.MVC.Requests;
-using DnsRip.MVC.Responses;
 using log4net;
 using System.Web;
 using System.Web.Http;
@@ -9,15 +8,18 @@ namespace DnsRip.MVC.Controllers
 {
     public class ServiceController : ApiController
     {
-        public ServiceController(ILog log, IParseResponseFactory parseResponseFactory, HttpRequestBase httpRequest)
+        public ServiceController(ILog log, IParseResponseFactory parseResponseFactory, IRunResponseFactory runResponseFactory,
+            HttpRequestBase httpRequest)
         {
             _log = log;
             _parseResponseFactory = parseResponseFactory;
+            _runResponseFactory = runResponseFactory;
             _httpRequest = httpRequest;
         }
 
         private readonly ILog _log;
         private readonly IParseResponseFactory _parseResponseFactory;
+        private readonly IRunResponseFactory _runResponseFactory;
         private readonly HttpRequestBase _httpRequest;
 
         [HttpPost]
@@ -40,12 +42,9 @@ namespace DnsRip.MVC.Controllers
         [Route("run")]
         public IHttpActionResult Run(RunRequest request)
         {
-            var reponseFactory = new RawRunResponseFactory();
-            var response = reponseFactory.Create(request);
-            var modelFactory = new RunResponseFactory();
-            var model = modelFactory.Create(response);
+            var response = _runResponseFactory.Create(request);
 
-            return Ok(model);
+            return Ok(response);
         }
     }
 }

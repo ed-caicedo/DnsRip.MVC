@@ -152,6 +152,10 @@
     <Compile Include="Config\RouteConfig.cs" />
     <Compile Include="Config\ContainerConfig.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Interfaces\IRunResponseFactory.cs" />
+    <Compile Include="Interfaces\IRawRunResponseFactory.cs" />
+    <Compile Include="Interfaces\IRunResponse.cs" />
+    <Compile Include="Interfaces\IRawRunResponse.cs" />
     <Compile Include="Responses\RunRecord.cs" />
     <Compile Include="Responses\RunResponse.cs" />
     <Compile Include="Responses\RunResponseFactory.cs" />

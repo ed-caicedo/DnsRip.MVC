@@ -11,37 +11,40 @@ namespace DnsRip.MVC.Tests.Tests
     [TestFixture]
     public class RunTests
     {
-        private IEnumerable<RawRunResponse> _responses;
+        private RunRequest _request;
 
         [OneTimeSetUp]
         public void GetReponses()
         {
-            var request = new RunRequest
+            _request = new RunRequest
             {
                 Domains = new[] { "google.com", "www.google.com", "www.google.com", "www.yahoo.com", "www.yahoo.com", "www.yahoo.com", "www.google.com", "google.com", "www.google.com", "invalid" },
                 Types = new[] { "A", "A", "CNAME", "CNAME", "CNAME", "A", "CNAME", "CNAME", "CNAME", "invalid" },
                 Server = "8.8.8.8"
             };
 
-            var responseFactory = new RawRunResponseFactory();
-            _responses = responseFactory.Create(request);
         }
 
         [Test]
         public void CountResponses()
         {
-            Console.Write(JsonConvert.SerializeObject(_responses, Formatting.Indented));
 
-            Assert.That(_responses.Count, Is.EqualTo(10));
-            Assert.That(_responses.Where(r => r.IsValid).Select(r => r).Count(), Is.EqualTo(9));
-            Assert.That(_responses.Where(r => !r.IsValid).Select(r => r).Count(), Is.EqualTo(1));
+            var responseFactory = new RawRunResponseFactory();
+            var response = responseFactory.Create(_request).ToList();
+
+            Console.Write(JsonConvert.SerializeObject(response, Formatting.Indented));
+
+            Assert.That(response.Count, Is.EqualTo(10));
+            Assert.That(response.Where(r => r.IsValid).Select(r => r).Count(), Is.EqualTo(9));
+            Assert.That(response.Where(r => !r.IsValid).Select(r => r).Count(), Is.EqualTo(1));
         }
 
         [Test]
         public void Organize()
         {
-            var reponseFactory = new RunResponseFactory();
-            var results = reponseFactory.Create(_responses).ToList();
+            var rawRunResponseFactory = new RawRunResponseFactory();
+            var runResponseFactory = new RunResponseFactory(rawRunResponseFactory);
+            var results = runResponseFactory.Create(_request).ToList();
 
             Console.Write(JsonConvert.SerializeObject(results, Formatting.Indented));
 

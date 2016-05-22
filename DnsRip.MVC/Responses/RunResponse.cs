@@ -2,7 +2,7 @@
 
 namespace DnsRip.MVC.Responses
 {
-    public class RunResponse
+    public class RunResponse : IRunResponse
     {
         public string Query { get; set; }
         public IEnumerable<RunRecord> Records { get; set; }

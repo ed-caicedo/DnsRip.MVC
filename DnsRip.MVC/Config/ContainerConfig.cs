@@ -22,6 +22,9 @@ namespace DnsRip.MVC
             builder.RegisterType<ParseResponseFactory>().As<IParseResponseFactory>().InstancePerRequest();
             builder.RegisterType<AdditionalHosts>().As<IAdditionalHosts>().InstancePerRequest();
             builder.RegisterType<Parser>().As<IParser>().InstancePerRequest();
+            builder.RegisterType<RunResponseFactory>().As<IRunResponseFactory>().InstancePerRequest();
+            builder.RegisterType<RawRunResponseFactory>().As<IRawRunResponseFactory>().InstancePerRequest();
+            
 
             return builder.Build();
         }

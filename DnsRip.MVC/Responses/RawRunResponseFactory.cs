@@ -1,10 +1,11 @@
 ﻿using DnsRip.MVC.Requests;
 using System;
 using System.Collections.Generic;
+using DnsRip.MVC.Interfaces;
 
 namespace DnsRip.MVC.Responses
 {
-    public class RawRunResponseFactory
+    public class RawRunResponseFactory : IRawRunResponseFactory
     {
         public RawRunResponseFactory()
         {
