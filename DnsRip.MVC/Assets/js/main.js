@@ -157,7 +157,8 @@
         }
 
         this.initRunLookups = function () {
-            var vm = this.viewModel;
+            var t = this;
+            var vm = t.viewModel;
 
             $(opts.runLookupsBtn).on("click", function () {
                 var domains = "";
@@ -170,8 +171,9 @@
                 }
 
                 var request = domains + "&" + types + "&server=" + vm.server();
+                var run = t.post("/run/", request);
 
-                $.post("/run/", request, function (response) {
+                run.done(function(response) {
                     console.log(response);
                 });
             });
@@ -275,7 +277,7 @@
         this.post = function (url, request) {
             NProgress.start();
 
-            var promise = $.post(url, request + "&" + $.getAFToken());
+            var promise = $.post(url, request + $.appendAFToken());
 
             promise.always(function() {
                 NProgress.done();

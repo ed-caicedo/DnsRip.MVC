@@ -3,13 +3,14 @@ using DnsRip.MVC.Interfaces;
 using DnsRip.MVC.Requests;
 using log4net;
 using System.Linq;
+using System.Net;
 using System.Web;
-using System.Web.Http;
-using Mvc = System.Web.Mvc;
+using System.Web.Mvc;
 
 namespace DnsRip.MVC.Controllers
 {
-    public class ServiceController : ApiController
+    [ValidateAntiForgeryToken]
+    public class ServiceController : Controller
     {
         public ServiceController(ILog log, IParseResponseFactory parseResponseFactory, IRunResponseFactory runResponseFactory,
             HttpRequestBase httpRequest)
@@ -25,27 +26,27 @@ namespace DnsRip.MVC.Controllers
         private readonly IRunResponseFactory _runResponseFactory;
         private readonly HttpRequestBase _httpRequest;
 
+        public ILog Log { get; set; }
+
         [HttpPost]
         [Route("parse")]
-        [Mvc.ValidateAntiForgeryToken]
-        public IHttpActionResult Parse(ParseRequest request)
+        public ActionResult Parse(ParseRequest request)
         {
             _log.Debug($"action: Parse; request: {request.Value}; ip: {_httpRequest.UserHostAddress}");
 
             if (request.Value == null)
-                return Ok();
+                return new HttpStatusCodeResult(HttpStatusCode.OK);
 
             var result = _parseResponseFactory.Create(request);
 
             _log.Debug($"action: Parse; result: {result.Parsed}; type: {result.Type}");
 
-            return Ok(result);
+            return Json(result);
         }
 
         [HttpPost]
         [Route("run")]
-        [Mvc.ValidateAntiForgeryToken]
-        public IHttpActionResult Run(RunRequest request)
+        public ActionResult Run(RunRequest request)
         {
             foreach (var domain in request.Domains)
                 _log.Debug($"action: Run; request: {domain}; ip: {_httpRequest.UserHostAddress}");
@@ -55,7 +56,7 @@ namespace DnsRip.MVC.Controllers
             foreach (var resp in response)
                 _log.Debug($"action: Run; result: {resp.Query}; isValid: {resp.IsValid}; ip: {_httpRequest.UserHostAddress}");
 
-            return Ok(response);
+            return Json(response);
         }
     }
 }

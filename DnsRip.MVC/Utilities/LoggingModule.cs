@@ -4,6 +4,7 @@ using log4net.Config;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace DnsRip.MVC.Utilities
 {
@@ -20,6 +21,7 @@ namespace DnsRip.MVC.Utilities
         protected override void AttachToComponentRegistration(IComponentRegistry registry, IComponentRegistration registration)
         {
             registration.Preparing += OnComponentPreparing;
+            registration.Activated += (sender, e) => InjectLoggerProperties(e.Instance);
         }
 
         private static void OnComponentPreparing(object sender, PreparingEventArgs e)
@@ -32,6 +34,20 @@ namespace DnsRip.MVC.Utilities
                         (p, i) => GetLogger(p.Member.DeclaringType)
                         ),
                 });
+        }
+
+        private static void InjectLoggerProperties(object instance)
+        {
+            var instanceType = instance.GetType();
+            
+            var properties = instanceType
+              .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+              .Where(p => p.PropertyType == typeof(ILog) && p.CanWrite && p.GetIndexParameters().Length == 0);
+            
+            foreach (var propToSet in properties)
+            {
+                propToSet.SetValue(instance, GetLogger(instanceType), null);
+            }
         }
 
         private static ILog GetLogger(Type type)

@@ -6,6 +6,10 @@
             return $("input[name='__RequestVerificationToken']").val();
         },
 
+        appendAFToken: function () {
+            return "&__RequestVerificationToken=" + $("input[name='__RequestVerificationToken']").val();
+        },
+
         removeWhitespace: function(string) {
             if (!string)
                 return "";
