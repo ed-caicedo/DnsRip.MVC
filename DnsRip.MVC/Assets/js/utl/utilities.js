@@ -27,6 +27,10 @@
             $("html, body").animate({ scrollTop: 0 }, speed);
         },
 
+        scrollToBottom: function (speed) {
+            $("html, body").animate({ scrollTop: $('body').height() }, speed);
+        },
+
         getTimestamp: function() {
             var time = Date.now();
             while (time === Date.now());

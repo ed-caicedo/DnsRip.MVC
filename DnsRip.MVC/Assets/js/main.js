@@ -42,6 +42,7 @@
             customServer: ko.observable(),
             hosts: ko.observableArray(),
             queued: ko.observableArray(),
+            results: ko.observableArray(),
             types: [
                 ko.observableArray([
                     new Type("A", "Hostname"),
@@ -69,6 +70,13 @@
 
             return defined;
         }, this.viewModel);
+
+        this.viewModel.fadeIn = function (elem) {
+            var $el = $(elem);
+
+            if ($el.find("*").length)
+                $el.fadeIn(opts.duration);
+        }
 
         ko.bindingHandlers.fade = {
             update: function (element, valueAccessor, allBindings, viewModel) {
@@ -161,6 +169,8 @@
             var vm = t.viewModel;
 
             $(opts.runLookupsBtn).on("click", function () {
+                $(opts.saveLookupsBtn).trigger("click");
+
                 var domains = "";
                 var types = "";
                 var queue = vm.queued();
@@ -173,8 +183,31 @@
                 var request = domains + "&" + types + "&server=" + vm.server();
                 var run = t.post("/run/", request);
 
-                run.done(function(response) {
-                    console.log(response);
+                vm.results.removeAll();
+                $(opts.panelUp).hide();
+                $(opts.panelActions).hide();
+
+                run.done(function (response) {
+                    var index = 0;
+
+                    var load = setInterval(function () {
+                        if (index === 0)
+                            $(opts.panelActions)
+                                .fadeIn(opts.duration)
+                                .css("display", "inline-block");
+
+                        if (response[index].IsValid) {
+                            vm.results.push(response[index]);
+                            $.scrollToBottom();
+                        }
+
+                        index++;
+
+                        if (index >= response.length) {
+                            $(opts.panelUp).fadeIn(opts.duration);
+                            clearInterval(load);
+                        }
+                    }, vm.duration);
                 });
             });
         }
@@ -216,6 +249,12 @@
                 }
 
                 t.updateQueue(vm.optionsTimestamp);
+            });
+        }
+
+        this.initUpBtn = function () {
+            $(opts.upBtn).on("click", function () {
+                $.scrollToTop();
             });
         }
 
@@ -279,7 +318,7 @@
 
             var promise = $.post(url, request + $.appendAFToken());
 
-            promise.always(function() {
+            promise.always(function () {
                 NProgress.done();
             });
 
@@ -487,6 +526,7 @@
             this.initTypeOptions();
             this.initSaveLookups();
             this.initRunLookups();
+            this.initUpBtn();
             this.initProgress();
 
             ko.applyBindings(this.viewModel);
@@ -507,6 +547,9 @@
             typeOptions: ".type-option",
             saveLookupsBtn: "#save-lookups",
             runLookupsBtn: "#run-lookups",
+            panelActions: ".panel-actions",
+            panelUp: ".panel-up",
+            upBtn: "#up-btn",
             defaultServer: "8.8.8.8",
             duration: 200
         });

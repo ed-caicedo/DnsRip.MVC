@@ -324,7 +324,7 @@ fieldset[disabled] .btn {
   background-color: #FE6D02;
 }
 .panel-actions {
-  display: inline-block;
+  display: none;
   width: 100%;
 }
 .panel-actions button {
@@ -349,12 +349,16 @@ fieldset[disabled] .btn {
   position: relative;
   top: 3px;
 }
+.panel-results {
+  display: none;
+}
 .panel-results .panel {
   border-bottom: 0;
   border-color: #536F7A;
 }
 .panel-results .panel-heading {
   font-size: 11px;
+  font-weight: bold;
   white-space: nowrap;
   overflow: hidden;
   -ms-text-overflow: ellipsis;
@@ -452,6 +456,7 @@ fieldset[disabled] .btn {
   }
 }
 .panel-up {
+  display: none;
   margin: 15px 0;
 }
 .panel-up button {

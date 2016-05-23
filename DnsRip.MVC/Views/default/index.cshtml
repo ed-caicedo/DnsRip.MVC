@@ -69,8 +69,7 @@
                                 <div class="col-md-12">
                                     <div data-bind="foreach: hosts">
                                         <button type="button" class="btn btn-default btn-block host-option"
-                                                data-bind="css: { active: active },
-                                                attr: { 'data-value': name }">
+                                                data-bind="css: { active: active }, attr: { 'data-value': name }">
                                             <span class="pull-left" data-bind="text: name"></span>
                                             <i class="m-icon pull-right" data-bind="text: active ? '&#xE147;' : '&#xE148;'"></i>
                                         </button>
@@ -81,8 +80,7 @@
                                 <div class="col-md-12" data-bind="foreach: types">
                                     <div class="row" data-bind="foreach: $data">
                                         <button type="button" class="btn btn-default type-option"
-                                                data-bind="css: { active: state == 'active', disabled: state == 'disabled' },
-                                                attr: { 'data-value': type, disabled: state == 'disabled' ? 'disabled' : null }">
+                                                data-bind="css: { active: state == 'active', disabled: state == 'disabled' }, attr: { 'data-value': type, disabled: state == 'disabled' ? 'disabled' : null }">
                                             <span class="pull-left" data-bind="text: type"></span>
                                             <i class="m-icon pull-right" data-bind="text: state == 'active' ? '&#xE147;' : '&#xE148;'"></i>
                                         </button>
@@ -128,7 +126,7 @@
                     </div>
 
                     <!--actions-->
-                    <div class="btn-group btn-group-sm panel-actions hidden">
+                    <div class="btn-group btn-group-sm panel-actions">
                         <button type="button" class="btn">
                             <i class="m-icon">&#xE258;</i>
                         </button>
@@ -138,36 +136,35 @@
                     </div>
 
                     <!--results-->
-                    <div class="panel-results">
-                        <div class="panel">
-                            <div class="panel-heading">
-                                googasdfasdfasdfasdfasasdbasdbsdabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbsdbasdbafdbasdfbarbarbarbbrbrrgfasdfsadfasdfle.com
-                            </div>
-                            <div class="panel-body">
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <span class="pull-left">CNAME</span>
-                                        <span class="pull-right">googasdfasdfasdfasdfasasdbasdbsdabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbsdbasdbafdbasdfbarbarbarbbrbrrgfasdfsadfasdfle.com</span>
-                                    </div>
-                                    <div class="row">
-                                        <span class="pull-left">A</span>
-                                        <span class="pull-right">216.58.192.238</span>
+                    <script type="text/html" id="result">
+                        <div class="panel-results">
+                            <div class="panel">
+                                <div class="panel-heading" data-bind="text: Query"></div>
+                                <div class="panel-body">
+                                    <div class="col-md-12" data-bind="foreach: Records">
+                                        <div class="row">
+                                            <span class="pull-left" data-bind="text: Type"></span>
+                                            <span class="pull-right" data-bind="text: Result"></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="btn-group btn-group-sm">
+                                <button type="button" class="btn btn-primary">
+                                    <i class="m-icon">&#xE258;</i>
+                                </button>
+                                <button type="button" class="btn btn-primary">
+                                    <i class="m-icon">&#xE14C;</i>
+                                </button>
+                            </div>
                         </div>
-                        <div class="btn-group btn-group-sm">
-                            <button type="button" class="btn btn-primary">
-                                <i class="m-icon">&#xE258;</i>
-                            </button>
-                            <button type="button" class="btn btn-primary">
-                                <i class="m-icon">&#xE14C;</i>
-                            </button>
-                        </div>
+                    </script>
+
+                    <div data-bind="template: { name: 'result', foreach: results, afterAdd: fadeIn }">
                     </div>
 
-                    <div class="panel-up hidden">
-                        <button type="button" class="btn btn-block btn-sm btn-default">
+                    <div class="panel-up">
+                        <button id="up-btn" type="button" class="btn btn-block btn-sm btn-default">
                             <i class="m-icon">&#xE5D8;</i>
                         </button>
                     </div>
