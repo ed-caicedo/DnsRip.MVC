@@ -1,5 +1,4 @@
-﻿using System;
-using DnsRip.MVC.Interfaces;
+﻿using DnsRip.MVC.Interfaces;
 using DnsRip.MVC.Requests;
 using log4net;
 using System.Linq;
@@ -32,14 +31,14 @@ namespace DnsRip.MVC.Controllers
         [Route("parse")]
         public ActionResult Parse(ParseRequest request)
         {
-            _log.Debug($"action: Parse; request: {request.Value}; ip: {_httpRequest.UserHostAddress}");
+            _log.Info($"action: Parse; request: {request.Value}; ip: {_httpRequest.UserHostAddress}");
 
             if (request.Value == null)
                 return new HttpStatusCodeResult(HttpStatusCode.OK);
 
             var result = _parseResponseFactory.Create(request);
 
-            _log.Debug($"action: Parse; result: {result.Parsed}; type: {result.Type}");
+            _log.Info($"action: Parse; result: {result.Parsed}; type: {result.Type}");
 
             return Json(result);
         }
@@ -49,12 +48,17 @@ namespace DnsRip.MVC.Controllers
         public ActionResult Run(RunRequest request)
         {
             foreach (var domain in request.Domains)
-                _log.Debug($"action: Run; request: {domain}; ip: {_httpRequest.UserHostAddress}");
+                _log.Info($"action: Run; request: {domain}; ip: {_httpRequest.UserHostAddress}");
 
             var response = _runResponseFactory.Create(request).ToList();
 
             foreach (var resp in response)
-                _log.Debug($"action: Run; result: {resp.Query}; isValid: {resp.IsValid}; ip: {_httpRequest.UserHostAddress}");
+            {
+                if (resp.IsValid)
+                    _log.Info($"action: Run; result: {resp.Query}; isValid: {resp.IsValid}; ip: {_httpRequest.UserHostAddress}");
+                else
+                    _log.Warn($"action: Run; warning: {resp.Error}; isValid: {resp.IsValid}; ip: {_httpRequest.UserHostAddress}");
+            }
 
             return Json(response);
         }
