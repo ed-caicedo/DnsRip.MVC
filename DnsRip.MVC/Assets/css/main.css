@@ -399,62 +399,6 @@ fieldset[disabled] .btn {
     font-size: 14px;
   }
 }
-.panel-results .btn-group {
-  width: 100%;
-  margin-top: -15px;
-}
-.panel-results .btn-group .btn-primary {
-  width: 50.15%;
-  background-color: #FE6D02;
-  border-color: #536F7A;
-  color: #283136;
-}
-.panel-results .btn-group .btn-primary:hover,
-.panel-results .btn-group .btn-primary:focus,
-.panel-results .btn-group .btn-primary:active,
-.panel-results .btn-group .btn-primary.active,
-.panel-results .btn-group .btn-primary:active:hover,
-.panel-results .btn-group .btn-primary.active:hover,
-.panel-results .btn-group .btn-primary:active:focus,
-.panel-results .btn-group .btn-primary.active:focus {
-  background-color: #FEE580;
-  border-color: #536F7A;
-  color: #283136;
-}
-.panel-results .btn-group .btn-primary:first-child:not(:last-child) {
-  border-top-left-radius: 0;
-}
-.panel-results .btn-group .btn-primary:last-child:not(:first-child) {
-  border-top-right-radius: 0;
-}
-@media (min-width: 375px) {
-  .panel-results .btn-group .btn-primary {
-    width: 50.10%;
-  }
-}
-@media (min-width: 547px) {
-  .panel-results .btn-group .btn-primary {
-    width: 50.05%;
-  }
-}
-@media (min-width: 769px) and (max-width: 991px) {
-  .panel-results .btn-group .btn-primary {
-    width: 360px;
-  }
-  .panel-results .btn-group .btn-primary:last-child {
-    width: 361px;
-  }
-}
-@media (min-width: 992px) {
-  .panel-results .btn-group .btn-primary {
-    width: 228px;
-  }
-}
-@media (min-width: 1200px) {
-  .panel-results .btn-group .btn-primary {
-    width: 278px;
-  }
-}
 .panel-up {
   display: none;
   margin: 15px 0;

@@ -1,10 +1,9 @@
 ﻿using DnsRip.Interfaces;
+using DnsRip.Models;
 using DnsRip.MVC.Interfaces;
 using DnsRip.MVC.Requests;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using DnsRip.Models;
 
 namespace DnsRip.MVC.Responses
 {

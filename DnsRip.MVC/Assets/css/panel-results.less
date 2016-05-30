@@ -41,46 +41,4 @@
             }
         }
     }
-
-    .btn-group {
-        width: 100%;
-        margin-top: -15px;
-
-        .btn-primary {
-            width: 50.15%;
-            .button-state(@button-primary, @back-dark, @button-selected, @back-dark, @back);
-
-            &:first-child:not(:last-child) {
-                border-top-left-radius: 0;
-            }
-
-            &:last-child:not(:first-child) {
-                border-top-right-radius: 0;
-            }
-
-            @media (min-width: @break1-1) {
-                width: 50.10%;
-            }
-
-            @media (min-width: @break2-1) {
-                width: 50.05%;
-            }
-
-            @media (min-width: @break3-1) and (max-width: @break3-2) {
-                width: 360px;
-
-                &:last-child {
-                    width: 361px;
-                }
-            }
-
-            @media (min-width: @break4) {
-                width: 228px;
-            }
-
-            @media (min-width: @break5) {
-                width: 278px;
-            }
-        }
-    }
 }

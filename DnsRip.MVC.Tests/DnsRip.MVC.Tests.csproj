@@ -35,8 +35,8 @@
       <HintPath>..\packages\Autofac.3.5.0\lib\net40\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="DnsRip, Version=1.2.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\DnsRip.1.2.4.0\lib\net452\DnsRip.dll</HintPath>
+    <Reference Include="DnsRip, Version=1.2.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DnsRip.1.2.5.0\lib\net452\DnsRip.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
