@@ -169,6 +169,12 @@
             var vm = t.viewModel;
 
             $(opts.runLookupsBtn).on("click", function () {
+                if (!vm.server()) {
+                    alert("Enter a nameserver");
+                    $(opts.serverFld).focus();
+                    return false;
+                }
+
                 $(opts.saveLookupsBtn).trigger("click");
 
                 var domains = "";
