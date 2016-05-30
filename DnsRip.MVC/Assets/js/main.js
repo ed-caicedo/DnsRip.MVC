@@ -180,8 +180,7 @@
                     types += types ? "&types=" + queue[i].type : "types=" + queue[i].type;
                 }
 
-                var server = vm.server() ? vm.server() : "";
-                var request = domains + "&" + types + "&server=" + server;
+                var request = domains + "&" + types + "&server=" + vm.server();
                 var run = t.post("/run/", request);
 
                 vm.results.removeAll();
@@ -190,14 +189,6 @@
 
                 run.done(function (response) {
                     var index = 0;
-
-                    if (response.length === 1 &&
-                        response[index].IsValid === false &&
-                        response[index].Error === "Invalid Server") {
-                        $(opts.serverFld).focus();
-                        alert("Enter a nameserver");
-                        return;
-                    }
 
                     var load = setInterval(function () {
                         if (index === 0)

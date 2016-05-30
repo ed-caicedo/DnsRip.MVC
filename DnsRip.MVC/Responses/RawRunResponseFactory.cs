@@ -4,6 +4,7 @@ using DnsRip.MVC.Requests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DnsRip.Models;
 
 namespace DnsRip.MVC.Responses
 {
@@ -13,13 +14,7 @@ namespace DnsRip.MVC.Responses
         {
             _resolverFactory = resolverFactory;
             _responses = new List<RawRunResponse>();
-
-            if (Cache == null)
-                Cache = new List<RawRunResponse>();
         }
-
-        public static List<RawRunResponse> Cache;
-        public const int CacheTime = 5;
 
         private readonly IResolverFactory _resolverFactory;
         private readonly List<RawRunResponse> _responses;
@@ -28,24 +23,12 @@ namespace DnsRip.MVC.Responses
         {
             var resolver = _resolverFactory.Create(request.Server);
 
-            if (!resolver.Validator.IsDomain(request.Server) && !resolver.Validator.IsIp(request.Server))
-                return new[]
-                {
-                    new RawRunResponse
-                    {
-                        IsValid = false,
-                        Error = "Invalid Server"
-                    }
-                };
-            
             for (var i = 0; i < request.Domains.Length; i++)
             {
                 var response = new RawRunResponse
                 {
                     Query = request.Domains[i],
                     Type = request.Types[i],
-                    Server = request.Server,
-                    Expires = DateTime.UtcNow.AddMinutes(CacheTime),
                     IsValid = true
                 };
 
@@ -63,24 +46,17 @@ namespace DnsRip.MVC.Responses
 
                 if (response.IsValid)
                 {
-                    var domain = request.Domains[i];
-                    var type = request.Types[i];
+                    var resolved = resolver.Resolve(request.Domains[i], (QueryType)Enum.Parse(typeof(QueryType), request.Types[i]));
+                    var validated = new List<ResolveResponse>();
 
-                    var cached =
-                        Cache.Where(
-                            c =>
-                                c.Query == domain && c.Type == type && c.Server == request.Server &&
-                                DateTime.UtcNow < c.Expires).SelectMany(c => c.Response).ToList();
+                    foreach (var res in resolved)
+                    {
+                        if ((resolver.Validator.IsDomain(res.Host) || resolver.Validator.IsIp(res.Host)) &&
+                            resolver.Validator.IsValidType(res.Type.ToString()))
+                            validated.Add(res);
+                    }
 
-                    if (cached.Any())
-                    {
-                        response.Response = cached;
-                    }
-                    else
-                    {
-                        response.Response = resolver.Resolve(domain, (QueryType)Enum.Parse(typeof(QueryType), type));
-                        Cache.Add(response);
-                    }
+                    response.Response = validated;
                 }
 
                 _responses.Add(response);

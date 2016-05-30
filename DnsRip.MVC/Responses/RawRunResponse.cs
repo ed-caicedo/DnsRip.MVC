@@ -8,8 +8,6 @@ namespace DnsRip.MVC.Responses
     {
         public string Query { get; set; }
         public string Type { get; set; }
-        public string Server { get; set; }
-        public DateTime Expires { get; set; }
         public bool IsValid { get; set; }
         public string Error { get; set; }
         public IEnumerable<ResolveResponse> Response { get; set; }

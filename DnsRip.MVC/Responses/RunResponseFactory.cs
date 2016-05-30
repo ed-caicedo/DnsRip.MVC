@@ -12,14 +12,8 @@ namespace DnsRip.MVC.Responses
         {
             _rawRunResponseFactory = rawRunResponseFactory;
             _results = new List<RunResponse>();
-
-            if (Cache == null)
-                Cache = new List<RunResponse>();
         }
-
-        public static List<RunResponse> Cache;
-        public const int CacheTime = 5;
-
+        
         private readonly List<RunResponse> _results;
         private readonly IRawRunResponseFactory _rawRunResponseFactory;
 
@@ -83,8 +77,6 @@ namespace DnsRip.MVC.Responses
                 _results.Add(new RunResponse
                 {
                     Query = query,
-                    QueryId = Guid.NewGuid().ToString(),
-                    Expires = DateTime.UtcNow.AddMinutes(CacheTime),
                     IsValid = isValid,
                     Error = error
                 });
