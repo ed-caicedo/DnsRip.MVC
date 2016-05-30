@@ -214,6 +214,7 @@
 
                         if (index >= response.length) {
                             $(opts.panelUp).fadeIn(opts.duration);
+                            $(opts.runLookupsBtn).blur();
                             clearInterval(load);
                         }
                     }, vm.duration);
@@ -264,6 +265,19 @@
         this.initUpBtn = function () {
             $(opts.upBtn).on("click", function () {
                 $.scrollToTop();
+            });
+        }
+
+        this.initClearAll = function () {
+            var vm = this.viewModel;
+
+            $(opts.clearAllBtn).on("click", function () {
+                if (confirm("Are you sure you want to clear everything?")) {
+                    vm.queued.removeAll();
+                    vm.results.removeAll();
+                    $(opts.panelUp).hide();
+                    $(opts.panelActions).hide();
+                }
             });
         }
 
@@ -535,6 +549,7 @@
             this.initTypeOptions();
             this.initSaveLookups();
             this.initRunLookups();
+            this.initClearAll();
             this.initUpBtn();
             this.initProgress();
 
@@ -558,6 +573,7 @@
             saveLookupsBtn: "#save-lookups",
             runLookupsBtn: "#run-lookups",
             panelActions: ".panel-actions",
+            clearAllBtn: "#clear-all",
             panelUp: ".panel-up",
             upBtn: "#up-btn",
             defaultServer: "8.8.8.8",
