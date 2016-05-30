@@ -127,10 +127,10 @@
 
                     <!--actions-->
                     <div class="btn-group btn-group-sm panel-actions">
-                        <button type="button" class="btn">
+                        <button type="button" class="btn" id="download-all">
                             <i class="m-icon">&#xE258;</i>
                         </button>
-                        <button type="button" class="btn">
+                        <button type="button" class="btn" id="clear-all">
                             <i class="m-icon">&#xE14C;</i>
                         </button>
                     </div>
@@ -148,6 +148,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <input type="hidden" data-bind="value: QueryId"/>
                             </div>
                             <div class="btn-group btn-group-sm">
                                 <button type="button" class="btn btn-primary">
