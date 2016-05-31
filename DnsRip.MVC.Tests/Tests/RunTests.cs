@@ -2,9 +2,11 @@
 using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using DnsRip.MVC.Responses;
+using NUnit.Framework.Constraints;
 
 namespace DnsRip.MVC.Tests.Tests
 {
@@ -54,6 +56,28 @@ namespace DnsRip.MVC.Tests.Tests
             Assert.That(results.Where(r => r.Query == "www.yahoo.com").Select(r => r.Records.Count()).Single(), Is.EqualTo(1));
             Assert.That(results.Where(r => r.Query == "fd-fp3.wg1.b.yahoo.com").Select(r => r.Records.Count()).Single(), Is.AtLeast(2));
             Assert.That(results.Where(r => r.Query == "invalid").Select(r => r.IsValid).Single(), Is.False);
+        }
+
+        [Test]
+        public void Flatten()
+        {
+            var resolverFactory = new ResolverFactory();
+            var rawRunResponseFactory = new RawRunResponseFactory(resolverFactory);
+            var runResponseFactory = new RunResponseFactory(rawRunResponseFactory);
+            var runResponse = runResponseFactory.Create(_request).ToList();
+
+            using (var runCsvResponseFactory = new RunCsvResponseFactory())
+            {
+                runCsvResponseFactory.Create(runResponse);
+
+                using (var reader = new StreamReader(runCsvResponseFactory.Stream, Encoding.UTF8))
+                {
+                    var result =  reader.ReadToEnd();
+
+                    Console.Write(result);
+                    Assert.That(result.Split(new[] { Environment.NewLine }, StringSplitOptions.None).Length, Is.EqualTo(10));
+                }
+            }
         }
     }
 }

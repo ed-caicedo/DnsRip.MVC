@@ -62,5 +62,12 @@ namespace DnsRip.MVC.Controllers
 
             return Json(response);
         }
+
+        [HttpPost]
+        [Route("download")]
+        public ActionResult Download(RunRequest request)
+        {
+            return null;
+        }
     }
 }
