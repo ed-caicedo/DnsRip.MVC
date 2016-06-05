@@ -268,12 +268,12 @@
         }
 
         this.initDownloadAll = function () {
-            var form = $(opts.downloadForm);
+            var $form = $(opts.downloadForm);
             var token = $.getAFTokenElement();
-            form.append(token);
+            $form.append(token);
 
             $(opts.downloadAllBtn).on("click", function () {
-                form.submit();
+                $form.submit();
             });
         }
 
@@ -474,12 +474,14 @@
                 var types = typeGroups[i]();
 
                 for (var j = 0; j < types.length; j++) {
-                    if (types[j].state === "active") {
+                    if (types[j].state === "active")
                         selectCount++;
 
-                        if (types[j].use && parseResultType !== types[j].use)
-                            return false;
-                    }
+                    if (types[j].state === "active" && types[j].use && parseResultType !== types[j].use)
+                        return false;
+
+                    if (types[j].state === "disabled" && types[j].use && parseResultType === types[j].use)
+                        return false;
                 }
             }
 

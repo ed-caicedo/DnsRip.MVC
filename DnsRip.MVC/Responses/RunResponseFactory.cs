@@ -30,7 +30,7 @@ namespace DnsRip.MVC.Responses
 
                 foreach (var resp in response.Response)
                 {
-                    if (response.Query != resp.Host)
+                    if (response.Query != resp.Host && !resp.Host.EndsWith("in-addr.arpa"))
                     {
                         AddQuery(resp.Host, true, null);
                         AddRecord(resp.Host, resp.Type, resp.Record);
