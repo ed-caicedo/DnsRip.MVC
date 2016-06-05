@@ -10,7 +10,15 @@
             return "&__RequestVerificationToken=" + $("input[name='__RequestVerificationToken']").val();
         },
 
-        removeWhitespace: function(string) {
+        getAFTokenElement: function () {
+            var value = $("input[name='__RequestVerificationToken']").val();
+
+            return $("<input>")
+                .attr("name", "__RequestVerificationToken")
+                .attr("value", value);
+        },
+
+        removeWhitespace: function (string) {
             if (!string)
                 return "";
 
@@ -23,7 +31,7 @@
             return string;
         },
 
-        scrollToTop: function(speed) {
+        scrollToTop: function (speed) {
             $("html, body").animate({ scrollTop: 0 }, speed);
         },
 
@@ -31,7 +39,7 @@
             $("html, body").animate({ scrollTop: $('body').height() }, speed);
         },
 
-        getTimestamp: function() {
+        getTimestamp: function () {
             var time = Date.now();
             while (time === Date.now());
             return Date.now();

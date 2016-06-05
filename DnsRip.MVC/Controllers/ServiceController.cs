@@ -1,16 +1,16 @@
-﻿using DnsRip.MVC.Interfaces;
+﻿using System;
+using DnsRip.MVC.Interfaces;
 using DnsRip.MVC.Requests;
 using log4net;
-using System;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using DnsRip.MVC.Extensions;
 
 namespace DnsRip.MVC.Controllers
 {
+    [ValidateAntiForgeryToken]
     public class ServiceController : Controller
     {
         public ServiceController(ILog log, IParseResponseFactory parseResponseFactory, IRunResponseFactory runResponseFactory,
@@ -21,6 +21,8 @@ namespace DnsRip.MVC.Controllers
             _runResponseFactory = runResponseFactory;
             _runCsvResponseFactory = runCsvResponseFactory;
             _httpRequest = httpRequest;
+
+            LogicalThreadContext.Properties["ip"] = _httpRequest.UserHostAddress;
         }
 
         private readonly ILog _log;
@@ -29,14 +31,11 @@ namespace DnsRip.MVC.Controllers
         private readonly IRunCsvResponseFactory _runCsvResponseFactory;
         private readonly HttpRequestBase _httpRequest;
 
-        public ILog Log { get; set; }
-
         [HttpPost]
         [Route("parse")]
-        [ValidateAntiForgeryToken]
         public ActionResult Parse(ParseRequest request)
         {
-            _log.Info($"action: Parse; request: {request.Value}; ip: {_httpRequest.UserHostAddress}");
+            _log.Info($"action: Parse; request: {request.Value}");
 
             if (request.Value == null)
                 return new HttpStatusCodeResult(HttpStatusCode.OK);
@@ -50,7 +49,6 @@ namespace DnsRip.MVC.Controllers
 
         [HttpPost]
         [Route("run")]
-        [ValidateAntiForgeryToken]
         public ActionResult Run(RunRequest request)
         {
             foreach (var domain in request.Domains)
@@ -61,9 +59,9 @@ namespace DnsRip.MVC.Controllers
             foreach (var resp in response)
             {
                 if (resp.IsValid)
-                    _log.Info($"action: Run; result: {resp.Query}; isValid: {resp.IsValid}; ip: {_httpRequest.UserHostAddress}");
+                    _log.Info($"action: Run; result: {resp.Query}; isValid: {resp.IsValid}");
                 else
-                    _log.Warn($"action: Run; warning: {resp.Error}; isValid: {resp.IsValid}; ip: {_httpRequest.UserHostAddress}");
+                    _log.Warn($"action: Run; warning: {resp.Error}; isValid: {resp.IsValid}");
             }
 
             return Json(response);
@@ -73,8 +71,15 @@ namespace DnsRip.MVC.Controllers
         [Route("download")]
         public ActionResult Download(RunRequest request)
         {
+            foreach (var domain in request.Domains)
+                _log.Info($"action: Download; request: {domain}");
+
             var runCsvResponseStream = _runCsvResponseFactory.Create(request);
-            return File(runCsvResponseStream.Stream, "text/csv", "dns.rip.csv");
+            var timestamp = DateTime.UtcNow.ToJsTime();
+
+            _log.Info($"action: Download; streamLength: {runCsvResponseStream.Stream.Length}");
+
+            return File(runCsvResponseStream.Stream, "text/csv", $"dns.rip.{timestamp}.csv");
         }
     }
 }

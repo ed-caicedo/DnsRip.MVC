@@ -30,6 +30,7 @@ namespace DnsRip.MVC.Responses
             Stream = new MemoryStream();
 
             _streamWriter = new StreamWriter(Stream);
+            _fileHelperEngine.HeaderText = "Query,Type,Result";
             _fileHelperEngine.WriteStream(_streamWriter, csv);
             _streamWriter.Flush();
 

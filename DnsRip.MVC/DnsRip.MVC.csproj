@@ -140,6 +140,7 @@
     <Compile Include="Config\BundleConfig.cs" />
     <Compile Include="Config\ContainerConfig.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Interfaces\IRawRunResponseFactory.cs" />
     <Compile Include="Interfaces\IRunResponseFactory.cs" />
     <Compile Include="Interfaces\IRunCsvReponseStream.cs" />

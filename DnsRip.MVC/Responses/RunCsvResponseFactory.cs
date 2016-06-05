@@ -18,7 +18,6 @@ namespace DnsRip.MVC.Responses
         public IRunCsvReponseStream Create(RunRequest request)
         {
             var runResponse = _runResponseFactory.Create(request);
-
             _runCsvReponseStream.Initialize(runResponse);
             return _runCsvReponseStream;
         }

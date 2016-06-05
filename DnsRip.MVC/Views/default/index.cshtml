@@ -29,178 +29,166 @@
 </head>
 <body>
     <div class="container">
-        @*<form id="form">*@
-            <div class="row">
+        <div class="row">
 
-                <!--main-->
-                <div class="col-md-6">
-                    <div class="panel panel-main">
-                        <div class="panel-body">
-                            <div class="logo center-block">
-                                <img src="/assets/img/logo.png" alt="DNS.rip" />
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="query" id="query" maxlength="100"
-                                       placeholder="Enter a hostname, IP, or URL" value="google.com" />
-                            </div>
-                            <div class="btn-group btn-group-sm">
-                                <button type="button" class="btn btn-default btn-google-dns dns active" data-value="8.8.8.8">Goolge DNS</button>
-                                <button type="button" class="btn btn-default btn-open-dns dns" data-value="208.67.222.222">OpenDNS</button>
-                                <button type="button" class="btn btn-default btn-custom dns">Custom</button>
-                            </div>
-                            <div id="server-container" class="form-group server">
-                                <input type="text" class="form-control" name="server" id="server" maxlength="100"
-                                       placeholder="Enter a nameserver" data-bind="textInput: customServer" />
-                            </div>
+            <!--main-->
+            <div class="col-md-6">
+                <div class="panel panel-main">
+                    <div class="panel-body">
+                        <div class="logo center-block">
+                            <img src="/assets/img/logo.png" alt="DNS.rip" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="query" id="query" maxlength="100"
+                                   placeholder="Enter a hostname, IP, or URL" value="google.com" />
+                        </div>
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-default btn-google-dns dns active" data-value="8.8.8.8">Goolge DNS</button>
+                            <button type="button" class="btn btn-default btn-open-dns dns" data-value="208.67.222.222">OpenDNS</button>
+                            <button type="button" class="btn btn-default btn-custom dns">Custom</button>
+                        </div>
+                        <div id="server-container" class="form-group server">
+                            <input type="text" class="form-control" name="server" id="server" maxlength="100"
+                                   placeholder="Enter a nameserver" data-bind="textInput: customServer" />
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-md-6">
+            <div class="col-md-6">
 
-                    <!--options-->
-                    <div id="option-panel" class="panel-options" data-bind="fade: optionsVisible">
-                        <ul class="nav nav-tabs">
-                            <li class="option-tab active"><a id="host-tab" href="#hosts">Hosts/IPs</a></li>
-                            <li class="option-tab"><a id="type-tab" href="#types">Types</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane option-pane" id="hosts">
-                                <div class="col-md-12">
-                                    <div data-bind="foreach: hosts">
-                                        <button type="button" class="btn btn-default btn-block host-option"
-                                                data-bind="css: { active: active }, attr: { 'data-value': name }">
-                                            <span class="pull-left" data-bind="text: name"></span>
-                                            <i class="m-icon pull-right" data-bind="text: active ? '&#xE147;' : '&#xE148;'"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane option-pane" id="types">
-                                <div class="col-md-12" data-bind="foreach: types">
-                                    <div class="row" data-bind="foreach: $data">
-                                        <button type="button" class="btn btn-default type-option"
-                                                data-bind="css: { active: state == 'active', disabled: state == 'disabled' }, attr: { 'data-value': type, disabled: state == 'disabled' ? 'disabled' : null }">
-                                            <span class="pull-left" data-bind="text: type"></span>
-                                            <i class="m-icon pull-right" data-bind="text: state == 'active' ? '&#xE147;' : '&#xE148;'"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-footer">
-                                <div class="col-md-12">
-                                    <button id="save-lookups" type="button" class="btn btn-primary btn-block">
-                                        <i class="m-icon">&#xE876;</i>
-                                        <span>Save Lookups</span>
+                <!--options-->
+                <div id="option-panel" class="panel-options" data-bind="fade: optionsVisible">
+                    <ul class="nav nav-tabs">
+                        <li class="option-tab active"><a id="host-tab" href="#hosts">Hosts/IPs</a></li>
+                        <li class="option-tab"><a id="type-tab" href="#types">Types</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane option-pane" id="hosts">
+                            <div class="col-md-12">
+                                <div data-bind="foreach: hosts">
+                                    <button type="button" class="btn btn-default btn-block host-option"
+                                            data-bind="css: { active: active }, attr: { 'data-value': name }">
+                                        <span class="pull-left" data-bind="text: name"></span>
+                                        <i class="m-icon pull-right" data-bind="text: active ? '&#xE147;' : '&#xE148;'"></i>
                                     </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!--queue-->
-                    <div class="panel panel-queue">
-                        <div class="panel-body">
+                        <div class="tab-pane option-pane" id="types">
+                            <div class="col-md-12" data-bind="foreach: types">
+                                <div class="row" data-bind="foreach: $data">
+                                    <button type="button" class="btn btn-default type-option"
+                                            data-bind="css: { active: state == 'active', disabled: state == 'disabled' }, attr: { 'data-value': type, disabled: state == 'disabled' ? 'disabled' : null }">
+                                        <span class="pull-left" data-bind="text: type"></span>
+                                        <i class="m-icon pull-right" data-bind="text: state == 'active' ? '&#xE147;' : '&#xE148;'"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-footer">
                             <div class="col-md-12">
-                                <div class="row header">
-                                    <span class="pull-left">Lookups</span>
-                                    <span class="pull-right">Server [ <span data-bind="text: server"></span> ]</span>
-                                </div>
-                                <div class="row item" data-bind="visible: !queued().length">
-                                    <span class="pull-left">[Empty]</span>
-                                </div>
-                                <div data-bind="foreach: queued">
-                                    <div class="row item" data-bind="css: { uncommitted: !committed }">
-                                        <span class="pull-left host" data-bind="text: name"></span>
-                                        <span class="pull-right type" data-bind="text: type"></span>
-                                    </div>
-                                </div>
+                                <button id="save-lookups" type="button" class="btn btn-primary btn-block">
+                                    <i class="m-icon">&#xE876;</i>
+                                    <span>Save Lookups</span>
+                                </button>
                             </div>
                         </div>
-                        <div class="panel-footer">
-                            <button id="run-lookups" type="button" class="btn btn-primary btn-block disabled" data-bind="css: { disabled: !queued().length  }">
-                                <i class="m-icon">&#xE877;</i>
-                                <span>Run Lookups</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!--actions-->
-                    <div class="btn-group btn-group-sm panel-actions">
-                        <button type="button" class="btn" id="download-all">
-                            <i class="m-icon">&#xE258;</i>
-                        </button>
-                        <button type="button" class="btn" id="clear-all">
-                            <i class="m-icon">&#xE14C;</i>
-                        </button>
-                    </div>
-
-                    <!--results-->
-                    <script type="text/html" id="result">
-                        <div class="panel-results">
-                            <div class="panel">
-                                <div class="panel-heading" data-bind="text: Query"></div>
-                                <div class="panel-body">
-                                    <div class="col-md-12" data-bind="foreach: Records">
-                                        <div class="row">
-                                            <span class="pull-left" data-bind="text: Type"></span>
-                                            <span class="pull-right" data-bind="text: Result"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </script>
-
-                    <div data-bind="template: { name: 'result', foreach: results, afterAdd: fadeIn }">
-                    </div>
-
-                    <div class="panel-up">
-                        <button id="up-btn" type="button" class="btn btn-block btn-sm btn-default">
-                            <i class="m-icon">&#xE5D8;</i>
-                        </button>
-                    </div>
-
-                    <!--results-->
-                    <script type="text/html" id="download">
-
-
-                        <iframe id="download-frame" name="download-frame"></iframe>
-
-                        <form method="POST" id="download-form" action="/download/" target="download-frame">
-                            <fieldset data-bind="foreach: queued">
-                                <input type="hidden" name="domains" data-bind="value: name" />
-                                <input type="hidden" name="types" data-bind="value: type" />
-
-                                </fieldset>
-
-                            <input type="hidden" name="server" data-bind="value: server" />
-</form>
-
-
-                    </script>
-
-                    <div data-bind="template: { name: 'download' }">
                     </div>
                 </div>
 
-            </div>
+                <!--queue-->
+                <div class="panel panel-queue">
+                    <div class="panel-body">
+                        <div class="col-md-12">
+                            <div class="row header">
+                                <span class="pull-left">Lookups</span>
+                                <span class="pull-right">Server [ <span data-bind="text: server"></span> ]</span>
+                            </div>
+                            <div class="row item" data-bind="visible: !queued().length">
+                                <span class="pull-left">[Empty]</span>
+                            </div>
+                            <div data-bind="foreach: queued">
+                                <div class="row item" data-bind="css: { uncommitted: !committed }">
+                                    <span class="pull-left host" data-bind="text: name"></span>
+                                    <span class="pull-right type" data-bind="text: type"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button id="run-lookups" type="button" class="btn btn-primary btn-block disabled" data-bind="css: { disabled: !queued().length  }">
+                            <i class="m-icon">&#xE877;</i>
+                            <span>Run Lookups</span>
+                        </button>
+                    </div>
+                </div>
 
-            <!--footer-->
-            <div class="footer">
-                <span class="copy">
-                    Copyright &copy; Ed Caicedo 2016 | A demo site for
-                    <a href="https://github.com/ed-caicedo/DnsRip" target="_blank">DnsRip</a>
-                </span>
-                <span class="pull-right">
-                    <a href="https://github.com/ed-caicedo/DnsRip" target="_blank">
-                        <img src="/assets/img/github.png" alt="GitHub" />
-                    </a>
-                </span>
-            </div>
+                <!--actions-->
+                <div class="btn-group btn-group-sm panel-actions">
+                    <button type="button" class="btn" id="download-all">
+                        <i class="m-icon">&#xE258;</i>
+                    </button>
+                    <button type="button" class="btn" id="clear-all">
+                        <i class="m-icon">&#xE14C;</i>
+                    </button>
+                </div>
 
-        @*</form>*@
+                <!--results-->
+                <script type="text/html" id="result">
+                    <div class="panel-results">
+                        <div class="panel">
+                            <div class="panel-heading" data-bind="text: Query"></div>
+                            <div class="panel-body">
+                                <div class="col-md-12" data-bind="foreach: Records">
+                                    <div class="row">
+                                        <span class="pull-left" data-bind="text: Type"></span>
+                                        <span class="pull-right" data-bind="text: Result"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </script>
+
+                <div data-bind="template: { name: 'result', foreach: results, afterAdd: fadeIn }">
+                </div>
+
+                <div class="panel-up">
+                    <button id="up-btn" type="button" class="btn btn-block btn-sm btn-default">
+                        <i class="m-icon">&#xE5D8;</i>
+                    </button>
+                </div>
+
+                <!--download-->
+                <div class="hidden" id="download">
+                    <iframe id="download-frame" name="download-frame"></iframe>
+                    <form method="POST" id="download-form" action="/download/" target="download-frame">
+                        <fieldset data-bind="foreach: queued">
+                            <input type="hidden" name="domains" data-bind="value: name"/>
+                            <input type="hidden" name="types" data-bind="value: type"/>
+                        </fieldset>
+                        <input type="hidden" name="server" data-bind="value: server"/>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+        <!--footer-->
+        <div class="footer">
+            <span class="copy">
+                Copyright &copy; Ed Caicedo 2016 | A demo site for
+                <a href="https://github.com/ed-caicedo/DnsRip" target="_blank">DnsRip</a>
+            </span>
+            <span class="pull-right">
+                <a href="https://github.com/ed-caicedo/DnsRip" target="_blank">
+                    <img src="/assets/img/github.png" alt="GitHub" />
+                </a>
+            </span>
+        </div>
     </div>
+
     @Html.AntiForgeryToken()
     @Scripts.Render("~/assets/js/default.bundle/")
 </body>

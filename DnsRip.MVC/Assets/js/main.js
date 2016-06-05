@@ -216,6 +216,8 @@
                         }
                     }, vm.duration);
                 });
+
+                return false;
             });
         }
 
@@ -265,9 +267,13 @@
             });
         }
 
-        this.initDownloadAll = function() {
+        this.initDownloadAll = function () {
+            var form = $(opts.downloadForm);
+            var token = $.getAFTokenElement();
+            form.append(token);
+
             $(opts.downloadAllBtn).on("click", function () {
-                $("#download-form").submit();
+                form.submit();
             });
         }
 
@@ -338,7 +344,7 @@
                     t.selectHostTab();
                 });
         }
-
+        
         this.post = function (url, request) {
             NProgress.start();
 
@@ -579,6 +585,7 @@
             panelActions: ".panel-actions",
             clearAllBtn: "#clear-all",
             downloadAllBtn: "#download-all",
+            downloadForm: "#download-form",
             panelUp: ".panel-up",
             upBtn: "#up-btn",
             defaultServer: "8.8.8.8",

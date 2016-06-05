@@ -66,9 +66,10 @@ namespace DnsRip.MVC.Tests.Tests
             var rawRunResponseFactory = new RawRunResponseFactory(resolverFactory);
             var runResponseFactory = new RunResponseFactory(rawRunResponseFactory);
             var fileHelperEngine = new FileHelperEngine<RunCsvResponse>();          
-            var runCsvReponseStream = new RunCsvReponseStream<RunCsvResponse>(fileHelperEngine);
+            var runCsvResponseStream = new RunCsvReponseStream<RunCsvResponse>(fileHelperEngine);
+            var runCsvResponseFactory = new RunCsvResponseFactory(runResponseFactory, runCsvResponseStream);
 
-            using (var runCsvResponseStream = new RunCsvResponseFactory(runResponseFactory, runCsvReponseStream).Create(_request))
+            using (runCsvResponseFactory.Create(_request))
             {
                 using (var reader = new StreamReader(runCsvResponseStream.Stream, Encoding.UTF8))
                 {
