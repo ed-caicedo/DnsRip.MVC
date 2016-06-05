@@ -29,7 +29,7 @@
 </head>
 <body>
     <div class="container">
-        <form id="form">
+        @*<form id="form">*@
             <div class="row">
 
                 <!--main-->
@@ -160,6 +160,28 @@
                             <i class="m-icon">&#xE5D8;</i>
                         </button>
                     </div>
+
+                    <!--results-->
+                    <script type="text/html" id="download">
+
+
+                        <iframe id="download-frame" name="download-frame"></iframe>
+
+                        <form method="POST" id="download-form" action="/download/" target="download-frame">
+                            <fieldset data-bind="foreach: queued">
+                                <input type="hidden" name="domains" data-bind="value: name" />
+                                <input type="hidden" name="types" data-bind="value: type" />
+
+                                </fieldset>
+
+                            <input type="hidden" name="server" data-bind="value: server" />
+</form>
+
+
+                    </script>
+
+                    <div data-bind="template: { name: 'download' }">
+                    </div>
                 </div>
 
             </div>
@@ -177,7 +199,7 @@
                 </span>
             </div>
 
-        </form>
+        @*</form>*@
     </div>
     @Html.AntiForgeryToken()
     @Scripts.Render("~/assets/js/default.bundle/")

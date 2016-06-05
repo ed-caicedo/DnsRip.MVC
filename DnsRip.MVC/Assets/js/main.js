@@ -265,6 +265,12 @@
             });
         }
 
+        this.initDownloadAll = function() {
+            $(opts.downloadAllBtn).on("click", function () {
+                $("#download-form").submit();
+            });
+        }
+
         this.initClearAll = function () {
             var vm = this.viewModel;
 
@@ -546,6 +552,7 @@
             this.initTypeOptions();
             this.initSaveLookups();
             this.initRunLookups();
+            this.initDownloadAll();
             this.initClearAll();
             this.initUpBtn();
             this.initProgress();
@@ -571,6 +578,7 @@
             runLookupsBtn: "#run-lookups",
             panelActions: ".panel-actions",
             clearAllBtn: "#clear-all",
+            downloadAllBtn: "#download-all",
             panelUp: ".panel-up",
             upBtn: "#up-btn",
             defaultServer: "8.8.8.8",

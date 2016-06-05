@@ -1,41 +1,26 @@
+using DnsRip.MVC.Interfaces;
+using DnsRip.MVC.Requests;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using FileHelpers;
 
 namespace DnsRip.MVC.Responses
 {
-    public class RunCsvResponseFactory : IDisposable
+    public class RunCsvResponseFactory : IRunCsvResponseFactory
     {
-        public MemoryStream Stream { get; set; }
-        private StreamWriter _streamWriter { get; set; }
-
-        public void Create(IEnumerable<RunResponse> runResponse)
+        public RunCsvResponseFactory(IRunResponseFactory runResponseFactory, IRunCsvReponseStream runCsvReponseStream)
         {
-            var csv = runResponse.Where(r => r.IsValid).SelectMany(r => r.Records, (response, record) => new RunCsvResponse
-            {
-                Query = response.Query,
-                Type = record.Type,
-                Result = record.Result
-            });
-
-            var fileHelper = new FileHelperEngine<RunCsvResponse>();
-
-            Stream = new MemoryStream();
-            _streamWriter = new StreamWriter(Stream);
-
-            fileHelper.WriteStream(_streamWriter, csv);
-
-            _streamWriter.Flush();
-            Stream.Flush();
-            Stream.Position = 0;
+            _runResponseFactory = runResponseFactory;
+            _runCsvReponseStream = runCsvReponseStream;
         }
 
-        public void Dispose()
+        private readonly IRunResponseFactory _runResponseFactory;
+        private readonly IRunCsvReponseStream _runCsvReponseStream;
+
+        public IRunCsvReponseStream Create(RunRequest request)
         {
-            Stream.Dispose();
-            _streamWriter.Dispose();
+            var runResponse = _runResponseFactory.Create(request);
+
+            _runCsvReponseStream.Initialize(runResponse);
+            return _runCsvReponseStream;
         }
     }
 }

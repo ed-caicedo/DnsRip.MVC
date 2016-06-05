@@ -1,34 +1,39 @@
 ﻿using DnsRip.MVC.Interfaces;
 using DnsRip.MVC.Requests;
 using log4net;
+using System;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
 namespace DnsRip.MVC.Controllers
 {
-    [ValidateAntiForgeryToken]
     public class ServiceController : Controller
     {
         public ServiceController(ILog log, IParseResponseFactory parseResponseFactory, IRunResponseFactory runResponseFactory,
-            HttpRequestBase httpRequest)
+            IRunCsvResponseFactory runCsvResponseFactory, HttpRequestBase httpRequest)
         {
             _log = log;
             _parseResponseFactory = parseResponseFactory;
             _runResponseFactory = runResponseFactory;
+            _runCsvResponseFactory = runCsvResponseFactory;
             _httpRequest = httpRequest;
         }
 
         private readonly ILog _log;
         private readonly IParseResponseFactory _parseResponseFactory;
         private readonly IRunResponseFactory _runResponseFactory;
+        private readonly IRunCsvResponseFactory _runCsvResponseFactory;
         private readonly HttpRequestBase _httpRequest;
 
         public ILog Log { get; set; }
 
         [HttpPost]
         [Route("parse")]
+        [ValidateAntiForgeryToken]
         public ActionResult Parse(ParseRequest request)
         {
             _log.Info($"action: Parse; request: {request.Value}; ip: {_httpRequest.UserHostAddress}");
@@ -45,6 +50,7 @@ namespace DnsRip.MVC.Controllers
 
         [HttpPost]
         [Route("run")]
+        [ValidateAntiForgeryToken]
         public ActionResult Run(RunRequest request)
         {
             foreach (var domain in request.Domains)
@@ -67,7 +73,8 @@ namespace DnsRip.MVC.Controllers
         [Route("download")]
         public ActionResult Download(RunRequest request)
         {
-            return null;
+            var runCsvResponseStream = _runCsvResponseFactory.Create(request);
+            return File(runCsvResponseStream.Stream, "text/csv", "dns.rip.csv");
         }
     }
 }

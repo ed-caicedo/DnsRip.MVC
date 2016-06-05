@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using DnsRip.MVC.Responses;
+using FileHelpers;
 using NUnit.Framework.Constraints;
 
 namespace DnsRip.MVC.Tests.Tests
@@ -64,13 +65,12 @@ namespace DnsRip.MVC.Tests.Tests
             var resolverFactory = new ResolverFactory();
             var rawRunResponseFactory = new RawRunResponseFactory(resolverFactory);
             var runResponseFactory = new RunResponseFactory(rawRunResponseFactory);
-            var runResponse = runResponseFactory.Create(_request).ToList();
+            var fileHelperEngine = new FileHelperEngine<RunCsvResponse>();          
+            var runCsvReponseStream = new RunCsvReponseStream<RunCsvResponse>(fileHelperEngine);
 
-            using (var runCsvResponseFactory = new RunCsvResponseFactory())
+            using (var runCsvResponseStream = new RunCsvResponseFactory(runResponseFactory, runCsvReponseStream).Create(_request))
             {
-                runCsvResponseFactory.Create(runResponse);
-
-                using (var reader = new StreamReader(runCsvResponseFactory.Stream, Encoding.UTF8))
+                using (var reader = new StreamReader(runCsvResponseStream.Stream, Encoding.UTF8))
                 {
                     var result =  reader.ReadToEnd();
 

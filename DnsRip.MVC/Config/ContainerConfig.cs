@@ -7,6 +7,7 @@ using DnsRip.MVC.Utilities;
 using System.Reflection;
 using System.Web.Mvc;
 using DnsRip.MVC.Attributes;
+using FileHelpers;
 using log4net;
 
 namespace DnsRip.MVC
@@ -22,14 +23,17 @@ namespace DnsRip.MVC
             builder.RegisterModule<AutofacWebTypesModule>();
             builder.RegisterControllers(Assembly.GetExecutingAssembly()).InstancePerRequest();
             builder.Register(c => new ErrorAttribute()).AsExceptionFilterFor<Controller>().InstancePerRequest();
-            builder.RegisterType<ParseResponseFactory>().As<IParseResponseFactory>().InstancePerRequest();
-            builder.RegisterType<AdditionalHosts>().As<IAdditionalHosts>().InstancePerRequest();
+            builder.RegisterGeneric(typeof(FileHelperEngine<>)).As(typeof(IFileHelperEngine<>)).InstancePerRequest();
             builder.RegisterType<Parser>().As<IParser>().InstancePerRequest();
-            builder.RegisterType<RunResponseFactory>().As<IRunResponseFactory>().InstancePerRequest();
-            builder.RegisterType<RawRunResponseFactory>().As<IRawRunResponseFactory>().InstancePerRequest();
+            builder.RegisterType<AdditionalHosts>().As<IAdditionalHosts>().InstancePerRequest();
             builder.RegisterType<ResolverFactory>().As<IResolverFactory>().InstancePerRequest();
+            builder.RegisterType<RunCsvReponseStream<RunCsvResponse>>().As<IRunCsvReponseStream>().ExternallyOwned()
+                .InstancePerRequest();
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t => t.Name.EndsWith("Factory"))
+                .AsImplementedInterfaces().InstancePerRequest();
 
-            return builder.Build();
+            var container = builder.Build();
+            return container;
         }
     }
 }

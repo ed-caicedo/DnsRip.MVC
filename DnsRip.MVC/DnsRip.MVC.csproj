@@ -140,8 +140,11 @@
     <Compile Include="Config\BundleConfig.cs" />
     <Compile Include="Config\ContainerConfig.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
-    <Compile Include="Interfaces\IRunResponseFactory.cs" />
     <Compile Include="Interfaces\IRawRunResponseFactory.cs" />
+    <Compile Include="Interfaces\IRunResponseFactory.cs" />
+    <Compile Include="Interfaces\IRunCsvReponseStream.cs" />
+    <Compile Include="Interfaces\IRunCsvResponseFactory.cs" />
+    <Compile Include="Responses\RunCsvReponseStream.cs" />
     <Compile Include="Responses\RunCsvResponseFactory.cs" />
     <Compile Include="Responses\RunCsvResponse.cs" />
     <Compile Include="Responses\RunRecord.cs" />
