@@ -344,7 +344,7 @@
                     t.selectHostTab();
                 });
         }
-        
+
         this.post = function (url, request) {
             NProgress.start();
 

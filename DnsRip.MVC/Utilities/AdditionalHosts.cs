@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using DnsRip.MVC.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
-using DnsRip.MVC.Interfaces;
 
 namespace DnsRip.MVC.Utilities
 {

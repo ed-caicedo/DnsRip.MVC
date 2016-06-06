@@ -1,6 +1,5 @@
 using DnsRip.MVC.Interfaces;
 using DnsRip.MVC.Requests;
-using System;
 
 namespace DnsRip.MVC.Responses
 {

@@ -1,5 +1,4 @@
 ﻿using log4net;
-using System.Net;
 using System.Web.Mvc;
 
 namespace DnsRip.MVC.Attributes

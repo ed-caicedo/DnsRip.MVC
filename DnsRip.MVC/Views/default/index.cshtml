@@ -35,12 +35,13 @@
             <div class="col-md-6">
                 <div class="panel panel-main">
                     <div class="panel-body">
-                        <div class="logo center-block">
-                            <img src="/assets/img/logo.png" alt="DNS.rip" />
-                        </div>
+                            <div class="logo">
+                                <img src="/assets/img/logo.svg" width="42" alt="DNS.rip" />
+                                <h1>DNS.rip</h1>
+                            </div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="query" id="query" maxlength="100"
-                                   placeholder="Enter a hostname, IP, or URL" value="google.com" />
+                                   placeholder="Enter a hostname, IP, or URL" />
                         </div>
                         <div class="btn-group btn-group-sm">
                             <button type="button" class="btn btn-default btn-google-dns dns active" data-value="8.8.8.8">Goolge DNS</button>
@@ -165,13 +166,12 @@
                     <iframe id="download-frame" name="download-frame"></iframe>
                     <form method="POST" id="download-form" action="/download/" target="download-frame">
                         <fieldset data-bind="foreach: queued">
-                            <input type="hidden" name="domains" data-bind="value: name"/>
-                            <input type="hidden" name="types" data-bind="value: type"/>
+                            <input type="hidden" name="domains" data-bind="value: name" />
+                            <input type="hidden" name="types" data-bind="value: type" />
                         </fieldset>
-                        <input type="hidden" name="server" data-bind="value: server"/>
+                        <input type="hidden" name="server" data-bind="value: server" />
                     </form>
                 </div>
-
             </div>
         </div>
 

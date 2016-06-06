@@ -1,14 +1,13 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using DnsRip.Interfaces;
+using DnsRip.MVC.Attributes;
 using DnsRip.MVC.Interfaces;
 using DnsRip.MVC.Responses;
 using DnsRip.MVC.Utilities;
+using FileHelpers;
 using System.Reflection;
 using System.Web.Mvc;
-using DnsRip.MVC.Attributes;
-using FileHelpers;
-using log4net;
 
 namespace DnsRip.MVC
 {

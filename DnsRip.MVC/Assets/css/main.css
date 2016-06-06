@@ -116,17 +116,36 @@ fieldset[disabled] .btn {
 }
 .panel-main .logo {
   display: inline-block;
-  margin-bottom: 10px;
-  text-align: center;
+  margin-bottom: 15px;
+}
+@media (min-width: 480px) {
+  .panel-main .logo {
+    margin-bottom: 25px;
+  }
 }
 .panel-main .logo img {
   float: left;
-  width: 256px;
-  margin: auto;
+  width: 42px;
 }
 @media (min-width: 480px) {
   .panel-main .logo img {
-    width: 404px;
+    margin-left: -4px;
+    width: 77px;
+    height: 68px;
+  }
+}
+.panel-main .logo h1 {
+  font-family: 'VT323';
+  font-size: 72px;
+  line-height: 0;
+  color: #ffffff;
+  float: left;
+  margin: 18px 0 0 5px;
+}
+@media (min-width: 480px) {
+  .panel-main .logo h1 {
+    margin: 29px 0 0 5px;
+    font-size: 116px;
   }
 }
 .panel-main .btn-group {
@@ -291,7 +310,7 @@ fieldset[disabled] .btn {
 }
 @media (min-width: 992px) {
   .panel-queue .panel-body {
-    min-height: 142px;
+    min-height: 138px;
   }
 }
 .panel-queue .item.uncommitted {

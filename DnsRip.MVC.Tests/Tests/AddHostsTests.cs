@@ -1,7 +1,7 @@
-﻿using System;
-using DnsRip.MVC.Utilities;
+﻿using DnsRip.MVC.Utilities;
 using Newtonsoft.Json;
 using NUnit.Framework;
+using System;
 
 namespace DnsRip.MVC.Tests.Tests
 {

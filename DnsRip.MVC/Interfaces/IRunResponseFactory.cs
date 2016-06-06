@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using DnsRip.MVC.Requests;
+﻿using DnsRip.MVC.Requests;
 using DnsRip.MVC.Responses;
+using System.Collections.Generic;
 
 namespace DnsRip.MVC.Interfaces
 {

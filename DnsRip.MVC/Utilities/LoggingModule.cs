@@ -39,11 +39,11 @@ namespace DnsRip.MVC.Utilities
         private static void InjectLoggerProperties(object instance)
         {
             var instanceType = instance.GetType();
-            
+
             var properties = instanceType
               .GetProperties(BindingFlags.Public | BindingFlags.Instance)
               .Where(p => p.PropertyType == typeof(ILog) && p.CanWrite && p.GetIndexParameters().Length == 0);
-            
+
             foreach (var propToSet in properties)
             {
                 propToSet.SetValue(instance, GetLogger(instanceType), null);

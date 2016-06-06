@@ -1,13 +1,12 @@
 ﻿using DnsRip.MVC.Requests;
+using DnsRip.MVC.Responses;
+using FileHelpers;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
 using System.IO;
 using System.Linq;
 using System.Text;
-using DnsRip.MVC.Responses;
-using FileHelpers;
-using NUnit.Framework.Constraints;
 
 namespace DnsRip.MVC.Tests.Tests
 {
@@ -25,7 +24,6 @@ namespace DnsRip.MVC.Tests.Tests
                 Types = new[] { "A", "A", "CNAME", "CNAME", "CNAME", "A", "CNAME", "CNAME", "CNAME", "invalid" },
                 Server = "8.8.8.8"
             };
-
         }
 
         [Test]
@@ -65,7 +63,7 @@ namespace DnsRip.MVC.Tests.Tests
             var resolverFactory = new ResolverFactory();
             var rawRunResponseFactory = new RawRunResponseFactory(resolverFactory);
             var runResponseFactory = new RunResponseFactory(rawRunResponseFactory);
-            var fileHelperEngine = new FileHelperEngine<RunCsvResponse>();          
+            var fileHelperEngine = new FileHelperEngine<RunCsvResponse>();
             var runCsvResponseStream = new RunCsvReponseStream<RunCsvResponse>(fileHelperEngine);
             var runCsvResponseFactory = new RunCsvResponseFactory(runResponseFactory, runCsvResponseStream);
 
@@ -73,7 +71,7 @@ namespace DnsRip.MVC.Tests.Tests
             {
                 using (var reader = new StreamReader(runCsvResponseStream.Stream, Encoding.UTF8))
                 {
-                    var result =  reader.ReadToEnd();
+                    var result = reader.ReadToEnd();
 
                     Console.Write(result);
                     Assert.That(result.Split(new[] { Environment.NewLine }, StringSplitOptions.None).Length, Is.EqualTo(10));

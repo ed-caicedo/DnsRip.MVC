@@ -26,7 +26,7 @@ namespace DnsRip.MVC.Responses
                 Type = record.Type,
                 Result = record.Result
             });
-            
+
             Stream = new MemoryStream();
 
             _streamWriter = new StreamWriter(Stream);

@@ -204,6 +204,7 @@
     <Content Include="Assets\icons\safari-pinned-tab.svg" />
     <Content Include="Assets\img\github.png" />
     <Content Include="Assets\img\logo.png" />
+    <Content Include="Assets\img\logo.svg" />
     <Content Include="Assets\js\lib\bootstrap.js" />
     <Content Include="Assets\css\nprogress.less" />
     <None Include="Assets\js\lib\jquery-vsdoc.js" />
