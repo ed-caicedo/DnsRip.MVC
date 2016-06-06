@@ -9,7 +9,7 @@
 @button-primary: #FE6D02;
 @result-body: #ffffff;
 
-@font: 'Oxygen', sans-serif; 
+@font: 'Oxygen', sans-serif;
 @logo-font: 'VT323',;
 
 @break1: 319px;
@@ -44,6 +44,15 @@ body {
     }
 }
 
+a {
+    color: @text;
+
+    &:hover {
+        color: @header-text;
+        text-decoration: none;
+    }
+}
+
 .m-icon {
     font-family: 'Material Icons';
     font-weight: normal;
@@ -72,6 +81,11 @@ body {
     -ms-text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
     text-overflow: ellipsis;
+}
+
+.outdated {
+    font-size: 24px;
+    display: none;
 }
 
 .button-state(@default-back, @default-text, @active-back, @active-text, @border) {

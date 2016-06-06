@@ -20,6 +20,13 @@ body {
     margin-bottom: 100px;
   }
 }
+a {
+  color: #C4D1D7;
+}
+a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
 .m-icon {
   font-family: 'Material Icons';
   font-weight: normal;
@@ -33,6 +40,10 @@ body {
   -ms-word-wrap: normal;
   word-wrap: normal;
   direction: ltr;
+}
+.outdated {
+  font-size: 24px;
+  display: none;
 }
 .btn-default {
   background-color: #536F7A;

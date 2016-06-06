@@ -26,19 +26,22 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="description" content="A demo site for DnsRip: https://github.com/ed-caicedo/DnsRip" />
     @Styles.Render("~/assets/css/default.bundle/")
+    <!--[if lte IE 9]>
+      <link rel="stylesheet" type="text/css" href="/assets/css/ie.css">
+    <![endif]-->
 </head>
 <body>
-    <div class="container">
+    <div class="main container">
         <div class="row">
 
             <!--main-->
             <div class="col-md-6">
                 <div class="panel panel-main">
                     <div class="panel-body">
-                            <div class="logo">
-                                <img src="/assets/img/logo.svg" width="42" alt="DNS.rip" />
-                                <h1>DNS.rip</h1>
-                            </div>
+                        <div class="logo">
+                            <img src="/assets/img/logo.svg" width="42" alt="DNS.rip" />
+                            <h1>DNS.rip</h1>
+                        </div>
                         <div class="form-group">
                             <input type="text" class="form-control" name="query" id="query" maxlength="100"
                                    placeholder="Enter a hostname, IP, or URL" />
@@ -188,6 +191,14 @@
             </span>
         </div>
     </div>
+
+    <!--[if lte IE 9]>
+        <div class="container outdated">
+            <p class="text-center">
+                <a href="http://outdatedbrowser.com/" target="_blank">Your browser is out of date. Click here to upgrade</a>
+            </p>
+        </div>
+    <![endif]-->
 
     @Html.AntiForgeryToken()
     @Scripts.Render("~/assets/js/default.bundle/")

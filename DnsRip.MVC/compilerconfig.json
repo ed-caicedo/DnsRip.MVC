@@ -2,5 +2,9 @@
   {
     "outputFile": "Assets/css/main.css",
     "inputFile": "Assets/css/main.less"
+  },
+  {
+    "outputFile": "Assets/css/ie.css",
+    "inputFile": "Assets/css/ie.less"
   }
 ]

@@ -168,6 +168,10 @@
     <Compile Include="Utilities\AdditionalHosts.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\css\ie.less" />
+    <Content Include="Assets\css\ie.css">
+      <DependentUpon>ie.less</DependentUpon>
+    </Content>
     <Content Include="Assets\css\lib\fonts.css" />
     <Content Include="Assets\css\lib\bootstrap.css" />
     <Content Include="Assets\css\lib\nprogress.css" />
@@ -203,7 +207,6 @@
     <Content Include="Assets\icons\mstile-70x70.png" />
     <Content Include="Assets\icons\safari-pinned-tab.svg" />
     <Content Include="Assets\img\github.png" />
-    <Content Include="Assets\img\logo.png" />
     <Content Include="Assets\img\logo.svg" />
     <Content Include="Assets\js\lib\bootstrap.js" />
     <Content Include="Assets\css\nprogress.less" />

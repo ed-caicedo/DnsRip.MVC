@@ -169,6 +169,11 @@
             var vm = t.viewModel;
 
             $(opts.runLookupsBtn).on("click", function () {
+                var queued = vm.queued();
+
+                if (!queued.length)
+                    return false;
+
                 if (!vm.server()) {
                     alert("Enter a nameserver");
                     $(opts.serverFld).focus();
@@ -179,11 +184,10 @@
 
                 var domains = "";
                 var types = "";
-                var queue = vm.queued();
 
-                for (var i = 0; i < queue.length; i++) {
-                    domains += domains ? "&domains=" + queue[i].name : "domains=" + queue[i].name;
-                    types += types ? "&types=" + queue[i].type : "types=" + queue[i].type;
+                for (var i = 0; i < queued.length; i++) {
+                    domains += domains ? "&domains=" + queued[i].name : "domains=" + queued[i].name;
+                    types += types ? "&types=" + queued[i].type : "types=" + queued[i].type;
                 }
 
                 var request = domains + "&" + types + "&server=" + vm.server();
