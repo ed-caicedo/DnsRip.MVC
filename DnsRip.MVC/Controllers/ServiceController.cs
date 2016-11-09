@@ -79,6 +79,7 @@ namespace DnsRip.MVC.Controllers
 
             _log.Info($"action: Download; streamLength: {runCsvResponseStream.Stream.Length}");
 
+            Response.AppendCookie(new HttpCookie("fileDownloadToken", "test")); //downloadTokenValue will have been provided in the form
             return File(runCsvResponseStream.Stream, "text/csv", $"dns.rip.{timestamp}.csv");
         }
     }
